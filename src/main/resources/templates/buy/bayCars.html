@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link href="css/back.css" rel="stylesheet"/>
+</head>
+<body><center>
+    <script language="JavaScript">
+        function buySuccessful() {
+            alert("Successfull buy CAR")
+        }
+
+
+    </script>
+    <h2>Form for Buy car</h2><p/>
+<table border="1">
+    <form action="buySuccessful" th:object = "${baySuccessfulCars}" method="post" >
+    <tr th:each="baySelectedCars : ${baySelectedCars}">
+        <td>
+            <img th:attr="src=${baySelectedCars.photo}" width="400" height="280"/>
+        </td>
+        <td width="100" th:text="${baySelectedCars.name_Cars}">Name</td>
+        <td width="100" th:text="${baySelectedCars.descriptions}">Name</td>
+
+        <td align="center">
+           <!--озн, что *{moduleAtributeQuantity} присоединяется к  baySuccessfulCars-->
+        <input type="number" id="quantityCars"  name="quantityCars" class="buttons" min="1"
+                                th:attr="max=${baySelectedCars.quantity}"
+                              style="text-align: center"  width="100" />
+        <!--<input type="text" id="quantityCars" nameYachts="quantityCars" class="buttons" pattern="[0-9]{1,3}" -->
+               <!--value=""-->
+               <!--style="text-align: center"  width="100" />-->
+        <!--<td align="center" width="100" th:text="${namesCars.quantity}">Name-->
+
+        </td>
+        <td width="100" align="center" th:text="${baySelectedCars.price}">Price</td>
+</tr><tr th:each="baySelectedCars : ${baySelectedCars}">
+        <td colspan="6" align="Right" width="80">
+
+                <input type="hidden" id="nameCars"  name="nameCars" th:value="${baySelectedCars.name_Cars}" />
+                <input class="buttons" type="submit"  style="width: 60px" onclick="buySuccessful" value="buy"/>
+
+        </td>
+    </tr> </form>
+</table>
+</center>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link href="css/back.css" rel="stylesheet"/>
+</head>
+<body><center>
+    <h2>Form for Buy YAACHTTSS!!!!!</h2><p/>
+<table border="1">
+    <form action="buyYachtSucceed" th:object = "${bayYachts}" method="post" >
+    <tr th:each="viewBuyYacht : ${viewBuyYacht}">
+        <td>
+            <img th:attr="src=${viewBuyYacht.photo}" width="400" height="280"/>
+        </td>
+        <td width="100" th:text="${viewBuyYacht.name}">Name</td>
+        <td width="100" th:text="${viewBuyYacht.number}">Name</td>
+
+         <td>  <!--озн, что *{moduleAtributeQuantity} присоединяется к  baySuccessfulCars-->
+        <input type="number"  size="5px" id="quantityYachts"
+               name="quantityYachts" class="buttons" min="1"
+                                th:attr="max=${viewBuyYacht.number}" style="text-align: center" />
+        </td>
+        <td width="100" th:text="${viewBuyYacht.price}">Name</td>
+
+    </tr>
+        <tr th:each="viewBuyYacht : ${viewBuyYacht}">
+            <td colspan="5" align="Right" width="80">
+
+                <input type="hidden" id="nameYacht" name="nameYacht" th:value="${viewBuyYacht.name}" />
+                <input class="buttons" type="submit"  style="width: 60px" value="buy"/>
+            </td>
+
+        </tr> </form>
+</table>
+</center>
+</body>
+</html>
