@@ -1,6 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
   <data-source name="MySQL - site@localhost" uuid="3eef1ee6-7321-485f-bea8-33d24415a265">
-    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+    <database-info product="MySQL" version="5.7.11-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.2">
+      <schema id="1" name="site"/>
+      <table id="2" parent="1" name="cars"/>
+      <table id="3" parent="1" name="users"/>
+      <table id="4" parent="1" name="whisky"/>
+      <table id="5" parent="1" name="yachts"/>
+      <column id="6" parent="2" name="photo">
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="7" parent="2" name="name_Cars">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="8" parent="2" name="descriptions">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="9" parent="2" name="quantity">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="10" parent="2" name="price">
+        <data-type>double</data-type>
+      </column>
+      <key id="11" parent="2" name="PRIMARY">
+        <columns>name_Cars</columns>
+        <primary>1</primary>
+      </key>
+      <column id="12" parent="3" name="user_Name">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="13" parent="3" name="password">
+        <data-type>varchar(45)</data-type>
+      </column>
+      <key id="14" parent="3" name="PRIMARY">
+        <columns>user_Name</columns>
+        <primary>1</primary>
+      </key>
+      <column id="15" parent="4" name="photo">
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="16" parent="4" name="name_Whisky">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="17" parent="4" name="description">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="18" parent="4" name="quantity">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="19" parent="4" name="price">
+        <data-type>double</data-type>
+      </column>
+      <key id="20" parent="4" name="PRIMARY">
+        <columns>name_Whisky</columns>
+        <primary>1</primary>
+      </key>
+      <column id="21" parent="5" name="photo">
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="22" parent="5" name="name_Yachts">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="23" parent="5" name="descriptions">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="24" parent="5" name="quantity">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="25" parent="5" name="price">
+        <data-type>varchar(45)</data-type>
+      </column>
+      <key id="26" parent="5" name="PRIMARY">
+        <columns>name_Yachts</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
   </data-source>
 </component>

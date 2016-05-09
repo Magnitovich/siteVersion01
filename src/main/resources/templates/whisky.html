@@ -15,22 +15,29 @@
         <td align="center" width="100">Describe</td>
         <td align="center" width="100">Available</td>
         <td align="center" width="100">Price</td>
+        <td align="center" width="100">Buy</td>
     </tr>
     <tr th:each="viewAvailableWhisky : ${viewAvailableWhisky}">
-        <td align="center" th:text="${viewAvailableWhisky.photo}">Photo</td>
+        <td align="center">
+            <img th:attr="src=${viewAvailableWhisky.photo}" width="150" height="250"/>
+            Photo</td>
         <td align="center" th:text="${viewAvailableWhisky.nameWhisky}">Name</td>
         <td align="center" th:text="${viewAvailableWhisky.describeWhisky}">Describe</td>
         <td align="center" th:text="${viewAvailableWhisky.quantityWhisky}">Quantity</td>
-        <td align="center" th:text="${viewAvailableWhisky.priceWhisky}">Price</td>
+        <td align="center" th:text="${viewAvailableWhisky.price}">Price</td>
+
+        <form action="buySelectedWhisky" method="post">
         <td align="center">
-            <input type="hidden" name="buttonBuyWhiskey" th:value="${viewAvailableWhisky.nameWhisky}"> Price</td>
-            <input type="submit" class="buttons" name="buttonBuyWhiskey"> Price</td>
+            <!--<form action="buySelectedWhisky" method="post">-->
+
+            <input type="hidden" name="nameBuyWhiskey" id="nameBuyWhiskey"
+                       th:value="${viewAvailableWhisky.nameWhisky}"/>
+                <input type="submit" class="buttons" name="buttonBuyWhiskey" value="Buy"/>
+            <!--</form>-->
+        </td>
+        </form>
+
     </tr>
-
-
-
-
-
 
 </table>
 

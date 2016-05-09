@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link href="css/back.css" rel="stylesheet"/>
+</head>
+<body>
+<h1 align="center">You selected this WHISKEY</h1>
+<p/>
+<p/>
+<table align="center" border="1">
+    <tr>
+        <td align="center" width="100">Photo</td>
+        <td align="center" width="100">Name</td>
+        <td align="center" width="100">Describe</td>
+        <td align="center" width="100">Available</td>
+        <td align="center" width="100">Price</td>
+        <td align="center" width="100">Buy</td>
+    </tr><form action="buySuccessfulWhisky" method="post">
+    <tr th:each="buySelectedWhisky : ${buySelectedWhisky}">
+        <td align="center">
+            <img th:attr="src=${buySelectedWhisky.photo}" width="150" height="250"/>
+            Photo</td>
+        <td align="center" th:text="${buySelectedWhisky.nameWhisky}">Name</td>
+        <td align="center" th:text="${buySelectedWhisky.describeWhisky}">Describe</td>
+        <td align="center" width="100">
+            <input type="number" style="width: 100px" min="1" th:attr="max=${buySelectedWhisky.quantityWhisky}"
+       placeholder="Enter quantity" name="numberOrderWhisky" /></td>
+        <!--<td align="center" th:text="${viewAvailableWhisky.quantityWhisky}">Quantity</td>-->
+        <td align="center" th:text="${buySelectedWhisky.price}">Price</td>
+
+
+        <td align="center">
+                <input type="hidden" name="nameWhiskey" th:value="${buySelectedWhisky.nameWhisky}"/>
+                <input type="hidden" name="quantityWhiskeyInDB" th:value="${buySelectedWhisky.quantityWhisky}"/>
+                <input type="submit" class="buttons" name="buttonBuyWhiskey" width="65" value="Buy"/> </td>
+    </tr>            </form>
+
+</table>
+
+</body>
+</html>
