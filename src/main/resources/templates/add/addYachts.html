@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <link href="css/back.css" rel="stylesheet"/>
@@ -9,7 +9,7 @@
 
 
 <table border="1" align="center"><p/>
-    <form action="addSuccessfulNewYachts" method="post">
+    <form action="addSuccessfulNewYachts"  th:object = "${comparePhotoNameWithDB}" method="post">
 
     <p/>
     <p/><br/>
@@ -20,7 +20,10 @@
     </tr>
     <tr>
         <td>Name Yacht </td>
-        <td><input class="buttons" type="text" style="width: 255px" name="nameYacht" id="nameYacht"/> </td>
+        <td><input class="buttons" type="text" th:field="*{exceptionCompare}" style="width: 255px" name="nameYacht" id="nameYacht"/>
+                <span style="font-style: italic; font-size: 10px" th:if="${#fields.hasErrors('exceptionCompare')}"
+               th:errors="*{exceptionCompare}">Errore</span>
+        </td>
     </tr>
     <tr>
         <td>Describe about yacht</td>
