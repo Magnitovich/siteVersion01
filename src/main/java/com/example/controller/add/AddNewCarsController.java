@@ -23,10 +23,22 @@ public class AddNewCarsController {
     private CarsRepository carsRepository;
 
     @RequestMapping(value = "/addInfoAboutNewCar", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView seePageAdd() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("add/addCars");
-        return modelAndView;
+    public ModelAndView seePageAdd(@RequestParam(required = false)String id) {
+
+        if (id !=null && id.length()!=0) {
+            CarsModel carsModel = carsService.editCar(id);
+            System.out.println(id);
+            System.out.println(carsModel);
+            ModelAndView model = new ModelAndView();
+            model.addObject("selectedCar", carsModel);
+            model.setViewName("add/addCars");
+            return model;
+
+        } else {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("add/addCars");
+            return modelAndView;
+        }
     }
 
     @RequestMapping(value = "/addSuccessfulNewCars", method = {RequestMethod.GET, RequestMethod.POST})

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <link href="css/back.css" rel="stylesheet"/>
@@ -8,32 +8,34 @@
 <body>
 
 
-<table border="1" align="center"><p/>
+<table border="1" align="center" th:each="carForEdit : ${selectedCar}"><p/>
     <form action="addSuccessfulNewCars" method="post">
 
     <p/>
     <p/><br/>
-    <tr>
+    <tr >
         <td>Path to photo </td>
         <td><input class="buttons" type="text" style="width: 255px" name="photoCars" id="photoCras"
-                    value="cars/"/> </td>
+                   th:attr="value=${carForEdit.photo}" value="cars/"/> </td>
     </tr>
     <tr>
         <td>Name Cars </td>
-        <td><input class="buttons" type="text" style="width: 255px" name="nameCars" id="nameCars"/> </td>
+        <td><input class="buttons" type="text" th:attr="value=${carForEdit.name_Cars}"
+
+                   style="width: 255px" name="nameCars" id="nameCars"/> </td>
     </tr>
     <tr>
         <td>Describe about cars</td>
-        <td><textarea class="buttons" rows="8" cols="35" name="describeCars" id="describeCars" maxlength="455"
+        <td><textarea class="buttons" rows="8" cols="35" th:attr="placeholder=${carForEdit.descriptions}" name="describeCars" id="describeCars" maxlength="455"
                       placeholder="max length 255"></textarea></td>
     </tr>
     <tr>
         <td>Quantity cars in warehouse </td>
-        <td><input type="number" style="width: 255px" class="buttons" min="1" value="1" name="quantityCars" id="quantityCars"/> </td>
+        <td><input type="number" style="width: 255px" th:attr="value=${carForEdit.quantity}" class="buttons" min="1" value="1" name="quantityCars" id="quantityCars"/> </td>
     </tr>
     <tr>
         <td>Price </td>
-        <td><input type="text" class="buttons" style="width: 255px" pattern="[0-9]{5,7}" value="1" name="priceCars" id="priceCars"/> </td>
+        <td><input type="text" class="buttons" style="width: 255px" th:attr="value=${carForEdit.price}" pattern="[0-9]{5,7}" value="1" name="priceCars" id="priceCars"/> </td>
     </tr>
     <tr>
         <!--<form action="../yacht.html">-->

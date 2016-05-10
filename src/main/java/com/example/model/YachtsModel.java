@@ -21,6 +21,17 @@ public class YachtsModel {
     @Column
     private BigDecimal price;
 
+    @Override
+    public String toString() {
+        return "YachtsModel{" +
+                "photo='" + photo + '\'' +
+                ", name='" + name + '\'' +
+                ", descriptions='" + descriptions + '\'' +
+                ", number=" + number +
+                ", price=" + price +
+                '}';
+    }
+
     public String getPhoto() {
         return photo;
     }

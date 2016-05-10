@@ -39,3 +39,9 @@ function editInfoWhisky() {
       window.location.href = "addNewWhisky?id=" + listCheckdWhisky[0].id;        }
 
 }
+
+function addNewWhisky() {
+
+    window.location.href="addNewWhisky";
+
+}

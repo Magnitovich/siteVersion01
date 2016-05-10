@@ -7,29 +7,9 @@
     <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
 </head>
 <body>
-<script>
 
-    function deleteSelectedElements() {
-        var nameYachts = [];
-        var i = 0;
-        var listCheckdYahcts = $('input:checked');
-        listCheckdYahcts.each(function() {
-            var checkbox = $(this);
 
-            nameYachts[i] = checkbox[0].id;
-            i++;
-        });
 
-        $.ajax({
-            type:"GET",
-            data: {'yachtName':nameYachts},
-            url: '/yacht/delete',
-            success: function(msg){
-              window.location.href = window.location.href;
-            }
-        });
-    }
-</script>
 
 <center>
     <h2>Form for Buy yachts</h2><p/>

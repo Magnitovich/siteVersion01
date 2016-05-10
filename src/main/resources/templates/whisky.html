@@ -19,9 +19,10 @@
             <input type="search" name="searchWhisky" id="searchWhisky" placeholder="Search" class="buttons"/>
         </td>
         <td colspan="2" align="center">
-            <form>
+            <!--<form>-->
             <input type="submit" style="width: 60px" name="addWhisky" id="addWhisky"
-                   formaction="addNewWhisky" class="buttons" value="Add"/></form>
+                onclick="addNewWhisky()" class="buttons" value="Add"/>
+            <!--</form>-->
             <input type="submit" style="width: 60px" onclick="editInfoWhisky()" name="EditWhisky" id="EditWhisky"
                    class="buttons" value="Edit"/>
             <input type="submit" style="width: 60px" onclick="deleteSelectedElements()" name="DeleteWhisky" id="DeleteWhisky"

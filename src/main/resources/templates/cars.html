@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8"/>
     <link href="css/back.css" rel="stylesheet"/>
+    <script src="jquery-1.12.3.min.js" ></script>
+    <script src="js/cars.js" ></script>
+
 </head>
 <body >
 <!--<script>-->
@@ -29,14 +32,12 @@
         <td colspan="4" align="Right" >
             <input class="buttons" type="search" value="Search"/></td>
         <td align="center" colspan="3">
-            <form>
-        <input class="buttons" formaction="addInfoAboutNewCar" type="submit" value="Add" style="width: 60px"/>
+        <input class="buttons" onclick="addNewCar()" type="button" value="Add" style="width: 60px"/>
                 &nbsp;&nbsp;&nbsp;
-        <input class="buttons" type="submit" value="Edit" style="width: 60px"/>&nbsp;&nbsp;&nbsp;
-        <!--<form action="/saleCars/delete" modelAttribute="deleteBtn" method="post" >-->
+        <input class="buttons" type="submit" onclick="editCars()" value="Edit" style="width: 60px"/>&nbsp;&nbsp;&nbsp;
         <input class="buttons" onclick="deleteSelectedElements()"
                nameYachts="deleteProducts" type="submit" value="Delete"/>
-    </form>
+
     </td> </tr>
     <tr align="center" style="font-weight: bold" >
         <td width="50"><input type="checkbox"/></td>
@@ -47,30 +48,30 @@
         <td>Price, Euro</td>
         <td>Buy</td>
     </tr>
-    <tr th:each="namesCars : ${namesCars}">
+    <tr th:each="Cars : ${namesCars}">
 
         <td align="center"><input type="checkbox"
-                                  th:attr="id=${namesCars.name_Cars}" /></td>
+                                  th:attr="id=${Cars.name_Cars}" /></td>
         <td>
-        <img th:attr="src=${namesCars.photo}" width="400" height="280"/>
+        <img th:attr="src=${Cars.photo}" width="400" height="280"/>
     </td>
-        <td width="100" th:text="${namesCars.name_Cars}">Name</td>
-        <td width="100" th:text="${namesCars.descriptions}">Describe</td>
+        <td width="100" th:text="${Cars.name_Cars}">Name</td>
+        <td width="100" th:text="${Cars.descriptions}">Describe</td>
 
         <!--<td align="center">-->
             <!--<input class="buttons" style="text-align: center" type="text" width="100" th:attr="value=${namesCars.quantity}"/>-->
 
-        <td align="center"  width="100" th:text="${namesCars.quantity}">Quantity
+        <td align="center"  width="100" th:text="${Cars.quantity}">Quantity
 
         </td>
-        <td align="center" width="100" th:text="${namesCars.price}">Price</td>
+        <td align="center" width="100" th:text="${Cars.price}">Price</td>
 
         <td align="center" width="80">
             <form action="bayCars" th:object = "${formForBayCars}" method="post" >
 
-            <input type="hidden" id="nameCarsHidden" name="nameCarsHidden" th:value="${namesCars.name_Cars}" />
-                <input type="submit" class="buttons" name="useCar"  th:attr="id=${namesCars.name_Cars}" style="width: 60px" value="buy"/>
-            <input type="hidden" id="qCars" name="qCars" th:value="${namesCars.quantity}" />
+            <input type="hidden" id="nameCarsHidden" name="nameCarsHidden" th:value="${Cars.name_Cars}" />
+                <input type="submit" class="buttons" name="useCar"  th:attr="id=${Cars.name_Cars}" style="width: 60px" value="buy"/>
+            <input type="hidden" id="qCars" name="qCars" th:value="${Cars.quantity}" />
             </form>
         </td>
 

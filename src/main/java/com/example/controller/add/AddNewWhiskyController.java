@@ -26,15 +26,17 @@ public class AddNewWhiskyController {
 
         System.out.println(id);
         if(id !=null && id.length() !=0) {
-
-        return null;
-
-        } else {
-
+            WhiskeyModel model = service.editWhisky(id);
+            System.out.println(model);
             ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject(model);
             modelAndView.setViewName("add/addWhisky");
             return modelAndView;
 
+        } else {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("add/addWhisky");
+            return modelAndView;
         }
     }
 

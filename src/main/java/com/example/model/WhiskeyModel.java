@@ -21,6 +21,17 @@ public class WhiskeyModel {
     @Column
     private BigDecimal price;
 
+    @Override
+    public String toString() {
+        return "WhiskeyModel{" +
+                "photo='" + photo + '\'' +
+                ", nameWhisky='" + nameWhisky + '\'' +
+                ", describeWhisky='" + describeWhisky + '\'' +
+                ", quantityWhisky=" + quantityWhisky +
+                ", price=" + price +
+                '}';
+    }
+
     public String getPhoto() {
         return photo;
     }

@@ -2,10 +2,12 @@ package com.example.service;
 
 import com.example.dao.WhiskyRepository;
 import com.example.model.WhiskeyModel;
+import com.example.model.YachtsModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class AddWhiskyService {
@@ -25,4 +27,15 @@ public class AddWhiskyService {
         repository.save(whiskeyModel);
     }
 
+    public WhiskeyModel editWhisky(final String nameWhisky) {
+
+        List<WhiskeyModel> byNameWhisky = repository.findByNameWhisky(nameWhisky);
+        WhiskeyModel model = byNameWhisky.get(0);
+        model.getPhoto();
+        model.getNameWhisky();
+        model.getDescribeWhisky();
+        model.getQuantityWhisky();
+        model.getPrice();
+        return model;
+    }
 }

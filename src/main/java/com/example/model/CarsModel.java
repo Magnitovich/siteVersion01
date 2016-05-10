@@ -27,6 +27,17 @@ public class CarsModel {
         return photo;
     }
 
+    @Override
+    public String toString() {
+        return "CarsModel{" +
+                "photo='" + photo + '\'' +
+                ", name_Cars='" + name_Cars + '\'' +
+                ", descriptions='" + descriptions + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                '}';
+    }
+
     public void setPhoto(String photo) {
         this.photo = photo;
     }

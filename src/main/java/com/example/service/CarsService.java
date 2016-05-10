@@ -26,11 +26,21 @@ public class CarsService {
         carsRepository.save(carsModel);
     }
 
-    public void deleteCars(String name) {
-        carsRepository.delete(name);
-    }
+
     public void viewSelectedCarsForBuy(final String name) {
         carsRepository.findByNameCars(name);
+    }
+
+    public CarsModel editCar(final String nameCar) {
+
+        List<CarsModel> byNameCars = carsRepository.findByNameCars(nameCar);
+        CarsModel model = byNameCars.get(0);
+        model.getPhoto();
+        model.getName_Cars();
+        model.getDescriptions();
+        model.getQuantity();
+        model.getPrice();
+        return model;
     }
 
 
