@@ -25,4 +25,16 @@ public class YachtAddService {
         yachtRepository.save(yachtsModel);
     }
 
+    public YachtsModel editYacht(String nameYacht) {
+
+        List<YachtsModel> list = yachtRepository.findByNameYacht(nameYacht);
+        YachtsModel model = list.get(0);
+        model.getPhoto();
+        model.getName();
+        model.getDescriptions();
+        model.getNumber();
+        model.getPrice();
+
+        return model;
+    }
 }

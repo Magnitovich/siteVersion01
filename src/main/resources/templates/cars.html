@@ -8,22 +8,6 @@
 
 </head>
 <body >
-<!--<script>-->
-    <!--function deleteSelectedElements() {-->
-        <!--var concatenatedIds = '';-->
-<!--//        input:checked определяет нажатые checkbox-->
-        <!--$('input:checked').each(function() {-->
-            <!--var checkbox = $(this);-->
-
-            <!--concatenatedIds =concatenatedIds+ 'Cars=' + checkbox[0].id + '&amp;';-->
-        <!--});-->
-
-        <!--$.ajax('/delete?' + concatenatedIds).done(function() {-->
-            <!--window.location.href = window.location.href;-->
-        <!--});-->
-    <!--}-->
-<!--</script>-->
-
 <center>
 <h2>Today we suggest next cars for purchase</h2>
 <table border="1" >
@@ -35,8 +19,9 @@
         <input class="buttons" onclick="addNewCar()" type="button" value="Add" style="width: 60px"/>
                 &nbsp;&nbsp;&nbsp;
         <input class="buttons" type="submit" onclick="editCars()" value="Edit" style="width: 60px"/>&nbsp;&nbsp;&nbsp;
-        <input class="buttons" onclick="deleteSelectedElements()"
-               nameYachts="deleteProducts" type="submit" value="Delete"/>
+
+        <input class="buttons" onclick="deleteCars()"
+               nameYachts="deleteProducts" type="button" value="Delete"/>
 
     </td> </tr>
     <tr align="center" style="font-weight: bold" >

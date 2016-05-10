@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link href="css/back.css" rel="stylesheet"/>
+
+</head>
+<body>
+
+
+<table border="1" align="center" th:each="selectedEditYacht:${selectedYacht}">
+    <p/>
+    <form action="editSuccessfulYachts"   method="post">
+
+    <p/>
+    <p/><br/>
+    <tr>
+        <td>Path to photo </td>
+        <td><input class="buttons" type="text" style="width: 255px" name="photoYacht" id="photoYacht"
+                  th:attr="value=${selectedEditYacht.photo}"/> </td>
+    </tr>
+    <tr>
+        <td>Name Yacht </td>
+        <td><input class="buttons" type="text"
+                   style="width: 255px" name="nameYacht" id="nameYacht" th:attr="value=${selectedEditYacht.name}"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Describe about yacht</td>
+        <td><textarea class="buttons" rows="8" cols="35" name="describeYacht"
+                      th:attr="placeholder=${selectedEditYacht.descriptions}"
+                      id="describeYacht" maxlength="455" placeholder="max length 255"></textarea></td>
+    </tr>
+    <tr>
+        <td>Quantity yachts in warehouse </td>
+        <td><input type="number" style="width: 255px" min="1"  name="quantityYacht" id="quantityYacht"
+                   th:attr="value=${selectedEditYacht.number}"   /> </td>
+    </tr>
+    <tr>
+        <td>Price </td>
+        <td><input type="text" style="width: 255px"  th:attr="value=${selectedEditYacht.price}"
+                  name="priceYacht" id="priceYacht"/> </td>
+    </tr>
+
+    <tr>
+        <!--<form action="../yacht.html">-->
+
+        <td colspan="2" align="right">
+        <input type="submit" class="buttons" style="width: 65px" name="enter" id="enter" value="Enter"/> </td>
+
+    </tr>
+    </form>
+</table>
+
+</body>
+</html>

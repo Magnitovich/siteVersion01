@@ -33,7 +33,7 @@ public class AddNewCarsController {
             model.addObject("selectedCar", carsModel);
             model.setViewName("add/addCars");
             return model;
-
+//            return null;
         } else {
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("add/addCars");

@@ -5,6 +5,7 @@
     <title>Title</title>
     <link href="css/back.css" rel="stylesheet"/>
     <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="js/yacht.js"></script>
 </head>
 <body>
 
@@ -16,13 +17,11 @@
 <table border="1">
     <tr><td colspan="4" align="Right" ><input class="buttons" type="search" value="Search"/></td>
     <td colspan="3" align="center">
-        <form>
-        <input class="buttons" type="submit" formaction="addInfoAboutNewYachts"  value="Add" style="width: 70px" />
-        <input class="buttons" type="submit" formaction="edit" value="Edit" style="width: 70px"/>
+        <input class="buttons" type="button" onclick="addNewYacht()"  value="Add" style="width: 70px" />
+        <input class="buttons" type="button" onclick="editInfoYacht()" value="Edit" style="width: 70px"/>
         <!--<form action="/saleCars/delete" modelAttribute="deleteBtn" method="post" >-->
-            <input class="buttons" name="deleteProducts" onclick="deleteSelectedElements()" formaction="delete"
+            <input class="buttons" name="deleteProducts" onclick="deleteSelectedElements()"
                    type="submit" value="Delete" style="width: 70px"/>
-        </form>    <!--</form>-->
     </td></tr>
         <tr>
             <td width="30" align="center">

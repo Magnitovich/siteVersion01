@@ -2,7 +2,7 @@ package com.example.controller.add;
 
 import com.example.dao.YachtRepository;
 import com.example.model.YachtsModel;
-import com.example.service.ExceptionAddYachtService;
+import com.example.service.exceptions.ExceptionAddYachtService;
 import com.example.service.YachtAddService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
