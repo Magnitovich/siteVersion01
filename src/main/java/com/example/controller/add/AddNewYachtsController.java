@@ -37,9 +37,9 @@ public class AddNewYachtsController {
     }
 
     @RequestMapping(value = "/addSuccessfulYacht", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView addInfoCars(@ModelAttribute("regPage")YachtsModel yachtsModel, BindingResult result,
-                                    @RequestParam("photoYacht")String photo,
-                                    @RequestParam("nameYacht")String name,
+    public ModelAndView addInfoCars(@ModelAttribute("comparePhotoNameWithDB")YachtsModel yachtsModel, BindingResult result,
+                                    @RequestParam(value = "photoYacht", required = false)String photo,
+                                    @RequestParam(value = "nameYacht", required = false)String name,
                                     @RequestParam("describeYacht")String describe,
                                     @RequestParam("quantityYacht")Integer quantity,
                                     @RequestParam("priceYacht")BigDecimal price) {
@@ -56,7 +56,7 @@ public class AddNewYachtsController {
             return modelAndView;
         } catch (RuntimeException r) {
 
-            result.rejectValue("exceptionCompare", "error.regPage", "Errore: Login exist");
+            result.rejectValue("name", "error.name", "Errore: Login exist");
             return seePageAddYachts();
 
         }

@@ -22,11 +22,20 @@ public class AddNewWhiskyController {
     private WhiskyRepository repository;
 
     @RequestMapping(value = "addNewWhisky", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView viewPageAddWhisky() {
+    public ModelAndView viewPageAddWhisky(@RequestParam(required = false)String id) {
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("add/addWhisky");
-        return modelAndView;
+        System.out.println(id);
+        if(id !=null && id.length() !=0) {
+
+        return null;
+
+        } else {
+
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("add/addWhisky");
+            return modelAndView;
+
+        }
     }
 
     @RequestMapping(value = "addSuccessfulNewWhisky", method = {RequestMethod.POST})

@@ -3,28 +3,33 @@
 <head>
     <meta charset="UTF-8"/>
     <link href="css/back.css" rel="stylesheet"/>
+    <script src="jquery-1.12.3.min.js" ></script>
+    <script src="js/whisky.js"></script>
 </head>
 <body>
+
 <h1 align="center">Wolrld of WHISKEY</h1>
 <p/>
 <p/>
 <table align="center" border="1">
-    <form>
+
     <tr>
 
         <td colspan="4" align="right">
             <input type="search" name="searchWhisky" id="searchWhisky" placeholder="Search" class="buttons"/>
         </td>
         <td colspan="2" align="center">
+            <form>
             <input type="submit" style="width: 60px" name="addWhisky" id="addWhisky"
-                   formaction="addNewWhisky" class="buttons" value="Add"/>
-            <input type="submit" style="width: 60px" name="EditWhisky" id="EditWhisky"
+                   formaction="addNewWhisky" class="buttons" value="Add"/></form>
+            <input type="submit" style="width: 60px" onclick="editInfoWhisky()" name="EditWhisky" id="EditWhisky"
                    class="buttons" value="Edit"/>
-            <input type="submit" style="width: 60px" name="DeleteWhisky" id="DeleteWhisky"
+            <input type="submit" style="width: 60px" onclick="deleteSelectedElements()" name="DeleteWhisky" id="DeleteWhisky"
                    class="buttons" value="Delete"/>
         </td>
-    </tr></form>
+    </tr>
     <tr>
+        <td><input type="checkbox" /></td>
         <td align="center" width="100">Photo</td>
         <td align="center" width="100">Name</td>
         <td align="center" width="100">Describe</td>
@@ -33,6 +38,7 @@
         <td align="center" width="100">Buy</td>
     </tr>
     <tr th:each="viewAvailableWhisky : ${viewAvailableWhisky}">
+        <td align="center"><input type="checkbox" th:attr="id=${viewAvailableWhisky.nameWhisky}"/> </td>
         <td align="center">
             <img th:attr="src=${viewAvailableWhisky.photo}" width="150" height="250"/>
             Photo</td>
