@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.service.old;
 
 import com.example.dao.CarsRepository;
 import com.example.model.CarsModel;
@@ -35,7 +35,7 @@ public class BuyCarService {
 //        }
 //    }
     @Transactional
-    public void changeQuantityCarsInDB(final String nameCars, final int quantityFromUI) {
+    public List<CarsModel> changeQuantityCarsInDB(final String nameCars, final int quantityFromUI) {
 
         List<CarsModel> list = carsRepository.findByNameCars(nameCars);
 
@@ -53,6 +53,9 @@ public class BuyCarService {
             carsRepository.save(model);
 
         }
+        List<CarsModel> update = carsRepository.findAllCars();
+        return update;
+
     }
 
 }

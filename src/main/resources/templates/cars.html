@@ -33,32 +33,33 @@
         <td>Price, Euro</td>
         <td>Buy</td>
     </tr>
-    <tr th:each="Cars : ${namesCars}">
+    <tr th:each="cars : ${namesCars}">
 
         <td align="center"><input type="checkbox"
-                                  th:attr="id=${Cars.name_Cars}" /></td>
+                                  th:attr="id=${cars.name_Cars}" /></td>
         <td>
-        <img th:attr="src=${Cars.photo}" width="400" height="280"/>
+        <img th:attr="src=${cars.photo}" width="400" height="280"/>
     </td>
-        <td width="100" th:text="${Cars.name_Cars}">Name</td>
-        <td width="100" th:text="${Cars.descriptions}">Describe</td>
+        <td width="100" th:text="${cars.name_Cars}">Name</td>
+        <td width="100" th:text="${cars.descriptions}">Describe</td>
 
         <!--<td align="center">-->
             <!--<input class="buttons" style="text-align: center" type="text" width="100" th:attr="value=${namesCars.quantity}"/>-->
 
-        <td align="center"  width="100" th:text="${Cars.quantity}">Quantity
+        <td align="center"  width="100" th:text="${cars.quantity}">Quantity
 
         </td>
-        <td align="center" width="100" th:text="${Cars.price}">Price</td>
 
+        <td align="center" width="100" th:text="${cars.price}">Price</td>
+
+         <form action="bayCars"  method="post" >
         <td align="center" width="80">
-            <form action="bayCars" th:object = "${formForBayCars}" method="post" >
 
-            <input type="hidden" id="nameCarsHidden" name="nameCarsHidden" th:value="${Cars.name_Cars}" />
-                <input type="submit" class="buttons" name="useCar"  th:attr="id=${Cars.name_Cars}" style="width: 60px" value="buy"/>
-            <input type="hidden" id="qCars" name="qCars" th:value="${Cars.quantity}" />
-            </form>
+            <input type="hidden" id="nameCarsHidden" name="nameCarsHidden" th:value="${cars.name_Cars}" />
+                <input type="submit" class="buttons" name="useCar"  style="width: 60px" value="buy"/>
+            <!--<input type="hidden" id="qCars" name="qCars" th:value="${Cars.quantity}" />-->
         </td>
+        </form>
 
     </tr>
 

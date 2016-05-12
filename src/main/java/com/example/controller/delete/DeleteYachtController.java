@@ -2,6 +2,7 @@ package com.example.controller.delete;
 
 import com.example.dao.YachtRepository;
 import com.example.model.YachtsModel;
+import com.example.service.YachtsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,17 +17,14 @@ import java.util.List;
 public class DeleteYachtController {
 
     @Autowired
-    private YachtRepository yachtRepository;
+    private YachtsService yachtsService;
 
     @RequestMapping(value = "/deleteYacht/DELETE", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView deleteSelectedYacht(@RequestBody List<String> list, Model model) {
 
-        for (String yachtForDelete:list) {
+        yachtsService.deleteYachts(list);
 
-            yachtRepository.delete(yachtForDelete);
-        }
-
-        Iterable<YachtsModel> all = yachtRepository.findAll();
+        List<YachtsModel> all = yachtsService.vewAllYachts();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("viewSelectedYacht", all);
         modelAndView.setViewName("yacht");

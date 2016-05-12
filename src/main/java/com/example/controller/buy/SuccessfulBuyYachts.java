@@ -1,8 +1,8 @@
 package com.example.controller.buy;
 
-import com.example.dao.YachtRepository;
 import com.example.model.YachtsModel;
-import com.example.service.BuyYachtsService;
+import com.example.service.YachtsService;
+import com.example.service.old.BuyYachtsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,21 +16,18 @@ import java.util.List;
 public class SuccessfulBuyYachts {
 
     @Autowired
-    private BuyYachtsService buyYachtsService;
-
-    @Autowired
-    private YachtRepository yachtRepository;
+    private YachtsService yachtsService;
 
     @RequestMapping(value = "buyYachtSucceed", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewSuccessfulBuyYachts(@RequestParam("nameYacht")String name,
                                                 @RequestParam("quantityYachts")Integer numberYachts) {
         System.out.println("Name Yachts: "+name+" quantity= "+numberYachts);
-        buyYachtsService.buyAndUpdate(name, numberYachts);
-
+         yachtsService.buyAndUpdate(name, numberYachts);
+        List<YachtsModel> all = yachtsService.vewAllYachts();
 //        ModelAndView modelAndView = new ModelAndView();
 //        modelAndView.setViewName("buy/successful");
 //        return modelAndView;
-        List<YachtsModel> all = yachtRepository.findAllYachts();
+//        List<YachtsModel> all = yachtRepository.findAllYachts();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("viewSelectedYacht", all);
         modelAndView.setViewName("yacht");

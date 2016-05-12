@@ -1,10 +1,9 @@
 package com.example.controller.buy;
 
-import com.example.dao.YachtRepository;
-import com.example.model.CarsModel;
 import com.example.model.YachtsModel;
+import com.example.service.YachtsService;
+import com.example.service.old.BuyYachtsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.Lifecycle;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,12 +17,12 @@ import java.util.List;
 public class YachtsBuyController {
 
     @Autowired
-    private YachtRepository yachtRepository;
+    private YachtsService yachtsService;
 
     @RequestMapping(value = "buyYachts", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewYachtForSale(@RequestParam("hiddenYachtName")String name) {
 
-        List<YachtsModel> list = yachtRepository.findByNameYacht(name);
+        List<YachtsModel> list = yachtsService.viewSelectedYacht(name);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("viewBuyYacht", list);
         modelAndView.setViewName("buy/buyYacht");

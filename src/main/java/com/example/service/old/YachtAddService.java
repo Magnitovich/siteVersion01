@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.service.old;
 
 import com.example.dao.YachtRepository;
 import com.example.model.YachtsModel;

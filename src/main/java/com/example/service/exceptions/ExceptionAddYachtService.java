@@ -3,12 +3,10 @@ package com.example.service.exceptions;
 import com.example.controller.YachtsController;
 import com.example.dao.YachtRepository;
 import com.example.model.YachtsModel;
-import com.example.service.YachtAddService;
+import com.example.service.old.YachtAddService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.websocket.server.ServerEndpoint;
 import java.math.BigDecimal;
 import java.util.List;
 

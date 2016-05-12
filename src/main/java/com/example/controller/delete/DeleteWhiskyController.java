@@ -1,6 +1,8 @@
 package com.example.controller.delete;
 
 import com.example.dao.WhiskyRepository;
+import com.example.model.WhiskeyModel;
+import com.example.service.WhiskyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,21 +18,18 @@ import java.util.List;
 public class DeleteWhiskyController {
 
     @Autowired
-    private WhiskyRepository repository;
+    private WhiskyService whiskyService;
 
     @RequestMapping(value = "/deleteWhisky", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewDelete(@RequestBody List<String> namesWhisky, Model model,
                                    HttpServletRequest req) {
 
-        for (String names:namesWhisky) {
-
-            repository.delete(names);
-
-        }
-
+        whiskyService.delete(namesWhisky);
+        Iterable<WhiskeyModel> whiskeyModels = whiskyService.seeAllWhisky();
         ModelAndView modelAndView = new ModelAndView();
         System.out.println(namesWhisky);
-
+        modelAndView.addObject("viewAvailableWhisky", whiskeyModels);
+        modelAndView.setViewName("whisky");
         return modelAndView;
 
     }

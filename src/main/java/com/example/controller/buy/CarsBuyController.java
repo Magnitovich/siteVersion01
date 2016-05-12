@@ -1,9 +1,7 @@
 package com.example.controller.buy;
 
 
-import com.example.dao.CarsRepository;
 import com.example.model.CarsModel;
-import com.example.service.BuyCarService;
 import com.example.service.CarsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +15,9 @@ import java.util.List;
 
 @Controller
 public class CarsBuyController {
+
     @Autowired
-    private CarsRepository carsService;
-    @Autowired
-    private BuyCarService buyCarService;
+    private CarsService buyCarService;
 
     @RequestMapping(value = "/bayCars", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewCarForBuy(@RequestParam("nameCarsHidden")String name_Cars) {

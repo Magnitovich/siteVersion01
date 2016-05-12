@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.service.old;
 
 import com.example.dao.WhiskyRepository;
 import com.example.model.WhiskeyModel;

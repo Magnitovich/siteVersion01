@@ -19,9 +19,6 @@ public class AddNewCarsController {
     @Autowired
     private CarsService carsService;
 
-    @Autowired
-    private CarsRepository carsRepository;
-
     @RequestMapping(value = "/addInfoAboutNewCar", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView seePageAdd(@RequestParam(required = false)String id) {
 
@@ -52,7 +49,7 @@ public class AddNewCarsController {
 //        ModelAndView modelAndView = new ModelAndView();
 //        modelAndView.setViewName("add/succeed");
 //        return modelAndView;
-        List<CarsModel> list = carsRepository.findAllCars();
+        List<CarsModel> list = carsService.viewAllModelCars();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("namesCars", list);
         modelAndView.setViewName("cars");

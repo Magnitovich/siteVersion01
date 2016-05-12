@@ -2,7 +2,7 @@ package com.example.controller.buy;
 
 import com.example.dao.CarsRepository;
 import com.example.model.CarsModel;
-import com.example.service.BuyCarService;
+import com.example.service.old.BuyCarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,12 +25,9 @@ public class SuccessfulBuyCars {
                                     @RequestParam("nameCars")String nameBuyCar) {
         System.out.println("Имя авто: "+nameBuyCar+" Кол-во авто: "+quantityBuyCar);
 
-        buyCarService.changeQuantityCarsInDB(nameBuyCar, quantityBuyCar);
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("buy/successful");
-//        return modelAndView;
+        List<CarsModel> list = buyCarService.changeQuantityCarsInDB(nameBuyCar, quantityBuyCar);
 
-        List<CarsModel> list = carsRepository.findAllCars();
+//        List<CarsModel> list = carsRepository.findAllCars();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("namesCars", list);
         modelAndView.setViewName("cars");

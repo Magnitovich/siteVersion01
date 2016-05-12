@@ -1,10 +1,8 @@
 package com.example.controller.add;
 
-import com.example.dao.WhiskyRepository;
 import com.example.model.WhiskeyModel;
-import com.example.service.AddWhiskyService;
+import com.example.service.WhiskyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,16 +15,14 @@ import java.math.BigDecimal;
 public class AddNewWhiskyController {
 
     @Autowired
-    private AddWhiskyService service;
-    @Autowired
-    private WhiskyRepository repository;
+    private WhiskyService whiskyService;
 
     @RequestMapping(value = "addNewWhisky", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewPageAddWhisky(@RequestParam(required = false)String id) {
 
         System.out.println(id);
         if(id !=null && id.length() !=0) {
-            WhiskeyModel model = service.editWhisky(id);
+            WhiskeyModel model = whiskyService.editWhisky(id);
             System.out.println(model);
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.addObject(model);
@@ -47,9 +43,9 @@ public class AddNewWhiskyController {
                                       @RequestParam("quantityWhisky")Integer quantity,
                                       @RequestParam("priceYacht")BigDecimal price) {
 
-        service.addNewWhisky(photo, name, describe, quantity, price);
+        whiskyService.addNewWhisky(photo, name, describe, quantity, price);
 
-        Iterable<WhiskeyModel> all = repository.findAll();
+        Iterable<WhiskeyModel> all = whiskyService.seeAllWhisky();
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("viewAvailableWhisky", all);

@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.service.old;
 
 import com.example.dao.WhiskyRepository;
 import com.example.model.WhiskeyModel;
@@ -13,6 +13,12 @@ public class BuyWhiskyService {
 
     @Autowired
     private WhiskyRepository repository;
+
+
+    public List<WhiskeyModel> viewSelectedWhisky(String name) {
+        List<WhiskeyModel> byNameWhisky = repository.findByNameWhisky(name);
+        return byNameWhisky;
+    }
 
     @Transactional
     public void changeInfoInDB(final String name, final Integer quantityFromUI) {
@@ -31,6 +37,12 @@ public class BuyWhiskyService {
             repository.save(model);
 
         }
+
+    }
+
+    public void seeAllWhisky() {
+
+        repository.findAll();
     }
 
 }
