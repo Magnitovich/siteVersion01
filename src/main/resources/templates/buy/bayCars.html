@@ -19,7 +19,7 @@
         <td>
             <img th:attr="src=${baySelectedCars.photo}" width="400" height="280"/>
         </td>
-        <td width="100" th:text="${baySelectedCars.name_Cars}">Name</td>
+        <td width="100" th:text="${baySelectedCars.name}">Name</td>
         <td width="100" th:text="${baySelectedCars.descriptions}">Name</td>
 
         <td align="center">
@@ -37,7 +37,7 @@
 </tr><tr th:each="baySelectedCars : ${baySelectedCars}">
         <td colspan="6" align="Right" width="80">
 
-                <input type="hidden" id="nameCars"  name="nameCars" th:value="${baySelectedCars.name_Cars}" />
+                <input type="hidden" id="nameCars"  name="nameCars" th:value="${baySelectedCars.name}" />
                 <input class="buttons" type="submit"  style="width: 60px" onclick="buySuccessful" value="buy"/>
 
         </td>

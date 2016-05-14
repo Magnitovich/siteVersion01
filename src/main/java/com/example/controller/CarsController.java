@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.dao.CarsRepository;
+import com.example.model.CarsDTO;
 import com.example.model.CarsModel;
 import com.example.service.CarsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class CarsController {
 
     @RequestMapping(value = "/saleCars", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewCarsForSale() {
-        List<CarsModel> list = carsService.viewAllModelCars();
+        List<CarsDTO> list = carsService.viewAllModelCars();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("namesCars", list);
         modelAndView.setViewName("cars");

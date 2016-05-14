@@ -1,6 +1,7 @@
 package com.example.controller.delete;
 
 import com.example.dao.CarsRepository;
+import com.example.model.CarsDTO;
 import com.example.model.CarsModel;
 import com.example.service.CarsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class DeleteCarsController {
 //            carsRepository.delete(cars);
 //
 //        }
-        List<CarsModel> list = carsService.viewAllModelCars();
+        List<CarsDTO> list = carsService.viewAllModelCars();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("namesCars", list);
         modelAndView.setViewName("cars");

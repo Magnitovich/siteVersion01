@@ -1,6 +1,7 @@
 package com.example.controller.buy;
 
 
+import com.example.model.CarsDTO;
 import com.example.model.CarsModel;
 import com.example.service.CarsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class CarsBuyController {
     public ModelAndView viewCarForBuy(@RequestParam("nameCarsHidden")String name_Cars) {
         System.out.println(name_Cars);
 //        List<CarsModel> list = carsService.findByNameCars(name_Cars);
-        List<CarsModel> list = buyCarService.viewSelectedCarForBuy(name_Cars);
+        List<CarsDTO> list = buyCarService.viewSelectedCarForBuy(name_Cars);
         System.out.println(list);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("baySelectedCars", list);
@@ -33,7 +34,7 @@ public class CarsBuyController {
 
     }
     @ModelAttribute("baySuccessfulCars")
-    public CarsModel createModel() {
-        return new CarsModel();
+    public CarsDTO createModel() {
+        return new CarsDTO();
     }
 }
