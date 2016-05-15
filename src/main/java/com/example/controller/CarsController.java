@@ -29,12 +29,5 @@ public class CarsController {
         return modelAndView;
 
     }
-//    @RequestMapping(value = "/delete", method = {RequestMethod.GET, RequestMethod.POST})
-//    public ModelAndView delete(@RequestParam("name_Cars")List<String> names) {
-//        System.out.println(names);
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("add/succeed");
-//        return modelAndView;
-//    }
 
 }

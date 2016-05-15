@@ -25,8 +25,10 @@ public class ExceptionAddYachtService {
     public void compareEnterInfoAndInDB(final String photo, final String name, final String describe,
                                                      final Integer quantity, final BigDecimal price) {
 
-        List<YachtDTO> list = yachtService.viewPhotoAndYacht(photo, name);
-        if (list.size()==0) {
+        List<YachtDTO> listPhoto = yachtService.viewPhoto(photo);
+        List<YachtDTO> listName = yachtService.viewName(name);
+
+        if (listPhoto.size()==0 && listName.size()==0) {
 
             yachtService.addNewYacht(photo,name,describe,quantity,price);
 //            ModelAndView modelAndView = yachtsController.viewListYachts();

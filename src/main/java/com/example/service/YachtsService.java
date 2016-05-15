@@ -105,8 +105,13 @@ public class YachtsService {
         return yachtDTO;
     }
 
-    public List<YachtDTO> viewPhotoAndYacht(String photo, String name) {
-        List<YachtsModel> yachtsModels = yachtRepository.findByPhotoAndName(photo, name);
+    public List<YachtDTO> viewPhoto(String photo) {
+        List<YachtsModel> yachtsModels = yachtRepository.findByPhoto(photo);
+        List<YachtDTO> yachtDTOs = convertListModelToListDTO(yachtsModels);
+        return yachtDTOs;
+    }
+    public List<YachtDTO> viewName(String name) {
+        List<YachtsModel> yachtsModels = yachtRepository.findByNameYacht(name);
         List<YachtDTO> yachtDTOs = convertListModelToListDTO(yachtsModels);
         return yachtDTOs;
     }

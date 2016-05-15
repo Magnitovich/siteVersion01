@@ -18,7 +18,9 @@ public interface YachtRepository extends CrudRepository<YachtsModel, String>{
     List<YachtsModel> findAllYachts();
 
 
-    List<YachtsModel> findByPhotoAndName(String photo, String name);
+    List<YachtsModel> findByPhoto(String photo);
 
     YachtsModel findFirstByName(String name);
+
+
 }
