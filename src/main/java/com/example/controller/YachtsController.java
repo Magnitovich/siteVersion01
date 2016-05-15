@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.dao.YachtRepository;
+import com.example.model.YachtDTO;
 import com.example.model.YachtsModel;
 import com.example.service.YachtsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class YachtsController {
     @RequestMapping(value = "selectAndBuyYachts", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewListYachts() {
 
-        List<YachtsModel> all = yachtsService.vewAllYachts();
+        List<YachtDTO> all = yachtsService.vewAllYachts();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("viewSelectedYacht", all);
         modelAndView.setViewName("yacht");

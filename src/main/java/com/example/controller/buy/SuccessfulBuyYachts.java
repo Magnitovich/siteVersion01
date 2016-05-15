@@ -1,5 +1,6 @@
 package com.example.controller.buy;
 
+import com.example.model.YachtDTO;
 import com.example.model.YachtsModel;
 import com.example.service.YachtsService;
 import com.example.service.old.BuyYachtsService;
@@ -23,7 +24,7 @@ public class SuccessfulBuyYachts {
                                                 @RequestParam("quantityYachts")Integer numberYachts) {
         System.out.println("Name Yachts: "+name+" quantity= "+numberYachts);
          yachtsService.buyAndUpdate(name, numberYachts);
-        List<YachtsModel> all = yachtsService.vewAllYachts();
+        List<YachtDTO> all = yachtsService.vewAllYachts();
 //        ModelAndView modelAndView = new ModelAndView();
 //        modelAndView.setViewName("buy/successful");
 //        return modelAndView;

@@ -1,40 +1,17 @@
 package com.example.model;
 
-import org.jvnet.hk2.config.Units;
-
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.*;
-import javax.persistence.Table;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "car")
-public class CarsModel {
-    @Column(name = "PHOTO")
+public class YachtDTO {
+
     private String photo;
-    @Id
-    @Column(name = "NAME_CAR")
     private String name;
-    @Column
     private String descriptions;
-    @Column
-    private Integer quantity;
-    @Column
+    private Integer number;
     private BigDecimal price;
-
-
-
-    @Override
-    public String toString() {
-        return "CarsModel{" +
-                "photo='" + photo + '\'' +
-                ", name='" + name + '\'' +
-                ", descriptions='" + descriptions + '\'' +
-                ", quantity=" + quantity +
-                ", price=" + price +
-                '}';
-    }
+    private String idForEdit;
 
     public String getPhoto() {
         return photo;
@@ -60,12 +37,12 @@ public class CarsModel {
         this.descriptions = descriptions;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Integer getNumber() {
+        return number;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public BigDecimal getPrice() {
@@ -74,5 +51,13 @@ public class CarsModel {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getIdForEdit() {
+        return idForEdit;
+    }
+
+    public void setIdForEdit(String idForEdit) {
+        this.idForEdit = idForEdit;
     }
 }

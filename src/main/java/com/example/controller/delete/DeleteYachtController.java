@@ -1,6 +1,7 @@
 package com.example.controller.delete;
 
 import com.example.dao.YachtRepository;
+import com.example.model.YachtDTO;
 import com.example.model.YachtsModel;
 import com.example.service.YachtsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class DeleteYachtController {
 
         yachtsService.deleteYachts(list);
 
-        List<YachtsModel> all = yachtsService.vewAllYachts();
+        List<YachtDTO> all = yachtsService.vewAllYachts();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("viewSelectedYacht", all);
         modelAndView.setViewName("yacht");

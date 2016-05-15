@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source name="MySQL - site@localhost" uuid="3eef1ee6-7321-485f-bea8-33d24415a265">
+  <data-source name="MySQL - site@localhost" uuid="6f3b53c0-bdf7-48c8-8732-153450dad7f1">
     <database-info product="MySQL" version="5.7.11-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
       <extra-name-characters>#@</extra-name-characters>
       <identifier-quote-string>`</identifier-quote-string>
@@ -8,79 +8,94 @@
     <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
     <database-model serializer="dbm" rdbms="MYSQL" format-version="2.2">
       <schema id="1" name="site"/>
-      <table id="2" parent="1" name="cars"/>
-      <table id="3" parent="1" name="users"/>
-      <table id="4" parent="1" name="whisky"/>
-      <table id="5" parent="1" name="yachts"/>
-      <column id="6" parent="2" name="photo">
+      <table id="2" parent="1" name="car"/>
+      <table id="3" parent="1" name="car_description"/>
+      <table id="4" parent="1" name="user"/>
+      <table id="5" parent="1" name="whisky"/>
+      <table id="6" parent="1" name="yachts"/>
+      <column id="7" parent="2" name="PHOTO">
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="7" parent="2" name="name_Cars">
+      <column id="8" parent="2" name="NAME_CAR">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="8" parent="2" name="descriptions">
+      <column id="9" parent="2" name="DESCRIPTIONS">
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="9" parent="2" name="quantity">
+      <column id="10" parent="2" name="QUANTITY">
         <data-type>int(11)</data-type>
       </column>
-      <column id="10" parent="2" name="price">
+      <column id="11" parent="2" name="PRICE">
         <data-type>double</data-type>
       </column>
-      <key id="11" parent="2" name="PRIMARY">
-        <columns>name_Cars</columns>
+      <key id="12" parent="2" name="PRIMARY">
+        <columns>NAME_CAR</columns>
         <primary>1</primary>
       </key>
-      <column id="12" parent="3" name="user_Name">
-        <mandatory>1</mandatory>
-        <data-type>varchar(45)</data-type>
-      </column>
-      <column id="13" parent="3" name="password">
-        <data-type>varchar(45)</data-type>
-      </column>
-      <key id="14" parent="3" name="PRIMARY">
-        <columns>user_Name</columns>
-        <primary>1</primary>
-      </key>
-      <column id="15" parent="4" name="photo">
-        <data-type>varchar(45)</data-type>
-      </column>
-      <column id="16" parent="4" name="name_Whisky">
-        <mandatory>1</mandatory>
-        <data-type>varchar(45)</data-type>
-      </column>
-      <column id="17" parent="4" name="description">
+      <column id="13" parent="3" name="DESCRIPTIOON">
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="18" parent="4" name="quantity">
+      <column id="14" parent="3" name="QUANTITY">
         <data-type>int(11)</data-type>
       </column>
-      <column id="19" parent="4" name="price">
+      <column id="15" parent="3" name="PRICE">
+        <mandatory>1</mandatory>
         <data-type>double</data-type>
       </column>
-      <key id="20" parent="4" name="PRIMARY">
-        <columns>name_Whisky</columns>
+      <key id="16" parent="3" name="PRIMARY">
+        <columns>PRICE</columns>
         <primary>1</primary>
       </key>
-      <column id="21" parent="5" name="photo">
-        <data-type>varchar(45)</data-type>
-      </column>
-      <column id="22" parent="5" name="name_Yachts">
+      <column id="17" parent="4" name="NAME">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="23" parent="5" name="descriptions">
-        <data-type>varchar(255)</data-type>
-      </column>
-      <column id="24" parent="5" name="quantity">
-        <data-type>int(11)</data-type>
-      </column>
-      <column id="25" parent="5" name="price">
+      <column id="18" parent="4" name="PASSWORD">
         <data-type>varchar(45)</data-type>
       </column>
-      <key id="26" parent="5" name="PRIMARY">
-        <columns>name_Yachts</columns>
+      <key id="19" parent="4" name="PRIMARY">
+        <columns>NAME</columns>
+        <primary>1</primary>
+      </key>
+      <column id="20" parent="5" name="PHOTO">
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="21" parent="5" name="NAME_WHISKY">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="22" parent="5" name="DESCRIPTION">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="23" parent="5" name="QUANTITY">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="24" parent="5" name="PRICE">
+        <data-type>double</data-type>
+      </column>
+      <key id="25" parent="5" name="PRIMARY">
+        <columns>NAME_WHISKY</columns>
+        <primary>1</primary>
+      </key>
+      <column id="26" parent="6" name="PHOTO">
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="27" parent="6" name="NAME_YACHT">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="28" parent="6" name="DESCRIPTIONS">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="29" parent="6" name="QUANTITY">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="30" parent="6" name="PRICE">
+        <data-type>varchar(45)</data-type>
+      </column>
+      <key id="31" parent="6" name="PRIMARY">
+        <columns>NAME_YACHT</columns>
         <primary>1</primary>
       </key>
     </database-model>

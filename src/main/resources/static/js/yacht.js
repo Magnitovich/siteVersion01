@@ -32,7 +32,7 @@ function deleteSelectedElements() {
 
         selectedYachtForDelete[i] = hasNextt[0].id;
         i++;
-    })
+    });
     $.ajax({   //тип запроса
         headers: {
             "Accept": "application/json",

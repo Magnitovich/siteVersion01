@@ -76,9 +76,15 @@ public class AddNewCarsController {
 
             }catch(RuntimeException r){
                 bindingResult.rejectValue("name", "error.name", "Errore: Photo or name exist in DB");
-                return seePageAdd(carsDTO.getName());
+                return viewException();
             }
         }
+    }
+    public ModelAndView viewException(){
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("add/addCars");
+        return modelAndView;
     }
 
     @ModelAttribute("comparePhotoNameCarWithDB")

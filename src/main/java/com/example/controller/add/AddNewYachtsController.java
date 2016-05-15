@@ -1,7 +1,9 @@
 package com.example.controller.add;
 
 import com.example.dao.YachtRepository;
+import com.example.model.YachtDTO;
 import com.example.model.YachtsModel;
+import com.example.service.YachtsService;
 import com.example.service.exceptions.ExceptionAddYachtService;
 import com.example.service.old.YachtAddService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ import java.util.List;
 public class AddNewYachtsController {
 
     @Autowired
-    private YachtAddService yachtAddService;
+    private YachtsService yachtService;
 
     @Autowired
     private YachtRepository seeAllYachts;
@@ -30,25 +32,44 @@ public class AddNewYachtsController {
     private ExceptionAddYachtService exceptionAddYachtService;
 
     @RequestMapping(value = "/addInfoAboutNewYachts", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView seePageAddYachts() {
+    public ModelAndView seePageAddYachts(@RequestParam(required = false)String id) {
+
+        if (id !=null && id.length()!=0) {
+            YachtDTO yachtDTO = yachtService.viewSelecterYachtModel(id);
+            yachtDTO.setIdForEdit(id);
+            System.out.println(id);
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("comparePhotoNameWithDB", yachtDTO);
+            modelAndView.setViewName("add/addYachts");
+            return modelAndView;
+
+        } else {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("add/addYachts");
-        return modelAndView;
+        return modelAndView;}
     }
 
     @RequestMapping(value = "/addSuccessfulYacht", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView addInfoCars(@ModelAttribute("comparePhotoNameWithDB")YachtsModel yachtsModel, BindingResult result,
-                                    @RequestParam(value = "photoYacht", required = false)String photo,
-                                    @RequestParam(value = "nameYacht", required = false)String name,
-                                    @RequestParam("describeYacht")String describe,
-                                    @RequestParam("quantityYacht")Integer quantity,
-                                    @RequestParam("priceYacht")BigDecimal price) {
+    public ModelAndView addInfoCars(@ModelAttribute("comparePhotoNameWithDB") YachtDTO yachtDTO, BindingResult result) {
+
+        if (yachtDTO.getIdForEdit()!=null && yachtDTO.getIdForEdit().length() !=0) {
+
+            yachtService.editYacht(yachtDTO);
+            List<YachtDTO> yachtDTOs = yachtService.vewAllYachts();
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("viewSelectedYacht", yachtDTOs);
+            modelAndView.setViewName("yacht");
+            return modelAndView;
+
+        } else {
+
         try {
 //        yachtAddService.addNewYacht(photo, name, describe, quantity, price);
 
-            exceptionAddYachtService.compareEnterInfoAndInDB(photo, name, describe, quantity, price);
+            exceptionAddYachtService.compareEnterInfoAndInDB(yachtDTO.getPhoto(), yachtDTO.getName(),
+                                    yachtDTO.getDescriptions(), yachtDTO.getNumber(), yachtDTO.getPrice());
 
-            List<YachtsModel> list = seeAllYachts.findAllYachts();
+            List<YachtDTO> list = yachtService.vewAllYachts();
 
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.addObject("viewSelectedYacht", list);
@@ -56,14 +77,23 @@ public class AddNewYachtsController {
             return modelAndView;
         } catch (RuntimeException r) {
 
-            result.rejectValue("name", "error.name", "Errore: Login exist");
-            return seePageAddYachts();
-
+            result.rejectValue("name", "error.name", "Error: Name or Photo exist");
+//            return seePageAddYachts(yachtDTO.getName());
+            return viewExeption();
+        }
         }
     }
 
+    public ModelAndView viewExeption() {
+
+        ModelAndView andView = new ModelAndView();
+        andView.setViewName("add/addYachts");
+        return andView;
+
+    }
+
     @ModelAttribute("comparePhotoNameWithDB")
-    public YachtsModel createModel() {
-        return new YachtsModel();
+    public YachtDTO createModel() {
+        return new YachtDTO();
     }
 }

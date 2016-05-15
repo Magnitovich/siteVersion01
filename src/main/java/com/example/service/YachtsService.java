@@ -1,12 +1,15 @@
 package com.example.service;
 
 import com.example.dao.YachtRepository;
+import com.example.model.CarsDTO;
+import com.example.model.YachtDTO;
 import com.example.model.YachtsModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,11 +18,23 @@ public class YachtsService {
     @Autowired
     private YachtRepository yachtRepository;
 
-    public List<YachtsModel> vewAllYachts() {
+    public List<YachtDTO> vewAllYachts() {
 
         List<YachtsModel> allYachts = yachtRepository.findAllYachts();
-        return allYachts;
+        List<YachtDTO> yachtDTOs = convertListModelToListDTO(allYachts);
+        return yachtDTOs;
     }
+
+    private List<YachtDTO> convertListModelToListDTO(List<YachtsModel> yachtsModels) {
+
+        List<YachtDTO> yachtDTOs = new ArrayList<>();
+        for (YachtsModel add:yachtsModels) {
+            YachtDTO yachtDTO = convertModelToDTO(add);
+            yachtDTOs.add(yachtDTO);
+        }
+    return yachtDTOs;
+    }
+
 
     public void deleteYachts(List<String> nameYachts) {
 
@@ -27,10 +42,11 @@ public class YachtsService {
             yachtRepository.delete(yacht);
         }
     }
-    public List<YachtsModel> viewSelectedYacht(String name) {
+    public List<YachtDTO> viewSelectedYacht(String name) {
 
         List<YachtsModel> byNameYacht = yachtRepository.findByNameYacht(name);
-        return byNameYacht;
+        List<YachtDTO> yachtDTOs = convertListModelToListDTO(byNameYacht);
+        return yachtDTOs;
     }
 
     @Transactional
@@ -59,17 +75,40 @@ public class YachtsService {
         yachtRepository.save(yachtsModel);
     }
 
-    public YachtsModel editYacht(String nameYacht) {
+    @Transactional
+    public void editYacht(YachtDTO yachtDTO) {
 
-        List<YachtsModel> list = yachtRepository.findByNameYacht(nameYacht);
-        YachtsModel model = list.get(0);
-        model.getPhoto();
-        model.getName();
-        model.getDescriptions();
-        model.getNumber();
-        model.getPrice();
+        YachtsModel model = yachtRepository.findFirstByName(yachtDTO.getName());
+        model.setPhoto(yachtDTO.getPhoto());
+        model.setName(yachtDTO.getName());
+        model.setDescriptions(yachtDTO.getDescriptions());
+        model.setNumber(yachtDTO.getNumber());
+        model.setPrice(yachtDTO.getPrice());
 
-        return model;
+        yachtRepository.save(model);
+    }
+    public YachtDTO viewSelecterYachtModel(String name) {
+        YachtsModel byName = yachtRepository.findFirstByName(name);
+        YachtDTO yachtDTO = convertModelToDTO(byName);
+        return yachtDTO;
+
+    }
+
+    private YachtDTO convertModelToDTO(YachtsModel model) {
+        YachtDTO yachtDTO = new YachtDTO();
+
+        yachtDTO.setPhoto(model.getPhoto());
+        yachtDTO.setName(model.getName());
+        yachtDTO.setDescriptions(model.getDescriptions());
+        yachtDTO.setNumber(model.getNumber());
+        yachtDTO.setPrice(model.getPrice());
+        return yachtDTO;
+    }
+
+    public List<YachtDTO> viewPhotoAndYacht(String photo, String name) {
+        List<YachtsModel> yachtsModels = yachtRepository.findByPhotoAndName(photo, name);
+        List<YachtDTO> yachtDTOs = convertListModelToListDTO(yachtsModels);
+        return yachtDTOs;
     }
 
 }

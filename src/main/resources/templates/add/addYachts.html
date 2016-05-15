@@ -15,32 +15,36 @@
     <p/><br/>
     <tr>
         <td>Path to photo </td>
-        <td><input class="buttons" type="text" style="width: 255px" name="photoYacht" id="photoYacht"
+        <td><input class="buttons" type="text" style="width: 255px" th:field="*{photo}" name="photoYacht" id="photoYacht"
                     value="yachts/"/> </td>
     </tr>
     <tr>
         <td>Name Yacht </td>
         <td><input class="buttons" type="text"
 
-                   th:field="*{name}"
-                   style="width: 255px" name="name" id="name"/>
+                   th:field="*{name}" style="width: 255px" name="name" id="name"/>
 
                 <span style="font-style: italic; font-size: 10px" th:if="${#fields.hasErrors('name')}"
-               th:errors="*{name}">Errore</span>
+               th:errors="*{name}">Error</span>
         </td>
     </tr>
     <tr>
         <td>Describe about yacht</td>
-        <td><textarea class="buttons" rows="8" cols="35" name="describeYacht" id="describeYacht" maxlength="455"
-                      placeholder="max length 255"></textarea></td>
+        <td>
+
+            <!--<textarea class="buttons" rows="8" cols="35" th:field="*{descriptions}" name="describeCars"-->
+                      <!--id="describeCars" maxlength="455"-->
+                      <!--placeholder="max length 255">-->
+            <textarea class="buttons" rows="8" cols="35" th:field="*{descriptions}"  name="describeYacht"
+                      id="describeYacht" maxlength="455" placeholder="max length 255"></textarea></td>
     </tr>
     <tr>
         <td>Quantity yachts in warehouse </td>
-        <td><input type="number" style="width: 255px" min="1" value="1" name="quantityYacht" id="quantityYacht"/> </td>
+        <td><input type="number" style="width: 255px" min="1" value="1" th:field="*{number}" name="quantityYacht" id="quantityYacht"/> </td>
     </tr>
     <tr>
         <td>Price </td>
-        <td><input type="text" style="width: 255px" pattern="[0-9]{5,9}" value="1" name="priceYacht" id="priceYacht"/> </td>
+        <td><input type="text" style="width: 255px" pattern="[0-9]{5,9}" th:field="*{price}" value="1" name="priceYacht" id="priceYacht"/> </td>
     </tr>
     <tr>
         <!--<form action="../yacht.html">-->

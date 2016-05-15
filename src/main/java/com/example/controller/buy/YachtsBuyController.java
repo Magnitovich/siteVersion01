@@ -1,5 +1,6 @@
 package com.example.controller.buy;
 
+import com.example.model.YachtDTO;
 import com.example.model.YachtsModel;
 import com.example.service.YachtsService;
 import com.example.service.old.BuyYachtsService;
@@ -22,7 +23,7 @@ public class YachtsBuyController {
     @RequestMapping(value = "buyYachts", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewYachtForSale(@RequestParam("hiddenYachtName")String name) {
 
-        List<YachtsModel> list = yachtsService.viewSelectedYacht(name);
+        List<YachtDTO> list = yachtsService.viewSelectedYacht(name);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("viewBuyYacht", list);
         modelAndView.setViewName("buy/buyYacht");
