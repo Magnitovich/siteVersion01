@@ -2,6 +2,7 @@ package com.example.controller.buy;
 
 import com.example.dao.WhiskyRepository;
 import com.example.model.WhiskeyModel;
+import com.example.model.WhiskyDTO;
 import com.example.service.WhiskyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ public class WhiskyBuyController {
     public ModelAndView viewSelectedWhisky(@RequestParam("nameBuyWhiskey")String nameWhisky) {
 
         System.out.println(nameWhisky);
-        List<WhiskeyModel> list = whiskyService.viewSelectedWhisky(nameWhisky);
+        List<WhiskyDTO> list = whiskyService.viewSelectedWhisky(nameWhisky);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("buySelectedWhisky", list);
         modelAndView.setViewName("buy/buyWhisky");

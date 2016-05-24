@@ -13,4 +13,13 @@ public interface WhiskyRepository extends CrudRepository<WhiskeyModel, String> {
 //    @Query(value = "select wm from WhiskeyModel ws where name_Whisky=?")
     public List<WhiskeyModel> findByNameWhisky(String name);
 
+    List<WhiskeyModel> findByPhoto(String photo);
+
+    @Query(value = "SELECT ws FROM WhiskeyModel ws")
+    List<WhiskeyModel> findAllWhisky();
+
+
+    WhiskeyModel findFirstByNameWhisky(String name);
+
+
 }

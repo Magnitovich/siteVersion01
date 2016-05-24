@@ -2,13 +2,17 @@ package com.example.controller.buy;
 
 import com.example.dao.WhiskyRepository;
 import com.example.model.WhiskeyModel;
-import com.example.service.old.BuyWhiskyService;
+import com.example.model.WhiskyDTO;
+import com.example.service.WhiskyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.Lifecycle;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 public class SuccessfulBuyWhiskey {
@@ -17,7 +21,7 @@ public class SuccessfulBuyWhiskey {
     private WhiskyRepository whiskyRepository;
 
     @Autowired
-    private BuyWhiskyService whiskyService;
+    private WhiskyService whiskyService;
 
     @RequestMapping(value = "buySuccessfulWhisky", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView view(@RequestParam("nameWhiskey")String name,
@@ -25,7 +29,7 @@ public class SuccessfulBuyWhiskey {
 
         whiskyService.changeInfoInDB(name, quantityOrder);
 
-        Iterable<WhiskeyModel> all = whiskyRepository.findAll();
+        List<WhiskyDTO> all = whiskyService.seeAllWhisky();
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("viewAvailableWhisky", all);

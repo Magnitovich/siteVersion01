@@ -15,7 +15,7 @@
 
     <tr>
 
-        <td colspan="4" align="right">
+        <td colspan="5" align="right">
             <input type="search" name="searchWhisky" id="searchWhisky" placeholder="Search" class="buttons"/>
         </td>
         <td colspan="2" align="center">
@@ -30,7 +30,7 @@
         </td>
     </tr>
     <tr>
-        <td><input type="checkbox" /></td>
+        <td align="center"><input type="checkbox" /></td>
         <td align="center" width="100">Photo</td>
         <td align="center" width="100">Name</td>
         <td align="center" width="100">Describe</td>
@@ -42,7 +42,7 @@
         <td align="center"><input type="checkbox" th:attr="id=${viewAvailableWhisky.nameWhisky}"/> </td>
         <td align="center">
             <img th:attr="src=${viewAvailableWhisky.photo}" width="150" height="250"/>
-            Photo</td>
+            </td>
         <td align="center" th:text="${viewAvailableWhisky.nameWhisky}">Name</td>
         <td align="center" th:text="${viewAvailableWhisky.describeWhisky}">Describe</td>
         <td align="center" th:text="${viewAvailableWhisky.quantityWhisky}">Quantity</td>

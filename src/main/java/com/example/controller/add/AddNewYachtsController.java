@@ -5,7 +5,6 @@ import com.example.model.YachtDTO;
 import com.example.model.YachtsModel;
 import com.example.service.YachtsService;
 import com.example.service.exceptions.ExceptionAddYachtService;
-import com.example.service.old.YachtAddService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

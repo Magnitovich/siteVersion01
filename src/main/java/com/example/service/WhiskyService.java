@@ -2,11 +2,13 @@ package com.example.service;
 
 import com.example.dao.WhiskyRepository;
 import com.example.model.WhiskeyModel;
+import com.example.model.WhiskyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,9 +17,30 @@ public class WhiskyService {
     @Autowired
     private WhiskyRepository repository;
 
-    public List<WhiskeyModel> viewSelectedWhisky(String name) {
+    public WhiskyDTO convertModelToDTO(WhiskeyModel model) {
+        WhiskyDTO whiskyDTO = new WhiskyDTO();
+
+        whiskyDTO.setPhoto(model.getPhoto());
+        whiskyDTO.setNameWhisky(model.getNameWhisky());
+        whiskyDTO.setDescribeWhisky(model.getDescribeWhisky());
+        whiskyDTO.setQuantityWhisky(model.getQuantityWhisky());
+        whiskyDTO.setPrice(model.getPrice());
+
+        return whiskyDTO;
+    }
+    public List<WhiskyDTO> convertListModelToListDTO(List<WhiskeyModel> whiskeyModels) {
+        List<WhiskyDTO> whisky = new ArrayList<>();
+        for (WhiskeyModel model:whiskeyModels) {
+            WhiskyDTO dto = convertModelToDTO(model);
+            whisky.add(dto);
+        }
+        return whisky;
+    }
+
+    public List<WhiskyDTO> viewSelectedWhisky(String name) {
         List<WhiskeyModel> byNameWhisky = repository.findByNameWhisky(name);
-        return byNameWhisky;
+        List<WhiskyDTO> whiskyDTOs = convertListModelToListDTO(byNameWhisky);
+        return whiskyDTOs;
     }
 
     @Transactional
@@ -37,10 +60,11 @@ public class WhiskyService {
         }
     }
 
-    public Iterable<WhiskeyModel> seeAllWhisky() {
+    public List<WhiskyDTO> seeAllWhisky() {
 
-        Iterable<WhiskeyModel> all = repository.findAll();
-        return all;
+        List<WhiskeyModel> all = repository.findAllWhisky();
+        List<WhiskyDTO> whiskyDTOs = convertListModelToListDTO(all);
+        return whiskyDTOs;
     }
 
     public void addNewWhisky(final String photo, final String name, final String describe,
@@ -55,16 +79,24 @@ public class WhiskyService {
         repository.save(whiskeyModel);
     }
 
-    public WhiskeyModel editWhisky(final String nameWhisky) {
+    public WhiskyDTO viewByNameWhisky(String name) {
+        WhiskeyModel whiskeyModels = repository.findFirstByNameWhisky(name);
+        WhiskyDTO whiskyDTOs = convertModelToDTO(whiskeyModels);
+        return whiskyDTOs;
+    }
+    @Transactional
+    public void editWhisky(WhiskyDTO whiskyDTO) {
 
-        List<WhiskeyModel> byNameWhisky = repository.findByNameWhisky(nameWhisky);
-        WhiskeyModel model = byNameWhisky.get(0);
-        model.getPhoto();
-        model.getNameWhisky();
-        model.getDescribeWhisky();
-        model.getQuantityWhisky();
-        model.getPrice();
-        return model;
+        WhiskeyModel whiskeyModels = repository.findFirstByNameWhisky(whiskyDTO.getNameWhisky());
+
+        whiskeyModels.setPhoto(whiskyDTO.getPhoto());
+        whiskeyModels.setNameWhisky(whiskyDTO.getNameWhisky());
+        whiskeyModels.setDescribeWhisky(whiskyDTO.getDescribeWhisky());
+        whiskeyModels.setQuantityWhisky(whiskyDTO.getQuantityWhisky());
+        whiskeyModels.setPrice(whiskyDTO.getPrice());
+
+        repository.save(whiskeyModels);
+
     }
 
     public void delete(List<String> nameWhisky) {
@@ -73,5 +105,17 @@ public class WhiskyService {
 
             repository.delete(name);
         }
+    }
+    public List<WhiskyDTO> viewPhoto(String photo) {
+
+       List<WhiskeyModel> models = repository.findByPhoto(photo);
+        List<WhiskyDTO> whiskyDTOs = convertListModelToListDTO(models);
+        return whiskyDTOs;
+    }
+    public List<WhiskyDTO> viewName(String name) {
+
+       List<WhiskeyModel> models = repository.findByNameWhisky(name);
+        List<WhiskyDTO> whiskyDTOs = convertListModelToListDTO(models);
+        return whiskyDTOs;
     }
 }

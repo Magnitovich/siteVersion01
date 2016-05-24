@@ -16,25 +16,19 @@ public class CarsModel {
     @Id
     @Column(name = "NAME_CAR")
     private String name;
-    @Column
-    private String descriptions;
-    @Column
-    private Integer quantity;
-    @Column
-    private BigDecimal price;
 
+    @OneToOne
+    @JoinColumn(name = "CAR_DESCRIPTION_ID")
+    private CarDescrModel carDescrModel;
 
-
-    @Override
-    public String toString() {
-        return "CarsModel{" +
-                "photo='" + photo + '\'' +
-                ", name='" + name + '\'' +
-                ", descriptions='" + descriptions + '\'' +
-                ", quantity=" + quantity +
-                ", price=" + price +
-                '}';
+    public CarDescrModel getCarDescrModel() {
+        return carDescrModel;
     }
+
+    public void setCarDescrModel(CarDescrModel carDescrModel) {
+        this.carDescrModel = carDescrModel;
+    }
+
 
     public String getPhoto() {
         return photo;
@@ -52,27 +46,5 @@ public class CarsModel {
         this.name = name;
     }
 
-    public String getDescriptions() {
-        return descriptions;
-    }
 
-    public void setDescriptions(String descriptions) {
-        this.descriptions = descriptions;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
 }

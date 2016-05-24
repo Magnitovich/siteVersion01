@@ -38,7 +38,9 @@
             <input type="checkbox" name="selectYachtForChange" th:attr="id=${viewSelectedYacht.name}"
         /> </td>
         <td>
-            <img th:attr="src=${viewSelectedYacht.photo}" width="400" height="280"/>
+            <input type="hidden" id="hiddenYachtImg" name="hiddenYachtImg" th:value="${viewSelectedYacht.name}" />
+            <a href="buyYachts">
+            <img th:attr="src=${viewSelectedYacht.photo}" width="400" height="280"/></a>
         </td>
         <td width="100" th:text="${viewSelectedYacht.name}">Name</td>
         <td width="100" th:text="${viewSelectedYacht.descriptions}">Name</td>

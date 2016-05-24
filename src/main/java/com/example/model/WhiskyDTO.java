@@ -1,35 +1,26 @@
 package com.example.model;
 
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name ="whisky")
-public class WhiskeyModel {
+public class WhiskyDTO {
 
-    @Column
+    private String idForEdit;
+
     private String photo;
-    @Id
-    @Column(name = "NAME_WHISKY")
     private String nameWhisky;
-    @Column(name = "DESCRIPTION")
     private String describeWhisky;
-    @Column(name = "QUANTITY")
     private Integer quantityWhisky;
-    @Column
     private BigDecimal price;
 
-    @Override
-    public String toString() {
-        return "WhiskeyModel{" +
-                "photo='" + photo + '\'' +
-                ", nameWhisky='" + nameWhisky + '\'' +
-                ", describeWhisky='" + describeWhisky + '\'' +
-                ", quantityWhisky=" + quantityWhisky +
-                ", price=" + price +
-                '}';
+    public String getIdForEdit() {
+        return idForEdit;
+    }
+
+    public void setIdForEdit(String idForEdit) {
+        this.idForEdit = idForEdit;
     }
 
     public String getPhoto() {

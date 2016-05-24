@@ -17,10 +17,11 @@ public interface CarsRepository extends CrudRepository<CarsModel, String> {
     @Query(value = "select cs from CarsModel cs")
     public List<CarsModel> findAllCars();
 
-//    @Query(value = "select cs from CarsModel cs where photo=?  name_Cars=?)")
+//    @Query(value = "select * from CarsModel cs where photo=?  name_Cars=?)")
     List<CarsModel> findByPhotoAndName(String photo, String name);
 
     CarsModel findFirstByName(String name);
+
 
 
 

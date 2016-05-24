@@ -2,6 +2,8 @@ package com.example.service;
 
 
 import com.example.dao.CarsRepository;
+
+import com.example.model.CarDescrModel;
 import com.example.model.CarsDTO;
 import com.example.model.CarsModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +26,9 @@ public class CarsService {
 
         carsDTO.setPhoto(carsMode.getPhoto());
         carsDTO.setName(carsMode.getName());
-        carsDTO.setDescriptions(carsMode.getDescriptions());
-        carsDTO.setQuantity(carsMode.getQuantity());
-        carsDTO.setPrice(carsMode.getPrice());
+        carsDTO.setDescriptions(carsMode.getCarDescrModel().getDescription());
+        carsDTO.setQuantity(carsMode.getCarDescrModel().getQuantity());
+        carsDTO.setPrice(carsMode.getCarDescrModel().getPrice());
 
         return carsDTO;
     }
@@ -48,11 +50,14 @@ public class CarsService {
     public void addNewCarsForDb(final String photo, final String name, final String describe, final Integer quantity,
                                 final BigDecimal price) {
         CarsModel carsModel = new CarsModel();
+        CarDescrModel carDescrModel = new CarDescrModel();
         carsModel.setPhoto(photo);
         carsModel.setName(name);
-        carsModel.setDescriptions(describe);
-        carsModel.setQuantity(quantity);
-        carsModel.setPrice(price);
+        carDescrModel.setDescription(describe);
+        carDescrModel.setQuantity(quantity);
+        carDescrModel.setPrice(price);
+        carsModel.setCarDescrModel(carDescrModel);
+
         carsRepository.save(carsModel);
     }
 
@@ -79,9 +84,9 @@ public class CarsService {
 
         model.setPhoto(carsDTO.getPhoto());
         model.setName(carsDTO.getName());
-        model.setDescriptions(carsDTO.getDescriptions());
-        model.setQuantity(carsDTO.getQuantity());
-        model.setPrice(carsDTO.getPrice());
+        model.getCarDescrModel().setDescription(carsDTO.getDescriptions());
+        model.getCarDescrModel().setQuantity(carsDTO.getQuantity());
+        model.getCarDescrModel().setPrice(carsDTO.getPrice());
 
         carsRepository.save(model);
 
@@ -96,13 +101,14 @@ public class CarsService {
             System.out.println("Db not FOUND THIS CAR");
         } else {
             CarsModel model = list.get(0);
-            int quantityCarsInDB = model.getQuantity();
+
+            int quantityCarsInDB = model.getCarDescrModel().getQuantity();
 
             int result;
 
             result = quantityCarsInDB - quantityFromUI;
 
-            model.setQuantity(result);
+            model.getCarDescrModel().setQuantity(result);
             carsRepository.save(model);
         }
     }

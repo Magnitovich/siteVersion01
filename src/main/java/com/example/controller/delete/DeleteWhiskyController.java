@@ -2,6 +2,7 @@ package com.example.controller.delete;
 
 import com.example.dao.WhiskyRepository;
 import com.example.model.WhiskeyModel;
+import com.example.model.WhiskyDTO;
 import com.example.service.WhiskyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ public class DeleteWhiskyController {
                                    HttpServletRequest req) {
 
         whiskyService.delete(namesWhisky);
-        Iterable<WhiskeyModel> whiskeyModels = whiskyService.seeAllWhisky();
+        Iterable<WhiskyDTO> whiskeyModels = whiskyService.seeAllWhisky();
         ModelAndView modelAndView = new ModelAndView();
         System.out.println(namesWhisky);
         modelAndView.addObject("viewAvailableWhisky", whiskeyModels);

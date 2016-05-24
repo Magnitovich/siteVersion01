@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.model.WhiskeyModel;
+import com.example.model.WhiskyDTO;
 import com.example.service.WhiskyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.Lifecycle;
@@ -20,7 +21,7 @@ public class WhiskyController {
     @RequestMapping(value = "/warehouseWhisky", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewAllWhiskyInWarehouse() {
 
-        Iterable<WhiskeyModel> list = whiskyService.seeAllWhisky();
+        Iterable<WhiskyDTO> list = whiskyService.seeAllWhisky();
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("viewAvailableWhisky", list);
