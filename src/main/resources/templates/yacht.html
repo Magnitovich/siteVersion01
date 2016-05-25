@@ -39,10 +39,14 @@
         </td>
         <td>
         <!--<a href="buyYachts?selectionYacht=${viewSelectedYacht.name}">-->
-            <a href="" onclick="buyYachtFromImg()">
-            <input type="hidden" id="hiddenYachtImg" name="hiddenYachtImg" th:value="${viewSelectedYacht.name}" />
-            <img th:attr="src=${viewSelectedYacht.photo}"  width="400" height="280"/>
-        </a>
+            <!--<a href="" onclick="buyYachtFromImg()">-->
+            <form action="buyImgYachts"  method="post" >
+            <!--<input type="hidden" id="hiddenYachtImg" name="hiddenYachtImg" th:value="${viewSelectedYacht.name}" />-->
+          <button id="hiddenYachtImg" name="hiddenYachtImg" th:value="${viewSelectedYacht.name}">
+              <img th:attr="src=${viewSelectedYacht.photo}"  width="400" height="280"/>
+          </button>
+        <!--</a>-->
+                </form>
         </td>
         <td width="100" th:text="${viewSelectedYacht.name}">Name</td>
         <td width="100" th:text="${viewSelectedYacht.descriptions}">Name</td>
