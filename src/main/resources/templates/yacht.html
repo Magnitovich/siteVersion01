@@ -38,9 +38,12 @@
             <input type="checkbox" name="selectYachtForChange" th:attr="id=${viewSelectedYacht.name}"
         /> </td>
         <td>
-            <input type="hidden" id="hiddenYachtImg" name="hiddenYachtImg" th:value="${viewSelectedYacht.name}" />
-            <a href="buyYachts">
-            <img th:attr="src=${viewSelectedYacht.photo}" width="400" height="280"/></a>
+
+
+        <a href="buyYachts?selectionYacht=${viewSelectedYacht.name}">
+                <!--<input type="hidden" id="hiddenYachtImg" name="hiddenYachtImg" th:value="${viewSelectedYacht.name}" />-->
+                <img th:attr="src=${viewSelectedYacht.photo}" width="400" height="280"/></a>
+
         </td>
         <td width="100" th:text="${viewSelectedYacht.name}">Name</td>
         <td width="100" th:text="${viewSelectedYacht.descriptions}">Name</td>
@@ -58,7 +61,8 @@
             <input type="hidden" id="hiddenYachtName" name="hiddenYachtName" th:value="${viewSelectedYacht.name}" />
             <input class="buttons" type="submit" th:attr="id=${viewSelectedYacht.name}" style="width: 60px" value="buy"/>
 
-        </td></form>
+        </td>
+        </form>
     </tr>
 </table>
 </center>
