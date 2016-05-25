@@ -22,14 +22,14 @@ public class YachtsBuyController {
 
     @RequestMapping(value = "buyYachts", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewYachtForSale(@RequestParam("hiddenYachtName")String name,
-                                         @RequestParam("hiddenYachtImg")String img) {
-        System.out.println(img);
+                                         @RequestParam(required = false)String id) {
+        System.out.println(id);
         if(name !=null & name.length()!=0) {
             List<YachtDTO> list = yachtsService.viewSelectedYacht(name);
             ModelAndView modelAndView = viewYachSelected(list);
             return modelAndView;
         } else {
-            List<YachtDTO> listImg = yachtsService.viewSelectedYacht(img);
+            List<YachtDTO> listImg = yachtsService.viewSelectedYacht(id);
             ModelAndView modelAndView = viewYachSelected(listImg);
             return modelAndView;
         }

@@ -35,15 +35,14 @@
         </tr>
     <tr th:each="viewSelectedYacht : ${viewSelectedYacht}">
         <td align="center">
-            <input type="checkbox" name="selectYachtForChange" th:attr="id=${viewSelectedYacht.name}"
-        /> </td>
+            <input type="checkbox" name="selectYachtForChange" th:attr="id=${viewSelectedYacht.name}"/>
+        </td>
         <td>
-
-
-        <a href="buyYachts?selectionYacht=${viewSelectedYacht.name}">
-                <!--<input type="hidden" id="hiddenYachtImg" name="hiddenYachtImg" th:value="${viewSelectedYacht.name}" />-->
-                <img th:attr="src=${viewSelectedYacht.photo}" width="400" height="280"/></a>
-
+        <!--<a href="buyYachts?selectionYacht=${viewSelectedYacht.name}">-->
+            <a href="" onclick="buyYachtFromImg()">
+            <input type="hidden" id="hiddenYachtImg" name="hiddenYachtImg" th:value="${viewSelectedYacht.name}" />
+            <img th:attr="src=${viewSelectedYacht.photo}"  width="400" height="280"/>
+        </a>
         </td>
         <td width="100" th:text="${viewSelectedYacht.name}">Name</td>
         <td width="100" th:text="${viewSelectedYacht.descriptions}">Name</td>

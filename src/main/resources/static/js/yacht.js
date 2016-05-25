@@ -1,4 +1,11 @@
+function buyYachtFromImg() {
 
+    var selectedForEdit = $('input:hidden')
+
+
+    window.location.href ="buyYachts?id="+selectedForEdit[0].id;
+
+}
 
 function addNewYacht(){
 
