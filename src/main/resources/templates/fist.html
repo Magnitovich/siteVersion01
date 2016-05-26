@@ -3,25 +3,54 @@
 <head>
     <meta charset="UTF-8"/>
     <link href="css/back.css" rel="stylesheet"/>
-
+    <script src="js/jquery-1.12.3.min.js" ></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" rel="stylesheet"/>
+    <script src="js/modalWindow.js"></script>
+    <script   src="https://code.jquery.com/ui/1.12.0-rc.2/jquery-ui.js"
+              integrity="sha256-6HSLgn6Ao3PKc5ci8rwZfb//5QUu3ge2/Sw9KfLuvr8=" crossorigin="anonymous"></script>
 </head>
 <body class="back">
-<form >
+
+<div id="registrationDialog" title="Register or login">
+    <table border="1">
+        <tr><td>
+    <form th:action="@{/login}" method="post">
+        <div><label> User Name : <input type="text" name="username"/> </label></div>
+        <div><label> Password: <input type="password" name="password"/> </label></div>
+        <div><input type="submit" value="Sign In"/></div>
+    </form>
+        </td>
+        <td>
+            <form th:action="@{/login}" method="post">
+                <div><label> User Name : <input type="text" name="username"/> </label></div>
+                <div><label> Password: <input type="password" name="password"/> </label></div>
+                <div><input type="submit" value="Sign In"/></div>
+            </form>
+        </td></tr>
+
+    </table>
+</div>
+
+
     <div align="right" th:if="${not #authorization.expression('isAuthenticated()')}">
-    <a href="login.html">
+     <a id="login_register"  >
         Registration
-    </a></div>
+    </a>
+        <a href="/logout" >Logout</a>
 
-    <div align="right" th:if="${#authorization.expression('isAuthenticated()')}"/>
+    </div>
 
-    <div align="right" th:text="${#authentication.name}"/>
+    <!--<div align="right" th:if="${#authorization.expression('isAuthenticated()')}"/>-->
+
+    <div align="right"  th:if="${#authorization.expression('isAuthenticated()')}"
+         th:text="${#authentication.name}"/>
     <!--The value of the "name" property of the authentication object should appear here.-->
-
-
-    <center>
+    <!--<div th:include="headerHtml :: header">...</div>-->
          <h2 class="text">Wellcome on site Premium Things</h2>
 
    <p/><p/>
+        <form >
+
     <table border="0" cellpadding="10px">
         <tr><td><a href="saleCars"><img src="cars/alfaSml.jpg" width="400"/></a></td>
             <!--<td class="yachtFPg" width="300" height="191"></td>-->
@@ -31,7 +60,6 @@
 
 
     </table>
-</center>
 </form>
 </body>
 </html>
