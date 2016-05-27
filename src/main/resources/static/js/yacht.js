@@ -23,7 +23,7 @@ function editInfoYacht() {
         alert("You don't selected anyone yacht")
     } else {
 
-        window.location.href ="editSelectedYacht?id="+selectedForEdit[0].id;
+        window.location.href ="addInfoAboutNewYachts?id="+selectedForEdit[0].id;
     }
 }
 

@@ -13,8 +13,9 @@ public interface UserRepository extends CrudRepository<UsersModel, String>{
 
     //поиск по праймери кей спринт делает автоматом
 
-//    @Query(value = "select cs from UsersModel cs ")
-//    List<UsersModel> findByName();
+    @Query(value = "select  cs from UsersModel cs WHERE name=?")
+    List<UsersModel> findByName(String name);
 
-
+//    @Query(value = "select NAME from USERS", nativeQuery = true )
+//    List<String> findByName();
 }

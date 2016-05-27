@@ -21,9 +21,14 @@
     </form>
         </td>
         <td>
-            <form th:action="@{/login}" method="post">
-                <div><label> User Name : <input type="text" name="username"/> </label></div>
-                <div><label> Password: <input type="password" name="password"/> </label></div>
+            <form th:action="@{/registrationPage}"    th:object="${compareUiAndDB}" method="post">
+
+                <div><label> User Name :
+                    <input type="text" name="username" th:field="*{name}" id="username"/> </label>
+                <span style="font-style: italic; font-size: 10px"
+                      th:if="${#fields.hasErrors('name')}"  th:errors="*{name}">Errore</span>
+                </div>
+                <div><label> Password: <input type="password" name="password" id="password"/> </label></div>
                 <div><input type="submit" value="Sign In"/></div>
             </form>
         </td></tr>

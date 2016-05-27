@@ -2,12 +2,16 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
+    <link href="css/back.css" rel="stylesheet"/>
+    <script src="js/jquery-1.12.3.min.js" ></script>
+    <script src="js/adminParams.js"></script>
+
 
 </head>
 <body class="centered">
 
 <table border="1">
-
+<!--<form action="okYouDoIt" method="post">-->
     <tr>
         <td>Name</td>
         <td>Admin</td>
@@ -21,14 +25,16 @@
         <!--<td>Admin</td>-->
         <!--<td>Moderator</td>-->
         <!--<td>User</td>-->
-        <td align="center">
-            <input type="checkbox" th:attr="id=${names.name}" /></td>
-        <td align="center">
-            <input type="checkbox" th:attr="id=${names.name}" /></td>
+        <!--<td align="center">-->
+            <!--<input type="checkbox" th:attr="id=${names.name}" /></td>-->
+        <!--<td align="center">-->
+            <!--<input type="checkbox" th:attr="id=${names.name}" /></td>-->
 
         </tr>
 
-
+<tr><td colspan="4" align="right">
+    <input type="button" onclick="adminRights()" value="Apply"/></td> </tr>
+<!--</form>-->
 </table>
 
 
