@@ -33,6 +33,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .permitAll()
                     .antMatchers("/yachts/**")
                     .permitAll()
+                    .antMatchers("/administrationNotSleeps")
+                    .permitAll()
                     .antMatchers("/whisky/**")
                     .permitAll()
                     .antMatchers("/index")

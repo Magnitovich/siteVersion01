@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+
+</head>
+<body class="centered">
+
+<table border="1">
+
+    <tr>
+        <td>Name</td>
+        <td>Admin</td>
+        <td>Moderator</td>
+        <td>User</td>
+    </tr>
+    <tr th:each="names : ${namesUsers}">
+        <td width="100" th:text="${names.name}">Name</td>
+        <td align="center"><input type="checkbox"
+                                  th:attr="id=${names.name}" /></td>
+        <!--<td>Admin</td>-->
+        <!--<td>Moderator</td>-->
+        <!--<td>User</td>-->
+        <td align="center">
+            <input type="checkbox" th:attr="id=${names.name}" /></td>
+        <td align="center">
+            <input type="checkbox" th:attr="id=${names.name}" /></td>
+
+        </tr>
+
+
+</table>
+
+
+</body>
+</html>

@@ -5,6 +5,9 @@
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
     -o-background-size: 100%; /* Opera 9.6+ */
     background-size: 100%; /* Современные браузеры */
+    /*margin-left:auto;*/
+    /*margin-right:auto;*/
+    /*!*width:800px;*!*/
 }
 .text
 {
@@ -16,3 +19,9 @@
 
 .buttons
 {border-radius: 10px}
+
+.centered {
+    margin-left:auto;
+    margin-right:auto;
+    width:800px;
+}

@@ -19,4 +19,7 @@ $(function() {
     });
 
     });
+function AdminsRight() {
 
+    window.location.href="administrationNotSleeps";
+}
