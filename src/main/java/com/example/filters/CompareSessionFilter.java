@@ -35,7 +35,7 @@ public class CompareSessionFilter  implements Filter {
                 Date now = new Date();
                 UsersModel user = (UsersModel) authentication.getPrincipal();
                 //если время ожидания превышенно происходит вылогинивание
-                if (user.getLastActive()!=null && (now.getTime()-user.getLastActive().getTime())>3000) {
+                if (user.getLastActive()!=null && (now.getTime()-user.getLastActive().getTime())>130000) {
 
                     new SecurityContextLogoutHandler().logout((HttpServletRequest)servletRequest,
                             (HttpServletResponse) servletResponse, authentication);
@@ -43,6 +43,12 @@ public class CompareSessionFilter  implements Filter {
 
                     user.setLastActive(now);
                 }
+
+                if (now.getTime()-user.getLoginDate().getTime()>3000) {
+                    new SecurityContextLogoutHandler().logout((HttpServletRequest)servletRequest,
+                            (HttpServletResponse) servletResponse, authentication);
+                }
+
             }
 
         }

@@ -17,6 +17,17 @@ public class UsersModel implements UserDetails {
     @Column
     private String password;
 
+    @Column(name = "LOGIN_DATE")
+    private Date loginDate;
+
+    public Date getLoginDate() {
+        return loginDate;
+    }
+
+    public void setLoginDate(Date loginDate) {
+        this.loginDate = loginDate;
+    }
+
     // @Transient говорит Hibernate, что это поле не является БД
     @Transient
     private Date lastActive;
