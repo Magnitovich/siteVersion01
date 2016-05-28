@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -24,14 +25,19 @@ public class AdminController {
 
         Iterable<UsersModel> usersModels = userRepository.findAll();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("namesUsers", usersModels);
+        modelAndView.addObject("namesUsersInDB", usersModels);
         modelAndView.setViewName("adminRight");
         return modelAndView;
 
     }
-    @RequestMapping(value ="/okYouDoIt",  method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView viewAdminChange(@RequestBody List<String> list, Model model) {
+    @RequestMapping(value ="/okYouDoIt",  method ={RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView viewAdminChange(
+            @RequestBody List<String> list, Model model, HttpServletRequest req
 
+//            @RequestParam(required = false)String id
+    ) {
+
+//        System.out.println(name);
         System.out.println(list);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("fist");

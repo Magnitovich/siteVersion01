@@ -10,7 +10,7 @@
 </head>
 <body class="centered">
 
-<table border="1">
+<table border="1"><form method="post">
 <!--<form action="okYouDoIt" method="post">-->
     <tr>
         <td>Name</td>
@@ -18,23 +18,29 @@
         <td>Moderator</td>
         <td>User</td>
     </tr>
-    <tr th:each="names : ${namesUsers}">
-        <td width="100" th:text="${names.name}">Name</td>
-        <td align="center"><input type="checkbox"
-                                  th:attr="id=${names.name}" /></td>
+    <tr th:each="names : ${namesUsersInDB}">
+        <td width="100" th:text="${names.name}">
+            <input type="hidden" id="nameUser" name="nameUser" th:value="${names.name}" />
+
+            Name</td>
+        <td align="center">
+            <input type="checkbox"
+            id="Admin"
+            /></td>
         <!--<td>Admin</td>-->
         <!--<td>Moderator</td>-->
         <!--<td>User</td>-->
-        <!--<td align="center">-->
-            <!--<input type="checkbox" th:attr="id=${names.name}" /></td>-->
-        <!--<td align="center">-->
-            <!--<input type="checkbox" th:attr="id=${names.name}" /></td>-->
+        <td align="center">
+            <input type="checkbox" id="Moderator" /></td>
+        <td align="center">
+            <input type="checkbox" th:attr="id=${names.name}" /></td>
 
         </tr>
 
 <tr><td colspan="4" align="right">
     <input type="button" onclick="adminRights()" value="Apply"/></td> </tr>
-<!--</form>-->
+</form>
+
 </table>
 
 
