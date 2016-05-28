@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -15,6 +16,19 @@ public class UsersModel implements UserDetails {
     private String name;
     @Column
     private String password;
+
+    // @Transient говорит Hibernate, что это поле не является БД
+    @Transient
+    private Date lastActive;
+
+    public Date getLastActive() {
+        return lastActive;
+    }
+
+    public void setLastActive(Date lastActive) {
+        this.lastActive = lastActive;
+    }
+
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "role_mapping", joinColumns = {

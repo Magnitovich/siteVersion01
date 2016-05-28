@@ -20,7 +20,7 @@
     </tr>
     <tr th:each="names : ${namesUsersInDB}">
         <td width="100" th:text="${names.name}">
-            <input type="hidden" id="nameUser" name="nameUser" th:value="${names.name}" />
+            <input type="hidden" id="nameUser" name="nameUser" th:attr="id=${names.name}" />
 
             Name</td>
         <td align="center">
@@ -31,9 +31,9 @@
         <!--<td>Moderator</td>-->
         <!--<td>User</td>-->
         <td align="center">
-            <input type="checkbox" id="Moderator" /></td>
+            <input type="checkbox" th:attr="id=${names.name}+ Moderator" id="Moderator" /></td>
         <td align="center">
-            <input type="checkbox" th:attr="id=${names.name}" /></td>
+            <input type="checkbox" id="User"  /></td>
 
         </tr>
 

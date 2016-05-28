@@ -17,13 +17,22 @@ public class AdminRoleService {
     @Autowired
     private UserRepository userRepositiry;
 
-    public void addRightsAdmin(List<String> users, Integer number) {
+    @Autowired
+    private UserRoleRepositiry userRoleRepositiry;
+
+    public void addRightsAdmin(List<String> roles, Integer number) {
         number = 4;
 
         UserRole userRole = new UserRole();
         UsersModel usersModel = new UsersModel();
 
-        usersModel.getUserRoles();
+        for (String role:roles) {
+
+            userRole.setRole(role);
+            userRoleRepositiry.save(userRole);
+            usersModel.getUserRoles().add(userRole);
+
+        }
     }
 
     public void addNewUser(String name, String password) {
