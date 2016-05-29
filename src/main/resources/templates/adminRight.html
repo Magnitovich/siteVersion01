@@ -25,15 +25,15 @@
             Name</td>
         <td align="center">
             <input type="checkbox"
-            id="Admin"
+                   th:attr="id=${names.name}+ _Admin"
             /></td>
         <!--<td>Admin</td>-->
         <!--<td>Moderator</td>-->
         <!--<td>User</td>-->
         <td align="center">
-            <input type="checkbox" th:attr="id=${names.name}+ Moderator" id="Moderator" /></td>
+            <input type="checkbox" th:attr="id=${names.name}+ _Moderator" id="Moderator" /></td>
         <td align="center">
-            <input type="checkbox" id="User"  /></td>
+            <input type="checkbox" th:attr="id=${names.name}+ _User"  /></td>
 
         </tr>
 

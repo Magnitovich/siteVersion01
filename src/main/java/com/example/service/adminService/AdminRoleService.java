@@ -20,8 +20,8 @@ public class AdminRoleService {
     @Autowired
     private UserRoleRepositiry userRoleRepositiry;
 
-    public void addRightsAdmin(List<String> roles, Integer number) {
-        number = 4;
+    public void addRightsAdmin(List<String> roles) {
+
 
         UserRole userRole = new UserRole();
         UsersModel usersModel = new UsersModel();
@@ -47,5 +47,6 @@ public class AdminRoleService {
         }
 
     }
+
 
 }
