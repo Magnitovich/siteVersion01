@@ -18,6 +18,7 @@ CREATE TABLE car_description(
 CREATE TABLE users (
   user_Name varchar(45) NOT NULL,
   password varchar(45) DEFAULT NULL,
+  login_date datetime,
   PRIMARY KEY (user_Name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

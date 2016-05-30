@@ -36,14 +36,7 @@
     </table>
 </div>
 
-
-    <div align="right" th:if="${not #authorization.expression('isAuthenticated()')}">
-     <a id="login_register"  >
-        Registration
-    </a>
-        <a href="/logout" >Logout</a>
-
-    </div>
+    <div th:replace="headerHtml :: header"></div>
 
     <!--<div align="right" th:if="${#authorization.expression('isAuthenticated()')}"/>-->
 

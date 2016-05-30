@@ -29,9 +29,7 @@ public class IsAccountNonExpiredFilter extends UsernamePasswordAuthenticationFil
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
 
-        Authentication authentication1 = super.attemptAuthentication(request, response);
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = super.attemptAuthentication(request, response);
 
         Date now = new Date();
         UsersModel user = (UsersModel) authentication.getPrincipal();
@@ -39,7 +37,7 @@ public class IsAccountNonExpiredFilter extends UsernamePasswordAuthenticationFil
         usersModel.setLoginDate(now);
         userRepository.save(usersModel);
 
-        return authentication1;
+        return authentication;
 
     }
 

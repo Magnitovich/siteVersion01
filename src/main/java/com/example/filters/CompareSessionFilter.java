@@ -23,6 +23,7 @@ public class CompareSessionFilter  implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        boolean isLoggedOut = false;
         try {
             //показывает текущего пользователя отославшего запрос
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -35,31 +36,38 @@ public class CompareSessionFilter  implements Filter {
                 Date now = new Date();
                 UsersModel user = (UsersModel) authentication.getPrincipal();
                 //если время ожидания превышенно происходит вылогинивание
-                if (user.getLastActive()!=null && (now.getTime()-user.getLastActive().getTime())>130000) {
+                System.out.println("Current time: " + now.getTime());
+                System.out.println("Logged in time: " + user.getLoginDate().getTime());
+
+                if (user.getLastActive()!=null && (now.getTime()-user.getLastActive().getTime())>100000000) {
+                    System.out.println("Last updated in time: " + user.getLastActive().getTime());
 
                     new SecurityContextLogoutHandler().logout((HttpServletRequest)servletRequest,
                             (HttpServletResponse) servletResponse, authentication);
+                    ((HttpServletResponse)servletResponse).sendRedirect("/login");
+                    isLoggedOut = true;
                 } else {
-
                     user.setLastActive(now);
                 }
 
-                if (now.getTime()-user.getLoginDate().getTime()>3000) {
+                if (now.getTime()-user.getLoginDate().getTime()>60000000) {
                     new SecurityContextLogoutHandler().logout((HttpServletRequest)servletRequest,
                             (HttpServletResponse) servletResponse, authentication);
+                    ((HttpServletResponse)servletResponse).sendRedirect("/login");
+                    isLoggedOut = true;
+                    System.out.println("Logged out user");
                 }
 
             }
 
         }
         finally {
-
-            filterChain.doFilter(servletRequest, servletResponse);
+            if (!isLoggedOut) {
+                filterChain.doFilter(servletRequest, servletResponse);
+            }
         }
 
     }
-
-//    public SecurityContextLogoutHandler loguotFroUI=new SecurityContextLogoutHandler();
 
     @Override
     public void destroy() {

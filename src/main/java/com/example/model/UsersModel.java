@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public class UsersModel implements UserDetails {
-    @Column
+    @Column(name = "user_Name")
     @Id
     private String name;
     @Column

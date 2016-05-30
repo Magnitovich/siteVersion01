@@ -23,15 +23,18 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-//    @Autowired
-//    private IsAccountNonExpiredFilter authenticationFilter;
-//
-//    @Autowired
-//    private AuthenticationManager authenticationManager;
+/*
+    @Autowired
+    private IsAccountNonExpiredFilter authenticationFilter;
+*/
+
         @Autowired
         private UserDetailsService userDetailsService;
 
-        @Override
+    @Autowired
+    private UserRepository userRepository;
+
+    @Override
         protected void configure(final HttpSecurity httpSecurity) throws Exception {
             httpSecurity
                     .authorizeRequests()
@@ -68,7 +71,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .httpBasic()
                     .and()
                     .csrf().disable();
-//                    httpSecurity.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                    httpSecurity.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         }
 
         @Autowired
@@ -82,30 +85,29 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             return new MyPasswordEncoder();
         }
 
-//    @Bean
-//    @Autowired
-//    public IsAccountNonExpiredFilter authenticationFilter(UserRepository userRepository
-//    ) {
-//        IsAccountNonExpiredFilter authFilter = new IsAccountNonExpiredFilter();
-//        authFilter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/login","POST"));
-//
-//
-//        authFilter.setAuthenticationManager(authenticationManager);
-//        authFilter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler("/index"));
-//        authFilter.setAuthenticationFailureHandler(new SimpleUrlAuthenticationFailureHandler("/login?error"));
-//        authFilter.setUsernameParameter("username");
-//        authFilter.setPasswordParameter("password");
-//        authFilter.setUserRepository(userRepository);
-//        return authFilter;
-//    }
-//    @Bean
-//    public FilterRegistrationBean filterRegistrationBean () {
-//        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-//        registrationBean.setFilter(authenticationFilter);
-//        registrationBean.setEnabled(false);
-//        return registrationBean;
-//    }
 
+    //@Bean
+    public IsAccountNonExpiredFilter authenticationFilter() throws Exception {
+        IsAccountNonExpiredFilter authFilter = new IsAccountNonExpiredFilter();
+        authFilter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/login","POST"));
+
+        authFilter.setAuthenticationManager(super.authenticationManager());
+        authFilter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler("/index"));
+        authFilter.setAuthenticationFailureHandler(new SimpleUrlAuthenticationFailureHandler("/login?error"));
+        authFilter.setUsernameParameter("username");
+        authFilter.setPasswordParameter("password");
+        authFilter.setUserRepository(userRepository);
+        return authFilter;
+    }
+/*
+    @Bean
+    public FilterRegistrationBean filterRegistrationBean () {
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+        registrationBean.setFilter(authenticationFilter);
+        registrationBean.setEnabled(false);
+        return registrationBean;
+    }
+*/
     }
 
 
