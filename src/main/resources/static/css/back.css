@@ -1,12 +1,17 @@
 .back
 {
-    background-image: url("../backgrounds/back.jpg");}
-.text
-{
+    background-image: url("../backgrounds/back.jpg");
     -moz-background-size: 100%; /* Firefox 3.6+ */
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
     -o-background-size: 100%; /* Opera 9.6+ */
     background-size: 100%; /* Современные браузеры */
+    /*margin-left:auto;*/
+    /*margin-right:auto;*/
+    /*!*width:800px;*!*/
+}
+.text
+{
+
     text-shadow: 5px 3px 3px black, 0 0 1em red; /* Параметры тени */
     color: white; /* Белый цвет текста */
     font-size: 2em; /* Размер надписи */}
@@ -14,3 +19,9 @@
 
 .buttons
 {border-radius: 10px}
+
+.centered {
+    margin-left:auto;
+    margin-right:auto;
+    width:800px;
+}

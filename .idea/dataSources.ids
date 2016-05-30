@@ -137,7 +137,10 @@ ROLE_UID</columns>
       <column id="40" parent="8" name="PASSWORD">
         <data-type>varchar(45)</data-type>
       </column>
-      <key id="41" parent="8" name="PRIMARY">
+      <column id="41" parent="8" name="LOGIN_DATE">
+        <data-type>datetime</data-type>
+      </column>
+      <key id="42" parent="8" name="PRIMARY">
         <columns>NAME</columns>
         <primary>1</primary>
       </key>

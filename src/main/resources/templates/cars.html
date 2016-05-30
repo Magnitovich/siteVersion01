@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <link href="css/back.css" rel="stylesheet"/>
-    <script src="jquery-1.12.3.min.js" ></script>
+    <script src="js/jquery-1.12.3.min.js" ></script>
     <script src="js/cars.js" ></script>
 
 </head>
@@ -35,8 +35,8 @@
     </tr>
     <tr th:each="cars : ${namesCars}">
 
-        <td align="center"><input type="checkbox"
-                                  th:attr="id=${cars.name}" /></td>
+        <td align="center">
+            <input type="checkbox" th:attr="id=${cars.name}" /></td>
         <td>
         <img th:attr="src=${cars.photo}" width="400" height="280"/>
     </td>

@@ -24,7 +24,7 @@ public class DeleteYachtController {
     public ModelAndView deleteSelectedYacht(@RequestBody List<String> list, Model model) {
 
         yachtsService.deleteYachts(list);
-
+        System.out.println(list);
         List<YachtDTO> all = yachtsService.vewAllYachts();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("viewSelectedYacht", all);

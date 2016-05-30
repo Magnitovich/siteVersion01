@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.springframework.org/schema/security">
+
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
@@ -17,10 +18,23 @@
 <table border="1">
     <tr><td colspan="4" align="Right" ><input class="buttons" type="search" value="Search"/></td>
     <td colspan="3" align="center">
-        <input class="buttons" type="button" onclick="addNewYacht()"  value="Add" style="width: 70px" />
-        <input class="buttons" type="button" onclick="editInfoYacht()" value="Edit" style="width: 70px"/>
+        <div align="right" sec:authorize="hasAuthority('admin')">
+            I am an admin
+        </div>
+        <div align="right" sec:authorize="hasAuthority('user')">
+            I am a user
+        </div>
+        <div align="right" sec:authorize="hasAuthority('moderator')">
+            I am a moderator
+        </div>
+
+        <input class="buttons" sec:authorize="hasAuthority('admin')" type="button" onclick="addNewYacht()"
+               value="Add" style="width: 70px" />
+        <input class="buttons" sec:authorize="hasAuthority('admin')" type="button" onclick="editInfoYacht()"
+               value="Edit" style="width: 70px"/>
         <!--<form action="/saleCars/delete" modelAttribute="deleteBtn" method="post" >-->
-            <input class="buttons" name="deleteProducts" onclick="deleteSelectedElements()"
+            <input class="buttons" sec:authorize="hasAuthority('admin')" name="deleteProducts"
+                   onclick="deleteSelectedElements()"
                    type="submit" value="Delete" style="width: 70px"/>
     </td></tr>
         <tr>

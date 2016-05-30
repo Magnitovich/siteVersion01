@@ -42,6 +42,7 @@ public class YachtsBuyController {
     public YachtsModel createModel() {
         return new YachtsModel();
     }
+
     public ModelAndView viewYachSelected(List<YachtDTO> list){
 
         ModelAndView modelAndView = new ModelAndView();

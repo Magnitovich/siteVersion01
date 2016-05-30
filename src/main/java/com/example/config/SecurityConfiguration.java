@@ -1,21 +1,33 @@
 package com.example.config;
 
 
+import com.example.dao.UserRepository;
+import com.example.filters.IsAccountNonExpiredFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
+//    @Autowired
+//    private IsAccountNonExpiredFilter authenticationFilter;
+//
+//    @Autowired
+//    private AuthenticationManager authenticationManager;
         @Autowired
         private UserDetailsService userDetailsService;
 
@@ -32,6 +44,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .antMatchers("/cars/**")
                     .permitAll()
                     .antMatchers("/yachts/**")
+                    .permitAll()
+                    .antMatchers("/administrationNotSleeps")
+                    .permitAll()
+                    .antMatchers("/registrationPage")
+                    .permitAll()
+                    .antMatchers("/okYouDoIt")
                     .permitAll()
                     .antMatchers("/whisky/**")
                     .permitAll()
@@ -50,6 +68,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .httpBasic()
                     .and()
                     .csrf().disable();
+//                    httpSecurity.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
         }
 
         @Autowired
@@ -62,6 +81,31 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         public PasswordEncoder passwordEncoder() {
             return new MyPasswordEncoder();
         }
+
+//    @Bean
+//    @Autowired
+//    public IsAccountNonExpiredFilter authenticationFilter(UserRepository userRepository
+//    ) {
+//        IsAccountNonExpiredFilter authFilter = new IsAccountNonExpiredFilter();
+//        authFilter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/login","POST"));
+//
+//
+//        authFilter.setAuthenticationManager(authenticationManager);
+//        authFilter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler("/index"));
+//        authFilter.setAuthenticationFailureHandler(new SimpleUrlAuthenticationFailureHandler("/login?error"));
+//        authFilter.setUsernameParameter("username");
+//        authFilter.setPasswordParameter("password");
+//        authFilter.setUserRepository(userRepository);
+//        return authFilter;
+//    }
+//    @Bean
+//    public FilterRegistrationBean filterRegistrationBean () {
+//        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+//        registrationBean.setFilter(authenticationFilter);
+//        registrationBean.setEnabled(false);
+//        return registrationBean;
+//    }
+
     }
 
 
