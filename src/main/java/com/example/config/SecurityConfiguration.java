@@ -67,6 +67,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .defaultSuccessUrl("/index")
                     .passwordParameter("password")
                     .permitAll()
+                    //благодаря этой строчке при logout кидает на индекс, если ее удрать будет кидать на logout
                     .and().logout().logoutSuccessUrl("/index")
                     .and()
                     .httpBasic()

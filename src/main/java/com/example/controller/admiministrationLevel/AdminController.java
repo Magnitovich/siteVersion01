@@ -42,14 +42,14 @@ public class AdminController {
     ) {
         adminRoleService.addRightsAdmin(list);
 
-        for(String i:list) {
-
-            System.out.println(i);
-            split = i.split("_");
-            System.out.println(split[0]);
-            System.out.println(split[1]);
-
-        }
+//        for(String i:list) {
+//
+//            System.out.println(i);
+//            split = i.split("_");
+//            System.out.println(split[0]);
+//            System.out.println(split[1]);
+//
+//        }
 
 //        System.out.println();
 //        System.out.println(split[0]);

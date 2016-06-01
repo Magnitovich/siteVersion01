@@ -5,8 +5,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRoleRepositiry extends CrudRepository<UserRole, String> {
+public interface UserRoleRepositiry extends CrudRepository<UserRole, Long> {
 
+
+        UserRole findFirstByRole(String name);
 
 
 
