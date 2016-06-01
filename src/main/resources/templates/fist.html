@@ -9,7 +9,6 @@
     <script   src="js/jquery-ui.min.js"></script>
 </head>
 <body class="back">
-<center>
 <div id="registrationDialog" title="Register or login">
     <table border="1">
         <tr><td>
@@ -23,7 +22,7 @@
             <form th:action="@{/registrationPage}" th:object="${compareUiAndDB}" method="post">
 
                 <div><label> User Name :
-                    <input type="text" name="username"  id="username"/>
+                    <input type="text"  name="name"  id="name"/>
                 <!--<span style="font-style: italic; font-size: 10px"-->
                       <!--th:if="${#fields.hasErrors('name')}"  th:errors="*{name}">Errore</span>-->
                 </label>
@@ -35,17 +34,20 @@
 
     </table>
 </div>
-
-    <div th:replace="headerHtml :: header"></div>
-
+<div align="right">
+    <div  th:replace="headerHtml :: header"></div>
+</div>
     <!--<div align="right" th:if="${#authorization.expression('isAuthenticated()')}"/>-->
+<!--//Эта строка выводит имя пользователя, когда он зарегистрируется.-->
 
     <div align="right"  th:if="${#authorization.expression('isAuthenticated()')}"
          th:text="${#authentication.name}"/>
+
     <!--The value of the "name" property of the authentication object should appear here.-->
     <!--<div th:include="headerHtml :: header">...</div>-->
-         <h2 class="text">Wellcome on site Premium Things</h2>
 
+<center>
+    <h2 class="text">Wellcome on site Premium Things</h2>
    <p/><p/>
         <form >
 

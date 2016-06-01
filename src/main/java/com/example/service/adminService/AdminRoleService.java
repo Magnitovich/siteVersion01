@@ -27,10 +27,12 @@ public class AdminRoleService {
         UsersModel usersModel = new UsersModel();
 
         for (String role:roles) {
-
-            userRole.setRole(role);
+            String[] split = role.split("_");
+            userRole.setRole(split[0]);
+            Long i = Long.parseLong(split[1]);
+            userRole.setId(i);
             userRoleRepositiry.save(userRole);
-            usersModel.getUserRoles().add(userRole);
+//            usersModel.getUserRoles().add(userRole);
 
         }
     }

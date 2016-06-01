@@ -5,14 +5,23 @@
     <title>Title</title>
 </head>
 <body>
-<div th:fragment="header">
-    <div  align="right" th:if="${not #authorization.expression('isAuthenticated()')}">
-        <a id="login_register"  >
-            Registration
-        </a>
+<!--th:if="${not #authorization.expression('isAuthenticated()')} эта строка говорит, что пока нет авторизации показать кнопку -->
+<!--Регистрация, после авторизации делает кнопку не активной-->
+<div align="right">
+<table align="right" border="1">
+    <tr>
+<td th:fragment="header" align="right" th:if="${not #authorization.expression('isAuthenticated()')}">
+    <a id="login_register"  >
+        Registration
+    </a>
+</td>
 
-    </div>
+<td th:fragment="header" align="right"  th:if="${#authorization.expression('isAuthenticated()')}">
     <a href="/logout" >Logout</a>
+</td>
+
+   </tr>
+</table>
 </div>
 
 </body>
