@@ -40,7 +40,7 @@ public class AdminController {
 
 //            @RequestParam(required = false)String id
     ) {
-//        adminRoleService.addRightsAdmin(split[0], split[1]);
+        adminRoleService.addRightsAdmin(list);
 
         for(String i:list) {
 
