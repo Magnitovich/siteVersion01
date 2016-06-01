@@ -67,6 +67,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .defaultSuccessUrl("/index")
                     .passwordParameter("password")
                     .permitAll()
+                    .and().logout().logoutSuccessUrl("/index")
                     .and()
                     .httpBasic()
                     .and()

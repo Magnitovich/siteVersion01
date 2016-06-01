@@ -37,6 +37,8 @@ public class IsAccountNonExpiredFilter extends UsernamePasswordAuthenticationFil
         usersModel.setLoginDate(now);
         userRepository.save(usersModel);
 
+        user.setLoginDate(now);
+
         return authentication;
 
     }

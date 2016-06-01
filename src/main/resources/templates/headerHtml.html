@@ -5,12 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-<div th:fragment="header" align="right" th:if="${not #authorization.expression('isAuthenticated()')}">
-    <a id="login_register"  >
-        Registration
-    </a>
-    <a href="/logout" >Logout</a>
+<div th:fragment="header">
+    <div  align="right" th:if="${not #authorization.expression('isAuthenticated()')}">
+        <a id="login_register"  >
+            Registration
+        </a>
 
+    </div>
+    <a href="/logout" >Logout</a>
 </div>
+
 </body>
 </html>
