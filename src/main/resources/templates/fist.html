@@ -2,37 +2,93 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
-    <link href="css/back.css" rel="stylesheet"/>
     <script src="js/jquery-1.12.3.min.js" ></script>
+    <script src="js/jquery-ui.min.js"></script>
     <link href="js/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="css/back.css" rel="stylesheet"/>
+    <link href="css/reg.css" rel="stylesheet"/>
+    <script src="css/reg_css.js" ></script>
     <script src="js/modalWindow.js"></script>
-    <script   src="js/jquery-ui.min.js"></script>
 </head>
 <body class="back">
 <div id="registrationDialog" title="Register or login">
-    <table border="1">
-        <tr><td>
-    <form th:action="@{/login}" method="post">
-        <div><label> User Name : <input type="text" name="username"/> </label></div>
-        <div><label> Password: <input type="password" name="password"/> </label></div>
-        <div><input type="submit" value="Sign In"/></div>
-    </form>
-        </td>
-        <td>
-            <form th:action="@{/registrationPage}" th:object="${compareUiAndDB}" method="post">
+    <div class="form">
 
-                <div><label> User Name :
-                    <input type="text"  name="name"  id="name"/>
-                <!--<span style="font-style: italic; font-size: 10px"-->
-                      <!--th:if="${#fields.hasErrors('name')}"  th:errors="*{name}">Errore</span>-->
-                </label>
-                </div>
-                <div><label> Password: <input type="password" name="password" id="password"/> </label></div>
-                <div><input type="submit" value="Sign In"/></div>
-            </form>
-        </td></tr>
+        <ul class="tab-group">
+            <li class="tab active"><a href="#signup">Sign Up</a></li>
+            <li class="tab"><a href="#login">Log In</a></li>
+        </ul>
 
-    </table>
+        <div class="tab-content">
+            <div id="signup">
+                <h1>Sign Up for Free</h1>
+
+                <form th:action="@{/registrationPage}" th:object="${compareUiAndDB}" method="post">
+                    <div class="top-row">
+                        <div class="field-wrap">
+                            <label>
+                                First Name<span class="req">*</span>
+                            </label>
+                            <input autocomplete="off" />
+                        </div>
+
+                        <div class="field-wrap">
+                            <label>
+                                Last Name<span class="req">*</span>
+                            </label>
+                            <input type="text" autocomplete="off"/>
+                        </div>
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Email Address<span class="req">*</span>
+                        </label>
+                        <input name="name" id="name" autocomplete="off"/>
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Set A Password<span class="req">*</span>
+                        </label>
+                        <input type="password" name="password" id="password" autocomplete="off"/>
+                    </div>
+
+                    <button type="submit" class="button button-block">Get Started</button>
+
+                </form>
+
+            </div>
+
+            <div id="login">
+                <h1>Welcome Back!</h1>
+
+                <form th:action="@{/login}" method="post">
+
+                    <div class="field-wrap">
+                        <label>
+                            Email Address<span class="req">*</span>
+                        </label>
+                        <input type="username" autocomplete="off"/>
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Password<span class="req">*</span>
+                        </label>
+                        <input type="password" autocomplete="off"/>
+                    </div>
+
+                    <p class="forgot"><a href="#">Forgot Password?</a></p>
+
+                    <button class="button button-block">Log In</button>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
 </div>
 <div align="right">
     <div  th:replace="headerHtml :: header"></div>
@@ -49,19 +105,19 @@
 <center>
     <h2 class="text">Wellcome on site Premium Things</h2>
    <p/><p/>
-        <form >
+        <form>
 
-    <table border="0" cellpadding="10px">
-        <tr><td><a href="saleCars"><img src="cars/alfaSml.jpg" width="400"/></a></td>
-            <!--<td class="yachtFPg" width="300" height="191"></td>-->
-            <td><a href="selectAndBuyYachts"><img src="yachts/yacht01sm.jpg" width="400"/></a></td>
-            <td><a href="warehouseWhisky"><img src="whisky/glenDevSml.jpg" width="133"/></a></td>
-        </tr>
+            <table border="0" cellpadding="10px">
+                <tr><td><a href="saleCars"><img src="cars/alfaSml.jpg" width="400"/></a></td>
+                    <!--<td class="yachtFPg" width="300" height="191"></td>-->
+                    <td><a href="selectAndBuyYachts"><img src="yachts/yacht01sm.jpg" width="400"/></a></td>
+                    <td><a href="warehouseWhisky"><img src="whisky/glenDevSml.jpg" width="133"/></a></td>
+                </tr>
 
 
-    </table>
+            </table>
             <input type="button" onclick="AdminsRight()" value="AdminRights"/>
-</form>
+        </form>
 </center>
 </body>
 </html>

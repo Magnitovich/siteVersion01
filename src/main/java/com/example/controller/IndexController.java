@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.model.UsersModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,4 +15,5 @@ public class IndexController {
         modelAndView.setViewName("fist");
         return modelAndView;
     }
+
 }

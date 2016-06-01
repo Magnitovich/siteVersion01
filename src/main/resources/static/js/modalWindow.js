@@ -3,7 +3,7 @@ $(function() {
     //# поиск по id
     dialog = $( "#registrationDialog" ).dialog({
         autoOpen: false,
-        height: 350,
+        height: 750,
         width: 550,
         modal: true,
         dialogClass: 'no-close success-dialog',

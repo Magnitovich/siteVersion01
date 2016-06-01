@@ -16,10 +16,10 @@ CREATE TABLE car_description(
 ) AUTO_INCREMENT=1;
 
 CREATE TABLE users (
-  user_Name varchar(45) NOT NULL,
+  name varchar(45) NOT NULL,
   password varchar(45) DEFAULT NULL,
   login_date datetime,
-  PRIMARY KEY (user_Name)
+  PRIMARY KEY (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE whisky (
@@ -52,7 +52,7 @@ CREATE TABLE role_mapping (
   PRIMARY KEY (USER_ID,ROLE_UID),
   KEY fk_role_user (ROLE_UID),
   CONSTRAINT fk_role_user FOREIGN KEY (ROLE_UID) REFERENCES user_role (ID),
-  CONSTRAINT fk_user_role FOREIGN KEY (USER_ID) REFERENCES users (user_Name)
+  CONSTRAINT fk_user_role FOREIGN KEY (USER_ID) REFERENCES users (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -73,9 +73,9 @@ CREATE TABLE car_description (
   PRIMARY KEY (ID)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-INSERT INTO USERS (user_Name, password) VALUE ('test', 'test');
-INSERT INTO USERS (user_Name, password) VALUE ('test2', 'test2');
-INSERT INTO USERS (user_Name, password) VALUE ('test3', 'test3');
+INSERT INTO USERS (name, password) VALUE ('test', 'test');
+INSERT INTO USERS (name, password) VALUE ('test2', 'test2');
+INSERT INTO USERS (name, password) VALUE ('test3', 'test3');
 
 INSERT INTO user_role (NAME) VALUE ('admin');
 INSERT INTO user_role (NAME) VALUE ('moderator');

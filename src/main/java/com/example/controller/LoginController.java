@@ -33,9 +33,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registrationPage", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView registrationPage(@ModelAttribute(value ="compareUiAndDB")UsersModel model,
-                                         BindingResult bindingResult,
-                                         @RequestParam(value = "name") String name,
+    public ModelAndView registrationPage(@RequestParam(value = "name") String name,
                                          @RequestParam(value = "password") String password) {
 
         try {
@@ -48,14 +46,9 @@ public class LoginController {
             return modelAndView;
 
         } catch (RuntimeException r) {
-            bindingResult.rejectValue("username", "error.username", "Errore: Photo or name exist in DB");
-            return viewMainPage();
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("login");
+            return modelAndView;
         }
     }
-
-    @ModelAttribute("compareUiAndDB")
-    public UsersModel createModel() {
-        return new UsersModel();
-    }
-
 }
