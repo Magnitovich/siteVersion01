@@ -56,7 +56,7 @@ public class CompareSessionFilter  implements Filter {
                     user.setLastActive(now);
                 }
 
-                if (now.getTime()-user.getLoginDate().getTime()>600000000) {
+                if (now.getTime()-user.getLoginDate().getTime()>600) {
                     new SecurityContextLogoutHandler().logout((HttpServletRequest)servletRequest,
                             (HttpServletResponse) servletResponse, authentication);
                     ((HttpServletResponse)servletResponse).sendRedirect("/login");

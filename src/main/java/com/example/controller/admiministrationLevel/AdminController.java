@@ -6,6 +6,7 @@ import com.example.service.adminService.AdminRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,11 +37,15 @@ public class AdminController {
     private String[] split;
     @RequestMapping(value ="/okYouDoIt",  method ={RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewAdminChange(
-            @RequestBody List<String> list, Model model, HttpServletRequest req
-
-//            @RequestParam(required = false)String id
-    ) {
-        adminRoleService.addRightsAdmin(list);
+            @RequestBody List<String> list,
+            BindingResult bindingResult,
+            Model model, HttpServletRequest req ) {
+        try {
+            adminRoleService.addRightsAdmin(list);
+        } catch (RuntimeException e) {
+            bindingResult.rejectValue("name", "error.name", "Errore: Photo or name exist in DB");
+            return viewAdminRight();
+        }
 
 //        for(String i:list) {
 //

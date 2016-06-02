@@ -21,7 +21,11 @@
     <tr th:each="names : ${namesUsersInDB}">
         <td width="100" th:text="${names.name}">
             <input type="hidden" id="nameUser" name="nameUser" th:attr="id=${names.name}" />
+            <!--<input class="buttons" type="text" th:field="*{name}"-->
 
+                   <!--style="width: 255px" name="nameCars" id="nameCars"/>-->
+                <span style="font-style: italic; font-size: 10px"
+                      th:if="${#fields.hasErrors('name')}"  th:errors="*{names.name}">Errore</span>
             Name</td>
         <td align="center">
             <input type="checkbox"

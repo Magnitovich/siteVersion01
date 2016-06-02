@@ -57,7 +57,7 @@ public class AdminRoleService {
             } else {
                 userFromList.getRole().add(split[1]);
             }
-
+            System.out.println(user);
         }
         for (UserAdminRightsDTO dto:user) {
 //            System.out.println(dto.getName()+ "/////"+ dto.getRole().toArray().toString());
