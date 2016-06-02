@@ -6,6 +6,7 @@ public class UserAdminRightsDTO {
 
     private String name;
     private List<String> role;
+    private List<RoleDto> roleDtos;
 
     public String getName() {
         return name;
@@ -21,5 +22,13 @@ public class UserAdminRightsDTO {
 
     public void setRole(List<String> role) {
         this.role = role;
+    }
+
+    public List<RoleDto> getRoleDtos() {
+        return roleDtos;
+    }
+
+    public void setRoleDtos(List<RoleDto> roleDtos) {
+        this.roleDtos = roleDtos;
     }
 }

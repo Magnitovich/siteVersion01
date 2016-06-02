@@ -10,36 +10,28 @@
 </head>
 <body class="centered">
 
-<table border="1"><form method="post">
-<!--<form action="okYouDoIt" method="post">-->
-    <tr>
-        <td>Name</td>
-        <td>Admin</td>
-        <td>Moderator</td>
-        <td>User</td>
-    </tr>
-    <tr th:each="names : ${namesUsersInDB}">
-        <td width="100" th:text="${names.name}">
-            <input type="hidden" id="nameUser" name="nameUser" th:attr="id=${names.name}" />
+<table border="1">
+    <form method="post">
 
-            Name</td>
-        <td align="center">
-            <input type="checkbox"
-                   th:attr="id=${names.name}+ _admin"
-            /></td>
-        <!--<td>Admin</td>-->
-        <!--<td>Moderator</td>-->
-        <!--<td>User</td>-->
-        <td align="center">
-            <input type="checkbox" th:attr="id=${names.name}+ _moderator" id="Moderator" /></td>
-        <td align="center">
-            <input type="checkbox" th:attr="id=${names.name}+ _user"  /></td>
+    <!--<form action="okYouDoIt" method="post">-->
+        <tr>
+            <td>Name</td>
+            <td>Admin</td>
+            <td>Moderator</td>
+            <td>User</td>
+        </tr>
+        <tr th:each="user : ${adminRightsModel}">
+            <td width="100" th:text="${user.name}">
 
+            </td>
+
+            <td th:each="role: ${user.roleDtos}" align="center">
+                <input type="checkbox" th:attr="id=${user.name}+_+${role.name}" th:checked="${role.applied}"/></td>
         </tr>
 
-<tr><td colspan="4" align="right">
-    <input type="button" onclick="adminRights()" value="Apply"/></td> </tr>
-</form>
+        <tr><td colspan="4" align="right">
+        <input type="button" onclick="adminRights()" value="Apply"/></td> </tr>
+    </form>
 
 </table>
 

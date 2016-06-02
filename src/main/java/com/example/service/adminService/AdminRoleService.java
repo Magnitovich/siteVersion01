@@ -3,14 +3,17 @@ package com.example.service.adminService;
 import com.example.controller.CarsController;
 import com.example.dao.UserRepository;
 import com.example.dao.UserRoleRepositiry;
+import com.example.model.RoleDto;
 import com.example.model.UserAdminRightsDTO;
 import com.example.model.UserRole;
 import com.example.model.UsersModel;
+import jersey.repackaged.com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -35,8 +38,40 @@ public class AdminRoleService {
         return null;
     }
 
-    public void addRightsAdmin(List<String> roles) {
+    public List<UserAdminRightsDTO> getAdminRights() {
+        List<UserAdminRightsDTO> users = new ArrayList<>();
+        ArrayList<UserRole> availableUserRoles = Lists.newArrayList(userRoleRepositiry.findAll());
 
+        userRepositiry.findAll().forEach(user -> {
+            UserAdminRightsDTO dto = new UserAdminRightsDTO();
+            dto.setName(user.getName());
+
+            List<String> userRoles = new ArrayList<>();
+
+            user.getUserRoles().forEach(role -> {
+                userRoles.add(role.getRole());
+            });
+            dto.setRole(userRoles);
+
+            List<RoleDto> userRoleDtos = new ArrayList<>();
+            availableUserRoles.forEach(userRoleEntity -> {
+                RoleDto roleDto = new RoleDto();
+                String roleNameInDB = userRoleEntity.getRole();
+
+                roleDto.setName(roleNameInDB);
+                roleDto.setApplied(userRoles.contains(roleNameInDB));
+
+                userRoleDtos.add(roleDto);
+            });
+
+            dto.setRoleDtos(userRoleDtos);
+            users.add(dto);
+        });
+
+        return users;
+    }
+
+    public void addRightsAdmin(List<String> roles) {
         List<UserAdminRightsDTO> user = new ArrayList<>();
 
         for (String role:roles) {
@@ -53,59 +88,73 @@ public class AdminRoleService {
                 userAdminRightsDTO.setRole(new ArrayList<>());
                 userAdminRightsDTO.getRole().add(split[1]);
                 user.add(userAdminRightsDTO);
-
             } else {
                 userFromList.getRole().add(split[1]);
             }
-
+            System.out.println(user);
         }
-        for (UserAdminRightsDTO dto:user) {
-//            System.out.println(dto.getName()+ "/////"+ dto.getRole().toArray().toString());
 
+        checkRoleLengthForEachUserIsLessThan2(user);
+
+        saveDataFromUserDto(user);
+    }
+
+    private void checkRoleLengthForEachUserIsLessThan2(List<UserAdminRightsDTO> user) {
+        for (UserAdminRightsDTO dto:user) {
             if(dto.getRole().size()>1) {
                 throw new RuntimeException("WOW");
             }
 
         }
-        for (UserAdminRightsDTO roleDTO:user) {
+    }
 
+    private void saveDataFromUserDto(List<UserAdminRightsDTO> users) {
+        for (UsersModel userEntity: userRepositiry.findAll()) {
+            UserAdminRightsDTO roleDTO = getUserFromList(users, userEntity.getName());
 
-            UsersModel byName = userRepositiry.findOne(roleDTO.getName());
-            if (roleDTO.getRole().size() > 0) {
-                if (roleDTO.getRole().size() == byName.getUserRoles().size()) {
+            if (roleDTO != null) {
+                if (roleDTO.getRole().size() > 0) {
+                    if (roleDTO.getRole().size() == userEntity.getUserRoles().size()) {
 
-                    if (roleDTO.getRole().get(0).equals(byName.getUserRoles().get(0))) {
-                        //здесь все ок. Озн, что вносимая роль и роль в БД совпадают
-                        //continue озн, что продолжаем цикл со след элемента
-                        continue;
-
-                    } else {
-                        //Ошибка
-
-                    }
-
-                } else {
-                    //означает что в БД нет роли у этого юзера
-                    if (roleDTO.getRole().size() == 1) {
-                        //сохранение в БД
-                        saveInDB(roleDTO.getName(), roleDTO.getRole().get(0));
+                        if (roleDTO.getRole().get(0).equals(userEntity.getUserRoles().get(0))) {
+                            //здесь все ок. Озн, что вносимая роль и роль в БД совпадают
+                            //continue озн, что продолжаем цикл со след элемента
+                            continue;
+                        } else {
+                            //Ошибка
+                            misstake();
+                        }
 
                     } else {
-                        //Ошибка, т.к. озн, что поставленно на одна птичка
+                        //означает что в БД нет роли у этого юзера
+                        if (roleDTO.getRole().size() == 1) {
+                            //сохранение в БД
+                            saveInDB(roleDTO.getName(), roleDTO.getRole().get(0));
+                            continue;
+                        } else {
+                            //Ошибка, т.к. озн, что поставленно на одна птичка
+                            misstake();
+                        }
                     }
                 }
+            } else {
+                saveInDB(userEntity.getName(), "");
             }
         }
-        }
+    }
+
     public void saveInDB(String name, String role) {
-
         UsersModel readUserFromDB = userRepositiry.findOne(name);
-            UserRole roleEntity = userRoleRepositiry.findFirstByRole(role);
-            readUserFromDB.getUserRoles().add(roleEntity);
+        UserRole roleEntity = userRoleRepositiry.findFirstByRole(role);
+        if (roleEntity != null) {
+            List<UserRole> userRoles = new ArrayList<>();
+            userRoles.add(roleEntity);
+            readUserFromDB.setUserRoles(userRoles);
+        } else {
+            readUserFromDB.setUserRoles(new ArrayList<>());
+        }
 
-//            Long i = Long.parseLong(split[1]);
-
-            userRepositiry.save(readUserFromDB);
+        userRepositiry.save(readUserFromDB);
     }
 
     public void misstake() {

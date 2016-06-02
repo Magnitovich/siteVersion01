@@ -1,11 +1,13 @@
 package com.example.controller.admiministrationLevel;
 
 import com.example.dao.UserRepository;
+import com.example.model.UserAdminRightsDTO;
 import com.example.model.UsersModel;
 import com.example.service.adminService.AdminRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,34 +28,24 @@ public class AdminController {
     @RequestMapping(value = "/administrationNotSleeps", method = RequestMethod.GET)
     public ModelAndView viewAdminRight() {
 
-        Iterable<UsersModel> usersModels = userRepository.findAll();
+        List<UserAdminRightsDTO> adminRights = adminRoleService.getAdminRights();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("namesUsersInDB", usersModels);
+        modelAndView.addObject("adminRightsModel", adminRights);
         modelAndView.setViewName("adminRight");
         return modelAndView;
 
     }
-    private String[] split;
+
     @RequestMapping(value ="/okYouDoIt",  method ={RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewAdminChange(
-            @RequestBody List<String> list, Model model, HttpServletRequest req
-
-//            @RequestParam(required = false)String id
-    ) {
-        adminRoleService.addRightsAdmin(list);
-
-//        for(String i:list) {
-//
-//            System.out.println(i);
-//            split = i.split("_");
-//            System.out.println(split[0]);
-//            System.out.println(split[1]);
-//
-//        }
-
-//        System.out.println();
-//        System.out.println(split[0]);
-//        System.out.println(name);
+            @RequestBody List<String> list,
+            BindingResult bindingResult,
+            Model model, HttpServletRequest req ) {
+        try {
+            adminRoleService.addRightsAdmin(list);
+        } catch (RuntimeException e) {
+            throw e;
+        }
         System.out.println(list);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("fist");
