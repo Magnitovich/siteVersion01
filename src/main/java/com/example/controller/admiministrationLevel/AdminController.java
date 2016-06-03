@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,15 +40,18 @@ public class AdminController {
 
     @RequestMapping(value ="/okYouDoIt",  method ={RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewAdminChange(
-            @RequestBody List<String> list,
-            BindingResult bindingResult,
-            Model model, HttpServletRequest req ) {
-        try {
+            @RequestBody List<String> list, HttpServletRequest req ) {
+        //try {
             adminRoleService.addRightsAdmin(list);
-        } catch (RuntimeException e) {
-            throw e;
-        }
-        System.out.println(list);
+        /*} catch (RuntimeException e) {
+            List<UserAdminRightsDTO> adminRights = adminRoleService.getAdminRights();
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("errors", "You are managing in a wrong way!");
+            modelAndView.addObject("adminRightsModel", adminRights);
+            modelAndView.setViewName("adminRight");
+            return modelAndView;
+        }*/
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("fist");
         return modelAndView;

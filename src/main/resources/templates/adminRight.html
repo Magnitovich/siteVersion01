@@ -22,7 +22,6 @@
         </tr>
         <tr th:each="user : ${adminRightsModel}">
             <td width="100" th:text="${user.name}">
-
             </td>
 
             <td th:each="role: ${user.roleDtos}" align="center">
@@ -32,6 +31,9 @@
         <tr><td colspan="4" align="right">
         <input type="button" onclick="adminRights()" value="Apply"/></td> </tr>
     </form>
+
+    <div th:if="${errors}" th:text="${errors}">
+    </div>
 
 </table>
 

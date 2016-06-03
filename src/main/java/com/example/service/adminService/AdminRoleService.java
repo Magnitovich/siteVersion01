@@ -3,6 +3,7 @@ package com.example.service.adminService;
 import com.example.controller.CarsController;
 import com.example.dao.UserRepository;
 import com.example.dao.UserRoleRepositiry;
+import com.example.exception.UserHasMoreThatOneRoleException;
 import com.example.model.RoleDto;
 import com.example.model.UserAdminRightsDTO;
 import com.example.model.UserRole;
@@ -102,13 +103,14 @@ public class AdminRoleService {
     private void checkRoleLengthForEachUserIsLessThan2(List<UserAdminRightsDTO> user) {
         for (UserAdminRightsDTO dto:user) {
             if(dto.getRole().size()>1) {
-                throw new RuntimeException("WOW");
+                throw new UserHasMoreThatOneRoleException();
             }
 
         }
     }
 
     private void saveDataFromUserDto(List<UserAdminRightsDTO> users) {
+        misstake();
         for (UsersModel userEntity: userRepositiry.findAll()) {
             UserAdminRightsDTO roleDTO = getUserFromList(users, userEntity.getName());
 
@@ -158,8 +160,7 @@ public class AdminRoleService {
     }
 
     public void misstake() {
-
-        throw  new RuntimeException("WOW");
+        throw new UserHasMoreThatOneRoleException();
     }
 
 

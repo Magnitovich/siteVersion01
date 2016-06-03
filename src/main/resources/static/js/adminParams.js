@@ -33,6 +33,10 @@ function adminRights() {
         url: '/okYouDoIt',
         success: function(msg){  //msg - показывает ответ с сервера
             window.location.href = "index";
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            alert(thrownError);
         }
     });
 }
