@@ -92,7 +92,7 @@ public class AdminRoleService {
             } else {
                 userFromList.getRole().add(split[1]);
             }
-            System.out.println(user);
+//            System.out.println(user);
         }
 
         checkRoleLengthForEachUserIsLessThan2(user);
