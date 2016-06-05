@@ -19,7 +19,26 @@ $(function() {
     });
 
     });
+
 function AdminsRight() {
 
     window.location.href="administrationNotSleeps";
+}
+
+function showSignUp() {
+    $("#signup").show();
+    $("#loginForm").hide();
+
+    $("li_signup").addClass("active");
+    $("li_login").removeClass("active");
+
+}
+
+function showLogin() {
+    $("#signup").hide();
+    $("#loginForm").show();
+
+    $("#li_login").addClass("active");
+    $("#li_signup").removeClass("active");
+
 }

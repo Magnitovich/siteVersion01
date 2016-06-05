@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.tags.form.LabelTag;
 
@@ -48,7 +49,6 @@ public class AddNewWhiskyController {
     @RequestMapping(value = "addSuccessfulNewWhisky", method = {RequestMethod.POST})
     public ModelAndView viewAddWhisky(@ModelAttribute("understandEditOrAdd")WhiskyDTO whiskyDTO,
                                       BindingResult bindingResult ) {
-
         if (whiskyDTO.getIdForEdit() !=null && whiskyDTO.getIdForEdit().length() !=0) {
 
             whiskyService.editWhisky(whiskyDTO);

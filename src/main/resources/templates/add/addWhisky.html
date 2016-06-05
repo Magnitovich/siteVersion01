@@ -9,14 +9,13 @@
 
 
 <table border="1" align="center"><p/>
-    <form action="addSuccessfulNewWhisky" th:object="${understandEditOrAdd}" method="post">
+    <form action="addSuccessfulNewWhisky" th:object="${understandEditOrAdd}" method="post" enctype="multipart/form-data">
 
     <p/>
     <p/><br/>
     <tr>
         <td>Path to photo </td>
-        <td><input class="buttons" type="text" th:field="*{photo}"  style="width: 255px" name="photoWhisky" id="photoWhisky"
-                    value="whisky/"/> </td>
+        <td><input class="buttons" type="file" th:field="*{fileObject}"  style="width: 255px" name="fileObject" id="fileObject"/> </td>
     </tr>
     <tr>
         <td>Name Yacht </td>

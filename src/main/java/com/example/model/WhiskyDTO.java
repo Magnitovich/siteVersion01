@@ -1,6 +1,8 @@
 package com.example.model;
 
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.math.BigDecimal;
@@ -9,6 +11,7 @@ public class WhiskyDTO {
 
     private String idForEdit;
 
+    private MultipartFile fileObject;
     private String photo;
     private String nameWhisky;
     private String describeWhisky;
@@ -61,5 +64,13 @@ public class WhiskyDTO {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public MultipartFile getFileObject() {
+        return fileObject;
+    }
+
+    public void setFileObject(MultipartFile file) {
+        this.fileObject = file;
     }
 }
