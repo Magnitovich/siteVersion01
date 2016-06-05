@@ -11,12 +11,12 @@
 <table align="right" border="1">
     <tr>
 <td th:fragment="header" align="right" th:if="${not #authorization.expression('isAuthenticated()')}">
-    <a id="login_register"  >
+    <a id="login_register" class="btn btn-lg btn-default">
         Registration
     </a>
 </td>
 
-<td th:fragment="header" align="right"  th:if="${#authorization.expression('isAuthenticated()')}">
+<td th:fragment="header" align="right" class="btn btn-lg btn-link"  th:if="${#authorization.expression('isAuthenticated()')}">
     <a href="/logout" >Logout</a>
 </td>
 

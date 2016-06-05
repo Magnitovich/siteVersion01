@@ -34,7 +34,7 @@ public class LoginController {
 
     @RequestMapping(value = "/registrationPage", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView registrationPage(@RequestParam(value = "name") String name,
-                                         @RequestParam(value = "password") String password) {
+                                         @RequestParam(value = "signuppassword") String password) {
 
         try {
             adminRoleService.addNewUser(name, password);

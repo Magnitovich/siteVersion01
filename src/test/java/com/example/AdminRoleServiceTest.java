@@ -6,7 +6,9 @@ import com.example.model.UserRole;
 import com.example.model.UsersModel;
 import com.example.service.adminService.AdminRoleService;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
@@ -28,6 +30,9 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AdminRoleServiceTest {
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @InjectMocks
     private AdminRoleService sut = new AdminRoleService();
