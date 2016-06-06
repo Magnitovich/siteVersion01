@@ -1,22 +1,22 @@
-DROP TABLE car_description;
 DROP TABLE role_mapping;
 DROP TABLE car;
+DROP TABLE car_description;
 DROP TABLE users;
 DROP TABLE user_role;
 DROP TABLE whisky;
 DROP TABLE yachts;
-DROP TABLE role_mapping;
 
-CREATE TABLE car_description(
-  DESCRIPTIOON varchar(45),
-  QUANTITY INT,
-  PRICE NUMERIC,
-  ID NUMERIC NOT NULL,
+CREATE TABLE car_description (
+  DESCRIPTIOON varchar(255) DEFAULT NULL,
+  QUANTITY int(11) DEFAULT NULL,
+  PRICE double NOT NULL,
+  ID int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (ID)
-) AUTO_INCREMENT=1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE users (
   name varchar(45) NOT NULL,
+  email varchar(45) DEFAULT NULL,
   password varchar(45) DEFAULT NULL,
   login_date datetime,
   PRIMARY KEY (name)
@@ -24,20 +24,20 @@ CREATE TABLE users (
 
 CREATE TABLE whisky (
   photo varchar(45) DEFAULT NULL,
-  name_Whisky varchar(45) NOT NULL,
+  name varchar(45) NOT NULL,
   description varchar(255) DEFAULT NULL,
   quantity int(11) DEFAULT NULL,
   price double DEFAULT NULL,
-  PRIMARY KEY (name_Whisky)
+  PRIMARY KEY (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE yachts (
   photo varchar(45) DEFAULT NULL,
-  name_Yachts varchar(45) NOT NULL,
+  name varchar(45) NOT NULL,
   descriptions varchar(255) DEFAULT NULL,
   quantity int(11) DEFAULT NULL,
   price varchar(45) DEFAULT NULL,
-  PRIMARY KEY (name_Yachts)
+  PRIMARY KEY (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE user_role (
@@ -65,13 +65,6 @@ CREATE TABLE car (
   CONSTRAINT FK_CAR_ID FOREIGN KEY (CAR_DESCRIPTION_ID) REFERENCES car_description (ID) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE car_description (
-  DESCRIPTIOON varchar(255) DEFAULT NULL,
-  QUANTITY int(11) DEFAULT NULL,
-  PRICE double NOT NULL,
-  ID int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (ID)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 INSERT INTO USERS (name, password) VALUE ('test', 'test');
 INSERT INTO USERS (name, password) VALUE ('test2', 'test2');
