@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.dao.UserRepository;
 import com.example.dao.UserRoleRepositiry;
+import com.example.exception.UserHasMoreThatOneRoleException;
 import com.example.model.UserRole;
 import com.example.model.UsersModel;
 import com.example.service.adminService.AdminRoleService;
@@ -21,18 +22,13 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AdminRoleServiceTest {
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     @InjectMocks
     private AdminRoleService sut = new AdminRoleService();
@@ -42,6 +38,9 @@ public class AdminRoleServiceTest {
 
     @Mock
     private UserRoleRepositiry userRoleRepositiry;
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Before
     public void prepareOurMocks() {
@@ -55,8 +54,27 @@ public class AdminRoleServiceTest {
         usersModelTest.setName("test");
         usersModelTest.setUserRoles(new ArrayList<>());
 
+
+        List<UsersModel> all = new ArrayList<>();
+        all.add(usersModelAlex);
+        all.add(usersModelTest);
+        when(userRepositiry.findAll()).thenReturn(all);
+
+
         when(userRepositiry.findOne(eq("test"))).thenReturn(usersModelTest);
     }
+@Test
+    public void testRole() {
+    expectedException.expect(UserHasMoreThatOneRoleException.class);
+        List<String> roleUserMapping = new ArrayList<>();
+        roleUserMapping.add("Alex_admin");
+        roleUserMapping.add("test_admin");
+        roleUserMapping.add("test_user");
+
+       sut.addRightsAdmin(roleUserMapping);
+
+    }
+
 
     @Test
     public void testAddAdminRights() {

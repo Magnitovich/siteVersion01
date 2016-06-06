@@ -33,14 +33,15 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registrationPage", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView registrationPage(@RequestParam(value = "name") String name,
-                                         @RequestParam(value = "signuppassword") String password) {
+    public ModelAndView registrationPage(@RequestParam(value = "NickName") String name,
+                                         @RequestParam(value = "signUpPassword") String password,
+                                         @RequestParam(value = "Email") String email) {
 
         try {
-            adminRoleService.addNewUser(name, password);
+            adminRoleService.addNewUser(name, password, email);
 //            adminRoleService.addNewUser(model.getName(), model.getPassword());
 
-            System.out.println(name + " pass:= " + password);
+            System.out.println(name + " pass:= " + password+ " email: "+email);
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("fist");
             return modelAndView;

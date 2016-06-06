@@ -35,6 +35,11 @@ function adminRights() {
             window.location.href = "index";
         },
         error: function (xhr, ajaxOptions, thrownError) {
+            var errorMessage = document.getElementById("errors");
+            //#errors это означ что мы обращаемся к нашему getElementById("errors")
+            $("#errors").text("ERRORRRRRRR!!!!");
+            $("#errors").show();
+            //errorMessage.alert("AAAAAAAAAAAAAAAAAAAQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")
             alert(xhr.status);
             alert(thrownError);
         }

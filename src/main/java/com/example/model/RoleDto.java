@@ -2,15 +2,15 @@ package com.example.model;
 
 
 public class RoleDto {
-    private String name;
+    private String nameRole;
     private boolean applied;
 
-    public String getName() {
-        return name;
+    public String getNameRole() {
+        return nameRole;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameRole(String name) {
+        this.nameRole = name;
     }
 
     public boolean isApplied() {

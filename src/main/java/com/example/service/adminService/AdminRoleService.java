@@ -43,29 +43,40 @@ public class AdminRoleService {
         List<UserAdminRightsDTO> users = new ArrayList<>();
         ArrayList<UserRole> availableUserRoles = Lists.newArrayList(userRoleRepositiry.findAll());
 
+        //для каждого пользователя из userRepositiry.findAll() выполняется forEach
+        //создаем переменную, в данном случае user имя не принципиально и в эту переменную передаем функцию
+        //user наполняем данными для каждого пользователя с userRepositiry.findAll()
         userRepositiry.findAll().forEach(user -> {
+            //этим уч кода мы набираем User(ов)
             UserAdminRightsDTO dto = new UserAdminRightsDTO();
             dto.setName(user.getName());
 
+            //этим уч мы набираем роли для каждого конкретного User(а) из БД
             List<String> userRoles = new ArrayList<>();
-
             user.getUserRoles().forEach(role -> {
                 userRoles.add(role.getRole());
             });
             dto.setRole(userRoles);
 
+            //этот участок кода сверяет какие роли относятся к User(y) на выходе мы получаем
+            // список ролей с true или false
+
             List<RoleDto> userRoleDtos = new ArrayList<>();
+
+//          ArrayList<UserRole> availableUserRoles = Lists.newArrayList(userRoleRepositiry.findAll());
             availableUserRoles.forEach(userRoleEntity -> {
                 RoleDto roleDto = new RoleDto();
                 String roleNameInDB = userRoleEntity.getRole();
 
-                roleDto.setName(roleNameInDB);
+                roleDto.setNameRole(roleNameInDB);
                 roleDto.setApplied(userRoles.contains(roleNameInDB));
 
+                //тут для каждого пользователя выдаестя ответ по существующим ролям true или false
                 userRoleDtos.add(roleDto);
             });
 
             dto.setRoleDtos(userRoleDtos);
+            //получаем ответ у какого пользователя какие роли в БД
             users.add(dto);
         });
 
@@ -110,7 +121,7 @@ public class AdminRoleService {
     }
 
     private void saveDataFromUserDto(List<UserAdminRightsDTO> users) {
-        misstake();
+//        misstake();
         for (UsersModel userEntity: userRepositiry.findAll()) {
             UserAdminRightsDTO roleDTO = getUserFromList(users, userEntity.getName());
 
@@ -134,7 +145,7 @@ public class AdminRoleService {
                             saveInDB(roleDTO.getName(), roleDTO.getRole().get(0));
                             continue;
                         } else {
-                            //Ошибка, т.к. озн, что поставленно на одна птичка
+                            //Ошибка, т.к. озн, что поставленно нe одна птичка
                             misstake();
                         }
                     }
@@ -164,13 +175,18 @@ public class AdminRoleService {
     }
 
 
-    public void addNewUser(String name, String password) {
+    public void addNewUser(final String name, final String password, final String email) {
         List<UsersModel> byName = userRepositiry.findByName(name);
-        if(byName.size()==0) {
+        List<UsersModel> byEmail = userRepositiry.findByEmail(email);
+
+        if(byName.size()==0 & byEmail.size() == 0) {
+
             UsersModel usersModel = new UsersModel();
             usersModel.setName(name);
             usersModel.setPassword(password);
+            usersModel.setEmail(email);
             userRepositiry.save(usersModel);
+
         } else {
             throw new RuntimeException("WOW");
         }

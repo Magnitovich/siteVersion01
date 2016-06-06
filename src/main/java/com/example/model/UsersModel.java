@@ -20,6 +20,10 @@ public class UsersModel implements UserDetails {
     @Column(name = "LOGIN_DATE")
     private Date loginDate;
 
+
+    @Column(name = "EMAIL")
+    private String email;
+
     public Date getLoginDate() {
         return loginDate;
     }
@@ -63,6 +67,15 @@ public class UsersModel implements UserDetails {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

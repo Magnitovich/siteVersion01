@@ -16,6 +16,9 @@ public interface UserRepository extends CrudRepository<UsersModel, String>{
     @Query(value = "select  cs from UsersModel cs WHERE name=?")
     List<UsersModel> findByName(String name);
 
+    @Query(value = "select  cs from UsersModel cs WHERE email=?")
+    List<UsersModel> findByEmail(String email);
+
 //    @Query(value = "select NAME from USERS", nativeQuery = true )
 //    List<String> findByName();
 }

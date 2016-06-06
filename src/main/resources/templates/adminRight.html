@@ -25,14 +25,15 @@
             </td>
 
             <td th:each="role: ${user.roleDtos}" align="center">
-                <input type="checkbox" th:attr="id=${user.name}+_+${role.name}" th:checked="${role.applied}"/></td>
+                <input type="checkbox" th:attr="id=${user.name}+_+${role.nameRole}" th:checked="${role.applied}"/></td>
+            <!--th:checked отвечает нажата ли галочка-->
         </tr>
 
         <tr><td colspan="4" align="right">
         <input type="button" onclick="adminRights()" value="Apply"/></td> </tr>
     </form>
 
-    <div th:if="${errors}" th:text="${errors}">
+    <div style="display: none" id="errors">
     </div>
 
 </table>
