@@ -1,5 +1,12 @@
 
 $(function() {
+
+    $("#SignUpBtn").click(function(event) {
+        //отмена привычных действий кнопки ссылки input(a)
+        event.preventDefault();
+        submitSignupShowError();
+    });
+
     //# поиск по id
     dialog = $( "#registrationDialog" ).dialog({
         autoOpen: false,
@@ -19,6 +26,8 @@ $(function() {
     });
 
     });
+
+
 
 function AdminsRight() {
 
@@ -40,5 +49,38 @@ function showLogin() {
 
     $("#li_login").addClass("active");
     $("#li_signup").removeClass("active");
+
+}
+
+function submitSignupShowError() {
+
+    var email = document.getElementById("Email");
+    var nickName = $("#NickName");
+    var password = $("#signUpPassword");
+
+    $.ajax({   //тип запроса
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        type:"POST", //это типа method
+        data: {NickName:nickName.val(), signUpPassword: password.val(), Email:email.value},
+        url: '/registrationPage',
+        success: function(msg){  //msg - показывает ответ с сервера
+
+            window.location.href = "index?successful";
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            var errorMessage = document.getElementById("emailError");
+            var errorMessage = document.getElementById("nickError");
+            //#errors это означ что мы обращаемся к нашему getElementById("errors")
+
+            $("#emailError").show();
+            $("#nickError").show();
+        }
+    });
+
+
+
 
 }
