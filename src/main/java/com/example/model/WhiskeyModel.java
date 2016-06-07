@@ -12,7 +12,7 @@ public class WhiskeyModel {
     @Column
     private String photo;
     @Id
-    @Column(name = "NAME_WHISKY")
+    @Column(name = "NAME")
     private String nameWhisky;
     @Column(name = "DESCRIPTION")
     private String describeWhisky;

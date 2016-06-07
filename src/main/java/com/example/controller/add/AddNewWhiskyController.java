@@ -6,6 +6,7 @@ import com.example.model.YachtDTO;
 import com.example.service.WhiskyService;
 import com.example.service.exceptions.ExceptionAddWhiskyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.tags.form.LabelTag;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -26,6 +31,12 @@ public class AddNewWhiskyController {
     private WhiskyService whiskyService;
     @Autowired
     private ExceptionAddWhiskyService exceptionAddWhiskyService;
+
+    @Value("${img.path}")
+    private String imagePath;
+
+    @Value("${img.relative.path}")
+    private String relativeImagePath;
 
     @RequestMapping(value = "addNewWhisky", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewPageAddWhisky(@RequestParam(required = false)String id) {
@@ -48,7 +59,7 @@ public class AddNewWhiskyController {
 
     @RequestMapping(value = "addSuccessfulNewWhisky", method = {RequestMethod.POST})
     public ModelAndView viewAddWhisky(@ModelAttribute("understandEditOrAdd")WhiskyDTO whiskyDTO,
-                                      BindingResult bindingResult ) {
+                                      BindingResult bindingResult ) throws IOException {
         if (whiskyDTO.getIdForEdit() !=null && whiskyDTO.getIdForEdit().length() !=0) {
 
             whiskyService.editWhisky(whiskyDTO);
@@ -61,10 +72,9 @@ public class AddNewWhiskyController {
 
         } else {
             try {
-
-//        whiskyService.addNewWhisky(whiskyDTO.getPhoto(), whiskyDTO.getNameWhisky(),whiskyDTO.getDescribeWhisky(),
-//                whiskyDTO.getQuantityWhisky(), whiskyDTO.getPrice());
-                exceptionAddWhiskyService.compareInfoInDBWithInfoUI(whiskyDTO.getPhoto(), whiskyDTO.getNameWhisky(), whiskyDTO.getDescribeWhisky(),
+                convert(imagePath, whiskyDTO.getFileObject());
+                String filePath = relativeImagePath + whiskyDTO.getFileObject().getOriginalFilename();
+                exceptionAddWhiskyService.compareInfoInDBWithInfoUI(filePath, whiskyDTO.getNameWhisky(), whiskyDTO.getDescribeWhisky(),
                         whiskyDTO.getQuantityWhisky(), whiskyDTO.getPrice());
 
                 List<WhiskyDTO> all = whiskyService.seeAllWhisky();
@@ -79,6 +89,17 @@ public class AddNewWhiskyController {
             }
         }
 
+    }
+
+    public File convert(String filePath, MultipartFile file) throws IOException {
+        File convFile = new File(filePath + file.getOriginalFilename());
+        if (!convFile.exists()) {
+            convFile.createNewFile();
+        }
+        FileOutputStream fos = new FileOutputStream(convFile);
+        fos.write(file.getBytes());
+        fos.close();
+        return convFile;
     }
 
     public ModelAndView viewAddForm() {

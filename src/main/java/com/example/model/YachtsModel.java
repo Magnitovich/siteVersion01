@@ -12,10 +12,11 @@ public class YachtsModel {
     @Column
     private String photo;
     @Id
-    @Column(name = "name_Yacht")
+    @Column
     private String name;
     @Column
     private String descriptions;
+
     @Column(name = "quantity")
     private Integer number;
     @Column

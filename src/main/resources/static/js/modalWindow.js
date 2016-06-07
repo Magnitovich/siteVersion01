@@ -18,6 +18,10 @@ $(function() {
         dialog.dialog( "open" );
     });
 
+    $("form").submit(function(e){
+        e.preventDefault();
+    });
+
     });
 
 function AdminsRight() {
