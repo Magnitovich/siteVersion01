@@ -3,6 +3,8 @@ package com.example.service.adminService;
 import com.example.controller.CarsController;
 import com.example.dao.UserRepository;
 import com.example.dao.UserRoleRepositiry;
+import com.example.exception.EmailCompareWithDBException;
+import com.example.exception.NickNameCompareWithDBException;
 import com.example.exception.UserHasMoreThatOneRoleException;
 import com.example.model.RoleDto;
 import com.example.model.UserAdminRightsDTO;
@@ -179,7 +181,16 @@ public class AdminRoleService {
         List<UsersModel> byName = userRepositiry.findByName(name);
         List<UsersModel> byEmail = userRepositiry.findByEmail(email);
 
-        if(byName.size()==0 & byEmail.size() == 0) {
+        if(byName.size()!=0)  {
+
+            throw new NickNameCompareWithDBException();
+
+        }
+
+        if( byEmail.size() != 0) {
+
+            throw new EmailCompareWithDBException();
+        }
 
             UsersModel usersModel = new UsersModel();
             usersModel.setName(name);
@@ -187,9 +198,7 @@ public class AdminRoleService {
             usersModel.setEmail(email);
             userRepositiry.save(usersModel);
 
-        } else {
-            throw new RuntimeException("WOW");
-        }
+
 
     }
 

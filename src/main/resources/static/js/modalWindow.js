@@ -1,10 +1,19 @@
 
 $(function() {
+
+    $("#SignUpBtn").click(function(event) {
+        //отмена привычных действий кнопки ссылки input(a)
+        event.preventDefault();
+        if ($("#signupSubmitFrm").valid()) {
+            submitSignupShowError();
+        }
+    });
+
     //# поиск по id
     dialog = $( "#registrationDialog" ).dialog({
         autoOpen: false,
-        height: 550,
-        width: 350,
+        height: 'auto',
+        width: 'auto',
         modal: true,
         dialogClass: 'no-close success-dialog',
         buttons: {
@@ -18,11 +27,9 @@ $(function() {
         dialog.dialog( "open" );
     });
 
-    $("form").submit(function(e){
-        e.preventDefault();
-    });
+});
 
-    });
+
 
 function AdminsRight() {
 
@@ -33,8 +40,8 @@ function showSignUp() {
     $("#signup").show();
     $("#loginForm").hide();
 
-    $("li_signup").addClass("active");
-    $("li_login").removeClass("active");
+    $("#li_signup").addClass("active");
+    $("#li_login").removeClass("active");
 
 }
 
@@ -45,4 +52,42 @@ function showLogin() {
     $("#li_login").addClass("active");
     $("#li_signup").removeClass("active");
 
+}
+
+function submitSignupShowError() {
+
+    var email = document.getElementById("Email");
+    var nickName = $("#NickName");
+    var password = $("#signUpPassword");
+
+    $("#emailError").hide();
+    $("#nickError").hide();
+
+    $.ajax({   //тип запроса
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        type:"POST", //это типа method
+        url: '/registrationPage?' + $("#signupSubmitFrm").serialize(),
+        success: function(msg){  //msg - показывает ответ с сервера
+
+            window.location.href = "index?successful";
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            var errorMessage = document.getElementById("emailError");
+            var errorMessage = document.getElementById("nickError");
+            //#errors это означ что мы обращаемся к нашему getElementById("errors")
+            if (xhr.responseJSON.message === 'Email exists') {
+                $("#emailError").show();
+                $("#nickError").hide();
+            }
+            if (xhr.responseJSON.message === 'NickName exists') {
+                $("#emailError").hide();
+                $("#nickError").show();
+            }
+
+            console.log(xhr.responseJSON.message);
+        }
+    });
 }

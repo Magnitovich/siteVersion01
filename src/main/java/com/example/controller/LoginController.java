@@ -6,10 +6,7 @@ import com.example.service.adminService.AdminRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
@@ -37,19 +34,11 @@ public class LoginController {
                                          @RequestParam(value = "signUpPassword") String password,
                                          @RequestParam(value = "Email") String email) {
 
-        try {
-            adminRoleService.addNewUser(name, password, email);
-//            adminRoleService.addNewUser(model.getName(), model.getPassword());
+        adminRoleService.addNewUser(name, password, email);
 
-            System.out.println(name + " pass:= " + password+ " email: "+email);
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("fist");
-            return modelAndView;
-
-        } catch (RuntimeException r) {
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("login");
-            return modelAndView;
-        }
+        System.out.println(name + " pass:= " + password+ " email: "+email);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("fist");
+        return modelAndView;
     }
 }

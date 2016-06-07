@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 public class YachtsModel {
     @Column
     private String photo;
+
     @Id
     @Column
     private String name;
