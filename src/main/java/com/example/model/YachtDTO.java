@@ -9,15 +9,15 @@ import java.math.BigDecimal;
 public class YachtDTO {
 
 
-    public MultipartFile getPhotoYacht() {
-        return photoYacht;
+    public MultipartFile getObjectPhotoYacht() {
+        return objectPhotoYacht;
     }
 
-    public void setPhotoYacht(MultipartFile photoYacht) {
-        this.photoYacht = photoYacht;
+    public void setObjectPhotoYacht(MultipartFile objectPhotoYacht) {
+        this.objectPhotoYacht = objectPhotoYacht;
     }
 
-    private MultipartFile photoYacht;
+    private MultipartFile objectPhotoYacht;
     private String photo;
     private String name;
     private String descriptions;
