@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <link href="css/back.css" rel="stylesheet"/>
@@ -16,6 +16,13 @@
         <td colspan="4" align="Right" >
             <input class="buttons" type="search" value="Search"/></td>
         <td align="center" colspan="3">
+            <div align="right" sec:authorize="hasAuthority('admin')">
+                I am an admin
+            </div>
+            <div align="right" sec:authorize="hasAuthority('user')">
+                I am a user
+            </div>
+
         <input class="buttons" onclick="addNewCar()" type="button" value="Add" style="width: 60px"/>
                 &nbsp;&nbsp;&nbsp;
         <input class="buttons" type="submit" onclick="editCars()" value="Edit" style="width: 60px"/>&nbsp;&nbsp;&nbsp;

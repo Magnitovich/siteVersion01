@@ -1,11 +1,23 @@
 package com.example.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 
 public class YachtDTO {
 
+
+    public MultipartFile getPhotoYacht() {
+        return photoYacht;
+    }
+
+    public void setPhotoYacht(MultipartFile photoYacht) {
+        this.photoYacht = photoYacht;
+    }
+
+    private MultipartFile photoYacht;
     private String photo;
     private String name;
     private String descriptions;

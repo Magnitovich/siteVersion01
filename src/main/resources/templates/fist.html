@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <script src="js/jquery-1.12.3.min.js" ></script>
     <script src="js/jquery-ui.min.js"></script>
     <link href="js/jquery-ui.min.css" rel="stylesheet"/>
     <link href="css/back.css" rel="stylesheet"/>
+    <script src="js/jquery.validate.js"></script>
     <script src="js/modalWindow.js"></script>
     <link href="css/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet"/>
     <script src="css/bootstrap-3.3.6-dist/js/bootstrap.min.js"/>
@@ -28,21 +29,25 @@
                             <h1 class="text-center login-title">Sign Up for Free</h1>
                             <div class="account-wall" >
                                 <!--<img class="profile-img" src="backgrounds/registration.jpg" alt=""/>-->
-                                <form class="form-signin" th:action="@{/registrationPage}" th:object="${compareUiAndDB}" method="post">
+                                <form class="form-signin" th:action="@{/registrationPage}" th:object="${compareUiAndDB}"
+                                      method="post" id="signupSubmitFrm">
 
-                                    <input type="text" name="Email" id="Email"  class="form-control" placeholder="Email"
-                                           pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"
-                                           required="" autofocus=""/>
-                                        <span id="emailError" style="display: none"> problem Email </span>
-                                    <input type="password" name="signUpPassword" id="signUpPassword" class="form-control" placeholder="Password" required=""/>
-                                    <hr/>
                                     <input type="text" name="NickName" id="NickName"  class="form-control"
                                            pattern="[A-Za-z0-9._]{3,}"
-                                           placeholder="Nick name" required="" autofocus=""/>
-                                    <span id="nickError" style="display: none"> problem NickName </span>
-                                    <!--<input type="text" name="lastname" id="lastname" class="form-control" placeholder="Last name" required=""/>-->
-                                    <button class="btn btn-lg btn-primary btn-block" style="margin-top:20px; " id="SignUpBtn"
-                                    >Sign up</button>
+                                           th:placeholder="#{.key.NickName}"  autofocus=""/>
+
+                                    <span id="nickError" style="display: none; color: snow"> problem NickName </span>
+
+                                    <!--required="" означает что это поле необходимо и не должно быть пустым-->
+                                    <input type="password" name="signUpPassword" id="signUpPassword"
+                                           class="form-control" th:placeholder="#{.key.Password}" required=""/>
+                                    <hr/>
+                                    <input type="email" name="Email" id="Email"  class="form-control" th:placeholder="#{.key.Email}"
+                                           pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"
+                                           required=""   />
+                                    <span id="emailError" style="display: none; color: dodgerblue"> problem Email </span>
+
+                                    <button class="btn btn-lg btn-primary btn-block" style="margin-top:20px; " id="SignUpBtn" >Sign up</button>
                                     <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
                                 </form>
                             </div>
@@ -60,12 +65,16 @@
                                 <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                                      alt=""/>
                                 <form class="form-signin" th:action="@{/login}" method="post">
-                                    <input type="text" name="username" id="username"  class="form-control" placeholder="Email" required="" autofocus=""/>
-                                    <input type="password" name="password" id="password" class="form-control" placeholder="Password" required=""/>
+                                    <input type="text" name="username" id="username"  class="form-control"
+                                           th:placeholder="#{.key.NickName}" required="" autofocus=""/>
+
+                                    <input type="password" name="password" id="password"
+                                           class="form-control" th:placeholder="#{.key.Password}" required=""/>
+
                                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                                     <label class="checkbox pull-left">
                                         <input type="checkbox" value="remember-me"/>
-                                        Remember me
+                                        <h3 th:text="#{.key.RememberME}">Remember me</h3>
                                     </label>
                                     <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
                                 </form>
@@ -82,20 +91,20 @@
 <div align="right">
     <div  th:replace="headerHtml :: header"></div>
 </div>
-<div th:if="${param.successful}">
-    <h2>Your registration was successful</h2>
+<div th:if="${param.successful}" style="color: white; lighting-color: red">
+    <h2 th:text="#{.key.successfulRegistration}">Your registration was successful</h2>
 </div>
     <!--<div align="right" th:if="${#authorization.expression('isAuthenticated()')}"/>-->
 <!--//Эта строка выводит имя пользователя, когда он зарегистрируется.-->
 
     <div align="right"  th:if="${#authorization.expression('isAuthenticated()')}"
-         th:text="${#authentication.name}"/>
+      style="color: white"   th:text="${#authentication.name}"/>
 
     <!--The value of the "name" property of the authentication object should appear here.-->
     <!--<div th:include="headerHtml :: header">...</div>-->
 
 <center>
-    <h2 class="text">Wellcome on site Premium Things</h2>
+    <h2 class="text" th:text="#{welcome.message}">Wellcome on site Premium Things</h2>
    <p/><p/>
         <form>
 
@@ -108,7 +117,7 @@
 
 
             </table>
-            <input type="button" onclick="AdminsRight()" value="AdminRights"/>
+            <input type="button" sec:authorize="hasAuthority('admin')" onclick="AdminsRight()" value="AdminRights"/>
         </form>
 </center>
 </body>

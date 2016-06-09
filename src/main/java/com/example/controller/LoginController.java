@@ -33,23 +33,20 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registrationPage", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView registrationPage(@RequestParam(value = "NickName") String name,
+    public ModelAndView registrationPage(
+                                         @RequestParam(value = "NickName") String name,
                                          @RequestParam(value = "signUpPassword") String password,
-                                         @RequestParam(value = "Email") String email) {
+                                         @RequestParam(value = "Email") String email
+    ) {
 
-        try {
+        System.out.println("Nick= "+name+" pass= "+password+" email= "+email);
+
             adminRoleService.addNewUser(name, password, email);
-//            adminRoleService.addNewUser(model.getName(), model.getPassword());
 
-            System.out.println(name + " pass:= " + password+ " email: "+email);
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("fist");
             return modelAndView;
 
-        } catch (RuntimeException r) {
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("login");
-            return modelAndView;
-        }
+
     }
 }
