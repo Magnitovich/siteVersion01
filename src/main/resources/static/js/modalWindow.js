@@ -4,6 +4,7 @@ $(function() {
     $("#SignUpBtn").click(function(event) {
         //отмена привычных действий кнопки ссылки input(a)
         event.preventDefault();
+        //valid вызывает метод валидации, проверяет есть ли ошибка или нет в вызваном id.
         if ($("#signupSubmitFrm").valid()) {
             submitSignupShowError();
         }
@@ -56,9 +57,9 @@ function showLogin() {
 
 function submitSignupShowError() {
 
-    var email = document.getElementById("Email");
     var nickName = $("#NickName");
     var password = $("#signUpPassword");
+    var email =document.getElementById("Email");
 
     $("#emailError").hide();
     $("#nickError").hide();
@@ -69,6 +70,9 @@ function submitSignupShowError() {
             "Content-Type": "application/json"
         },
         type:"POST", //это типа method
+        //data:
+        //    JSON.stringify(submitSignupShowError),
+        //{"NickName":nickName.val(), "signUpPassword": password.val(), "Email":email.value},
         url: '/registrationPage?' + $("#signupSubmitFrm").serialize(),
         success: function(msg){  //msg - показывает ответ с сервера
 
@@ -86,8 +90,9 @@ function submitSignupShowError() {
                 $("#emailError").hide();
                 $("#nickError").show();
             }
-
+            //логирование ошибки в консоль.
             console.log(xhr.responseJSON.message);
+
         }
     });
 }

@@ -181,26 +181,22 @@ public class AdminRoleService {
         List<UsersModel> byName = userRepositiry.findByName(name);
         List<UsersModel> byEmail = userRepositiry.findByEmail(email);
 
-        if(byName.size()!=0)  {
+        if (byName.size() != 0 ) {
 
             throw new NickNameCompareWithDBException();
 
         }
 
-        if( byEmail.size() != 0) {
+        if (byEmail.size() != 0 ) {
 
             throw new EmailCompareWithDBException();
-        }
 
+        }
             UsersModel usersModel = new UsersModel();
             usersModel.setName(name);
             usersModel.setPassword(password);
             usersModel.setEmail(email);
             userRepositiry.save(usersModel);
 
-
-
     }
-
-
 }

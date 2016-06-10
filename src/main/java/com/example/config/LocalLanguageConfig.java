@@ -1,6 +1,5 @@
 package com.example.config;
 
-
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +14,10 @@ import java.util.Locale;
 
 @Configuration
 @EnableAutoConfiguration
-public class WebConfig extends WebMvcConfigurerAdapter {
+public class LocalLanguageConfig extends WebMvcConfigurerAdapter {
 
     @Bean
+    //язык по умолчанию пишется US, но означает en
     public LocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();
         slr.setDefaultLocale(Locale.US);
@@ -25,6 +25,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
+    //приставка при смене языка(lang=us, lang=rus)
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
         lci.setParamName("lang");
@@ -32,14 +33,16 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
     @Override
+    //добавление перехватчика к спрингу
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
     }
 
     @Bean
+    //путь где брать языки
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:messages");
+        messageSource.setBasename("classpath:bundles/messages");
         messageSource.setCacheSeconds(10); //reload messages every 10 seconds
         return messageSource;
     }

@@ -6,6 +6,7 @@ import com.example.model.YachtsModel;
 import com.example.service.YachtsService;
 import com.example.service.exceptions.ExceptionAddYachtService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-;import java.math.BigDecimal;
+;import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -29,6 +33,15 @@ public class AddNewYachtsController {
 
     @Autowired
     private ExceptionAddYachtService exceptionAddYachtService;
+
+    @Value("${img.yacht.path}")
+    private String realObjectsPath;
+
+    @Value("${img.yacht.relative.path}")
+    private String relativeObjectsPath;
+
+
+
 
     @RequestMapping(value = "/addInfoAboutNewYachts", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView seePageAddYachts(@RequestParam(required = false)String id) {
@@ -49,7 +62,10 @@ public class AddNewYachtsController {
     }
 
     @RequestMapping(value = "/addSuccessfulYacht", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView addInfoCars(@ModelAttribute("comparePhotoNameWithDB") YachtDTO yachtDTO, BindingResult result) {
+    public ModelAndView addInfoCars(@ModelAttribute("comparePhotoNameWithDB") YachtDTO yachtDTO,
+                                    BindingResult result) throws IOException {
+
+        System.out.println(yachtDTO.getName()+ "//PHOTO\\\\" + yachtDTO.getObjectPhotoYacht().getOriginalFilename());
 
         if (yachtDTO.getIdForEdit()!=null && yachtDTO.getIdForEdit().length() !=0) {
 
@@ -60,12 +76,24 @@ public class AddNewYachtsController {
             modelAndView.setViewName("yacht");
             return modelAndView;
 
-        } else {
+        }
+
+        else {
+            FileOutputStream fileOutputStream = null;
 
         try {
-//        yachtAddService.addNewYacht(photo, name, describe, quantity, price);
 
-            exceptionAddYachtService.compareEnterInfoAndInDB(yachtDTO.getPhoto(), yachtDTO.getName(),
+            File convertFileObjectYachts = new File(realObjectsPath + yachtDTO.getObjectPhotoYacht().getOriginalFilename());
+
+            if (!convertFileObjectYachts.exists()) {
+                convertFileObjectYachts.createNewFile();
+            }
+            fileOutputStream = new FileOutputStream(convertFileObjectYachts);
+            fileOutputStream.write(yachtDTO.getObjectPhotoYacht().getBytes());
+
+            String nameFile = relativeObjectsPath + yachtDTO.getObjectPhotoYacht().getOriginalFilename();
+
+                        exceptionAddYachtService.compareEnterInfoAndInDB(nameFile, yachtDTO.getName(),
                                     yachtDTO.getDescriptions(), yachtDTO.getNumber(), yachtDTO.getPrice());
 
             List<YachtDTO> list = yachtService.vewAllYachts();
@@ -79,6 +107,12 @@ public class AddNewYachtsController {
             result.rejectValue("name", "error.name", "Error: Name or Photo exist");
 //            return seePageAddYachts(yachtDTO.getName());
             return viewExeption();
+        }
+        //если я получу ошибку между открытием и закрытием потока, то поток без finally не закроется
+        finally {
+            if(fileOutputStream != null) {
+                fileOutputStream.close();
+            }
         }
         }
     }
