@@ -23,13 +23,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-/*
-    @Autowired
-    private IsAccountNonExpiredFilter authenticationFilter;
-*/
 
-        @Autowired
-        private UserDetailsService userDetailsService;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Autowired
     private UserRepository userRepository;
@@ -60,6 +56,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .permitAll()
                     .antMatchers("/backgrounds/**")
                     .permitAll()
+                    .antMatchers("/name_duplication")
+                    .permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()
@@ -88,7 +86,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         }
 
 
-    //@Bean
     public IsAccountNonExpiredFilter authenticationFilter() throws Exception {
         IsAccountNonExpiredFilter authFilter = new IsAccountNonExpiredFilter();
         authFilter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/login","POST"));
@@ -101,15 +98,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         authFilter.setUserRepository(userRepository);
         return authFilter;
     }
-/*
-    @Bean
-    public FilterRegistrationBean filterRegistrationBean () {
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-        registrationBean.setFilter(authenticationFilter);
-        registrationBean.setEnabled(false);
-        return registrationBean;
-    }
-*/
-    }
+}
 
 

@@ -32,10 +32,10 @@ public class AddNewWhiskyController {
     @Autowired
     private ExceptionAddWhiskyService exceptionAddWhiskyService;
 
-    @Value("${img.whisky.path}")
+    @Value("${img.path}")
     private String imagePath;
 
-    @Value("${img.whisky.relative.path}")
+    @Value("${img.relative.path}")
     private String relativeImagePath;
 
 

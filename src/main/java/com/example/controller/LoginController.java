@@ -1,9 +1,11 @@
 package com.example.controller;
 
+import com.example.config.UserDetailsImpl;
 import com.example.dao.UserRepository;
 import com.example.model.UsersModel;
 import com.example.service.adminService.AdminRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +20,7 @@ public class LoginController {
     @Autowired
     private AdminRoleService adminRoleService;
     @Autowired
-    private UserRepository userRepository;
+    private UserDetailsService userDetailsService;
 
     @RequestMapping(value = "/login", method = {RequestMethod.GET})
     public ModelAndView viewMainPage() {
@@ -43,4 +45,11 @@ public class LoginController {
         modelAndView.setViewName("fist");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/name_duplication", method = RequestMethod.GET)
+    @ResponseBody
+    public String checkDuplicates(@RequestParam(value="name") String name) {
+        return userDetailsService.loadUserByUsername(name) == null ? "0" : "1";
+    }
+
 }

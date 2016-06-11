@@ -10,6 +10,10 @@ $(function() {
         }
     });
 
+    $("#NickName").change(function() {
+        $("#NickName").valid()
+    });
+
     //# поиск по id
     dialog = $( "#registrationDialog" ).dialog({
         autoOpen: false,
