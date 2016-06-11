@@ -1,23 +1,26 @@
 package com.example.controller.admiministrationLevel;
 
 import com.example.dao.UserRepository;
+import com.example.exception.UserHasMoreThatOneRoleException;
 import com.example.model.UserAdminRightsDTO;
 import com.example.model.UsersModel;
 import com.example.service.adminService.AdminRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class AdminController {
@@ -41,21 +44,21 @@ public class AdminController {
     @RequestMapping(value ="/okYouDoIt",  method ={RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewAdminChange(
             @RequestBody List<String> list, HttpServletRequest req ) {
-        //try {
+
             adminRoleService.addRightsAdmin(list);
-        /*} catch (RuntimeException e) {
-            List<UserAdminRightsDTO> adminRights = adminRoleService.getAdminRights();
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.addObject("errors", "You are managing in a wrong way!");
-            modelAndView.addObject("adminRightsModel", adminRights);
-            modelAndView.setViewName("adminRight");
-            return modelAndView;
-        }*/
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("fist");
         return modelAndView;
 
+    }
+    @ExceptionHandler
+    void handleUserHasMoreThatOneRoleException(UserHasMoreThatOneRoleException e, HttpServletResponse response)
+            throws IOException {
+        Set<String> invalidUserNames = e.getFaildUserRights();
+
+        response.sendError(HttpStatus.EXPECTATION_FAILED.value(),
+                StringUtils.collectionToCommaDelimitedString(invalidUserNames));
     }
 
 }

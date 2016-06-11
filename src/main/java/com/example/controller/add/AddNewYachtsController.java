@@ -65,7 +65,7 @@ public class AddNewYachtsController {
     public ModelAndView addInfoCars(@ModelAttribute("comparePhotoNameWithDB") YachtDTO yachtDTO,
                                     BindingResult result) throws IOException {
 
-        System.out.println(yachtDTO.getName()+ "//PHOTO\\\\" + yachtDTO.getObjectPhotoYacht().getOriginalFilename());
+        System.out.println(yachtDTO.getName()+ "//PHOTO:= " + yachtDTO.getObjectPhotoYacht().getOriginalFilename());
 
         if (yachtDTO.getIdForEdit()!=null && yachtDTO.getIdForEdit().length() !=0) {
 

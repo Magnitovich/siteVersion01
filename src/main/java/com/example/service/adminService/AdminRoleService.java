@@ -1,6 +1,5 @@
 package com.example.service.adminService;
 
-import com.example.controller.CarsController;
 import com.example.dao.UserRepository;
 import com.example.dao.UserRoleRepositiry;
 import com.example.exception.EmailCompareWithDBException;
@@ -12,12 +11,10 @@ import com.example.model.UserRole;
 import com.example.model.UsersModel;
 import jersey.repackaged.com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -84,9 +81,10 @@ public class AdminRoleService {
 
         return users;
     }
-
+@Transactional
     public void addRightsAdmin(List<String> roles) {
         List<UserAdminRightsDTO> user = new ArrayList<>();
+        Set<String> twoOrMoreCheckBoxTrueUsers = new HashSet<>();
 
         for (String role:roles) {
 
@@ -108,21 +106,29 @@ public class AdminRoleService {
 //            System.out.println(user);
         }
 
-        checkRoleLengthForEachUserIsLessThan2(user);
+        checkRoleLengthForEachUserIsLessThan2(user, twoOrMoreCheckBoxTrueUsers);
 
-        saveDataFromUserDto(user);
+        saveDataFromUserDto(user, twoOrMoreCheckBoxTrueUsers);
+
+    if(twoOrMoreCheckBoxTrueUsers.size()>0) {
+
+        throw new UserHasMoreThatOneRoleException(twoOrMoreCheckBoxTrueUsers);
+
     }
 
-    private void checkRoleLengthForEachUserIsLessThan2(List<UserAdminRightsDTO> user) {
+
+}
+
+    private void checkRoleLengthForEachUserIsLessThan2(List<UserAdminRightsDTO> user, Set<String> twoOrMoreCheckBoxTrueUsersHref) {
         for (UserAdminRightsDTO dto:user) {
             if(dto.getRole().size()>1) {
-                throw new UserHasMoreThatOneRoleException();
+                misstake(dto.getName(),twoOrMoreCheckBoxTrueUsersHref  );
             }
 
         }
     }
 
-    private void saveDataFromUserDto(List<UserAdminRightsDTO> users) {
+    private void saveDataFromUserDto(List<UserAdminRightsDTO> users, Set<String> twoOrMoreCheckBoxTrueUsersHref) {
 //        misstake();
         for (UsersModel userEntity: userRepositiry.findAll()) {
             UserAdminRightsDTO roleDTO = getUserFromList(users, userEntity.getName());
@@ -131,13 +137,13 @@ public class AdminRoleService {
                 if (roleDTO.getRole().size() > 0) {
                     if (roleDTO.getRole().size() == userEntity.getUserRoles().size()) {
 
-                        if (roleDTO.getRole().get(0).equals(userEntity.getUserRoles().get(0))) {
+                        if (roleDTO.getRole().get(0).equals(userEntity.getUserRoles().get(0).getRole())) {
                             //здесь все ок. Озн, что вносимая роль и роль в БД совпадают
                             //continue озн, что продолжаем цикл со след элемента
                             continue;
                         } else {
                             //Ошибка
-                            misstake();
+                            misstake(userEntity.getName(),twoOrMoreCheckBoxTrueUsersHref );
                         }
 
                     } else {
@@ -148,7 +154,7 @@ public class AdminRoleService {
                             continue;
                         } else {
                             //Ошибка, т.к. озн, что поставленно нe одна птичка
-                            misstake();
+                            misstake(userEntity.getName(),twoOrMoreCheckBoxTrueUsersHref );
                         }
                     }
                 }
@@ -172,8 +178,10 @@ public class AdminRoleService {
         userRepositiry.save(readUserFromDB);
     }
 
-    public void misstake() {
-        throw new UserHasMoreThatOneRoleException();
+    public void misstake (String nickName, Set<String> setErroredNickNames) {
+
+       setErroredNickNames.add(nickName);
+
     }
 
 

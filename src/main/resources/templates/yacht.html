@@ -18,11 +18,14 @@
 <table border="1">
     <tr><td colspan="4" align="Right" ><input class="buttons" type="search" value="Search"/></td>
     <td colspan="3" align="center">
+
         <div align="right" sec:authorize="hasAuthority('admin')">
-            I am an admin
+            Hello  <span th:text="${#authentication.name}"/>
+            you are admin
         </div>
         <div align="right" sec:authorize="hasAuthority('user')">
-            I am a user
+            Hello  <span th:text="${#authentication.name}"/>
+            you are user
         </div>
         <div align="right" sec:authorize="hasAuthority('moderator')">
             I am a moderator
