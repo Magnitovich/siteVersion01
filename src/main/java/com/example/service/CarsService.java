@@ -122,9 +122,17 @@ public class CarsService {
         }
 
     }
-    public List<CarsDTO> viewPhotoName(String photo, String name){
+    public List<CarsDTO> viewPhoto(String photo){
 
-        List<CarsModel> byName_carsAndPhoto = carsRepository.findByPhotoAndName(photo, name);
+        List<CarsModel> byName_carsAndPhoto = carsRepository.findByPhoto(photo);
+        List<CarsDTO> carsDTOs = convertListModelToLIstDTO(byName_carsAndPhoto);
+
+        return carsDTOs;
+    }
+
+    public List<CarsDTO> viewName(String name){
+
+        List<CarsModel> byName_carsAndPhoto = carsRepository.findByNameCars(name);
         List<CarsDTO> carsDTOs = convertListModelToLIstDTO(byName_carsAndPhoto);
 
         return carsDTOs;

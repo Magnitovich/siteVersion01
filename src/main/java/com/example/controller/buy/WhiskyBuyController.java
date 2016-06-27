@@ -6,6 +6,7 @@ import com.example.model.WhiskyDTO;
 import com.example.service.WhiskyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +30,16 @@ public class WhiskyBuyController {
         modelAndView.setViewName("buy/buyWhisky");
         return modelAndView;
 
-
     }
-}
+//    @RequestMapping(value = "buySelectedWhisky", method = {RequestMethod.GET, RequestMethod.POST})
+//    public ModelAndView viewSelectedWhisky(@RequestParam String nameWhisky) {
+//
+//        System.out.println(nameWhisky);
+////        List<WhiskyDTO> list = whiskyService.viewSelectedWhisky(nameWhisky);
+//            ModelAndView modelAndView = new ModelAndView();
+////        modelAndView.addObject("buySelectedWhisky", list);
+////        modelAndView.setViewName("buy/buyWhisky");
+//            return modelAndView;
+//        }
+    }
+

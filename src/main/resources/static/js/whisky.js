@@ -45,3 +45,22 @@ function addNewWhisky() {
     window.location.href="addNewWhisky";
 
 }
+
+function selectedYachtForBuy() {
+
+    var nameYacht = $("#nameBuyWhiskey");
+
+    $.ajax({   //тип запроса
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        type:"POST", //это типа method
+        data: JSON.stringify(nameYacht), //грубо говоря это Серриализация
+        url: '/buySelectedWhisky',
+        success: function(msg){  //msg - показывает ответ с сервера
+            window.location.href ="buySelectedWhisky";
+        }
+    });
+
+}

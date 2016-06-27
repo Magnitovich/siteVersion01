@@ -7,6 +7,7 @@ import com.example.model.YachtsModel;
 import com.example.service.CarsService;
 import com.example.service.exceptions.ExceptionAddCarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -26,6 +30,13 @@ public class AddNewCarsController {
 
     @Autowired
     private ExceptionAddCarService exceptionAddCar;
+
+    @Value("${img.car.path}")
+    private String realObjectsPath;
+
+    @Value("${img.car.relative.path}")
+    private String relativeObjectsPath;
+
 
     @RequestMapping(value = "/addInfoAboutNewCar", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView seePageAdd(@RequestParam(required = false)String id) {
@@ -49,9 +60,12 @@ public class AddNewCarsController {
 
     @RequestMapping(value = "/addSuccessfulNewCars", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView addInfoCars(@ModelAttribute("comparePhotoNameCarWithDB")CarsDTO carsDTO,
-                                    BindingResult bindingResult ) {
+                                    BindingResult bindingResult ) throws IOException {
+
+        System.out.println(carsDTO.getName()+ "  PHOTO:=" + carsDTO.getObjectPhotoCar().getOriginalFilename());
 
             if (carsDTO.getIdForEditAdd() != null && carsDTO.getIdForEditAdd().length() !=0) {
+
                     carsService.editCar(carsDTO);
 
                 List<CarsDTO> list = carsService.viewAllModelCars();
@@ -62,24 +76,41 @@ public class AddNewCarsController {
 
 
             } else {
+
+                FileOutputStream fileOutputStream = null;
+
                 try {
 
-                    exceptionAddCar.compareInfoInDBWithInfoUI(carsDTO.getPhoto(), carsDTO.getName(), carsDTO.getDescriptions(),
-                        carsDTO.getQuantity(), carsDTO.getPrice());
-                carsService.addNewCarsForDb(carsDTO.getPhoto(), carsDTO.getName(), carsDTO.getDescriptions(),
-                        carsDTO.getQuantity(), carsDTO.getPrice());
-                List<CarsDTO> list = carsService.viewAllModelCars();
-                ModelAndView modelAndView = new ModelAndView();
-                modelAndView.addObject("namesCars", list);
-                modelAndView.setViewName("cars");
-                return modelAndView;
+                    File convertFileCar = new File(realObjectsPath + carsDTO.getObjectPhotoCar().getOriginalFilename());
 
-            }catch(RuntimeException r){
-                bindingResult.rejectValue("name", "error.name", "Errore: Photo or name exist in DB");
-                return viewException();
-            }
-        }
-    }
+                    if (!convertFileCar.exists()) {
+                        convertFileCar.createNewFile();
+                    }
+                    fileOutputStream = new FileOutputStream(convertFileCar);
+                    fileOutputStream.write(carsDTO.getObjectPhotoCar().getBytes());
+
+                    String nameFile = relativeObjectsPath + carsDTO.getObjectPhotoCar().getOriginalFilename();
+
+                    exceptionAddCar.compareInfoInDBWithInfoUI(nameFile, carsDTO.getName(), carsDTO.getDescriptions(),
+                            carsDTO.getQuantity(), carsDTO.getPrice());
+
+//                    carsService.addNewCarsForDb(carsDTO.getPhoto(), carsDTO.getName(), carsDTO.getDescriptions(),
+//                            carsDTO.getQuantity(), carsDTO.getPrice());
+                    List<CarsDTO> list = carsService.viewAllModelCars();
+                    ModelAndView modelAndView = new ModelAndView();
+                    modelAndView.addObject("namesCars", list);
+                    modelAndView.setViewName("cars");
+                    return modelAndView;
+
+                } catch (RuntimeException r) {
+                    bindingResult.rejectValue("name", "error.name", "Errore: Photo or name exist in DB");
+                    return viewException();
+                } finally {
+                    if (fileOutputStream != null) {
+                        fileOutputStream.close();
+                    }
+                }
+            }}
     public ModelAndView viewException(){
 
         ModelAndView modelAndView = new ModelAndView();

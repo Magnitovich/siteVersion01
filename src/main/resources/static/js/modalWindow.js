@@ -1,4 +1,7 @@
 
+
+
+
 $(function() {
 
     $("#SignUpBtn").click(function(event) {
@@ -34,8 +37,6 @@ $(function() {
 
 });
 
-
-
 function AdminsRight() {
 
     window.location.href="administrationNotSleeps";
@@ -47,7 +48,6 @@ function showSignUp() {
 
     $("#li_signup").addClass("active");
     $("#li_login").removeClass("active");
-
 }
 
 function showLogin() {

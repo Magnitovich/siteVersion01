@@ -47,6 +47,7 @@
     <tr th:each="viewAvailableWhisky : ${viewAvailableWhisky}">
         <td align="center"><input type="checkbox" th:attr="id=${viewAvailableWhisky.nameWhisky}"/> </td>
         <td align="center">
+            <input type="hidden" th:value="${viewAvailableWhisky.nameWhisky}" id="imageClick" name="imageClick"/>
             <img th:attr="src=${viewAvailableWhisky.photo}" width="150" height="250"/>
             </td>
         <td align="center" th:text="${viewAvailableWhisky.nameWhisky}">Name</td>

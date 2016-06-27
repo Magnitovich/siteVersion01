@@ -23,9 +23,10 @@
                 I am a user
             </div>
 
-        <input class="buttons" onclick="addNewCar()" type="button" value="Add" style="width: 60px"/>
+        <input class="buttons" onclick="addNewCar()" type="button" th:value="#{.key.Add}" style="width: 60px"/>
                 &nbsp;&nbsp;&nbsp;
-        <input class="buttons" type="submit" onclick="editCars()" value="Edit" style="width: 60px"/>&nbsp;&nbsp;&nbsp;
+        <input class="buttons" type="submit" onclick="editCars()" th:value="#{.key.Edit}"
+               style="width: 60px"/>&nbsp;&nbsp;&nbsp;
 
         <input class="buttons" onclick="deleteCars()"
                nameYachts="deleteProducts" type="button" value="Delete"/>

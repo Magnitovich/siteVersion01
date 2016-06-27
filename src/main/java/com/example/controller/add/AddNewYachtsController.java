@@ -79,15 +79,18 @@ public class AddNewYachtsController {
         }
 
         else {
+
             FileOutputStream fileOutputStream = null;
 
         try {
 
-            File convertFileObjectYachts = new File(realObjectsPath + yachtDTO.getObjectPhotoYacht().getOriginalFilename());
+            File convertFileObjectYachts = new File(realObjectsPath +
+                    yachtDTO.getObjectPhotoYacht().getOriginalFilename());
 
             if (!convertFileObjectYachts.exists()) {
                 convertFileObjectYachts.createNewFile();
             }
+
             fileOutputStream = new FileOutputStream(convertFileObjectYachts);
             fileOutputStream.write(yachtDTO.getObjectPhotoYacht().getBytes());
 

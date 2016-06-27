@@ -48,13 +48,15 @@
     <!--</form>-->
 <!--</table>-->
 <table border="1" align="center" ><p/>
-    <form action="addSuccessfulNewCars" th:object="${comparePhotoNameCarWithDB}" method="post">
+    <form action="addSuccessfulNewCars" th:object="${comparePhotoNameCarWithDB}" method="post" enctype="multipart/form-data">
 
         <p/>
         <p/><br/>
         <tr >
             <td>Path to photo </td>
-            <td><input class="buttons" type="text" style="width: 255px" name="photoCars" id="photoCras"
+            <td><input class="buttons" type="file" th:field="*{objectPhotoCar}"  style="width: 205px"
+                       name="objectPhotoCar" id="objectPhotoCar"/>
+            <input class="buttons" type="text" style="width: 120px" name="photoCars" id="photoCras"
                        th:field="*{photo}" value="cars/"/> </td>
         </tr>
         <tr>
