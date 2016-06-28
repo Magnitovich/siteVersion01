@@ -16,14 +16,15 @@ public class ExceptionAddCarService {
     @Autowired
     private CarsService carsService;
 
-        public void compareInfoInDBWithInfoUI(final String photo, final String name_Cars, final String describe,
+        public void compareInfoInDBWithInfoUI(final String photo, final String nameCars, final String describe,
                                           final Integer quantity, final BigDecimal price) {
 
-        List<CarsDTO> list = carsService.viewPhotoName(photo, name_Cars);
+        List<CarsDTO> listPhoto = carsService.viewPhoto(photo);
+        List<CarsDTO> listName = carsService.viewPhoto(nameCars);
 
-        if (list.size()==0) {
+        if (listPhoto.size()==0 && listName.size()==0) {
 
-            carsService.addNewCarsForDb(photo,name_Cars, describe,quantity,price);
+            carsService.addNewCarsForDb(photo,nameCars, describe,quantity,price);
 
         } else {
             throw new RuntimeException("WOW");

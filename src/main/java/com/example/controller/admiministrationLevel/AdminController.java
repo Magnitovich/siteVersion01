@@ -44,24 +44,14 @@ public class AdminController {
     @RequestMapping(value ="/okYouDoIt",  method ={RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewAdminChange(
             @RequestBody List<String> list, HttpServletRequest req ) {
-        //try {
+
             adminRoleService.addRightsAdmin(list);
-        /*} catch (RuntimeException e) {
-            List<UserAdminRightsDTO> adminRights = adminRoleService.getAdminRights();
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.addObject("errors", "You are managing in a wrong way!");
-            modelAndView.addObject("adminRightsModel", adminRights);
-            modelAndView.setViewName("adminRight");
-            return modelAndView;
-        }*/
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("fist");
         return modelAndView;
 
     }
-
-
 
     @ExceptionHandler
     void handleUserHasMoreThatOneRoleException(UserHasMoreThatOneRoleException e, HttpServletResponse response) throws IOException {

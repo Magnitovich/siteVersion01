@@ -13,6 +13,11 @@ function adminRights() {
         selectedCheckBoxForUpdate[i] = hasNextt[0].id;
         i++;
     });
+
+    //cкрываем все ранее показанные ошибки
+    var allInputHide = $('span[id*="_someText"]');
+    allInputHide.hide();
+
     $.ajax({   //тип запроса
         headers: {
             "Accept": "application/json",
@@ -29,11 +34,19 @@ function adminRights() {
             //#errors это означ что мы обращаемся к нашему getElementById("errors")
             $("#errors").text("ERRORRRRRRR!!!!");
             $("#errors").show();
-            if (xhr.responseJSON.status === 417) {
-                var userNameArray = xhr.responseJSON.message.split(",");
-                userNameArray.forEach(function(userName) {
-                    $("#username_" + userName).show();
-                });
+            //эта ошибка 417 ее и проверяем
+
+            if(xhr.responseJSON.status == 417) {
+
+                var arrayErrors = xhr.responseJSON.message.split(",");
+
+                arrayErrors.forEach(function(userName) {
+                    //userName = ${user.name}
+                    var nick = $("#"+userName+"_someText");
+                    nick.show();
+
+                })
+
             }
         }
     });

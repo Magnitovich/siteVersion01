@@ -77,7 +77,7 @@ public class YachtsService {
 
     @Transactional
     public void editYacht(YachtDTO yachtDTO) {
-
+        System.out.println(yachtDTO.getPhoto()+" -Photo, Name - "+ yachtDTO.getName());
         YachtsModel model = yachtRepository.findFirstByName(yachtDTO.getName());
         model.setPhoto(yachtDTO.getPhoto());
         model.setName(yachtDTO.getName());

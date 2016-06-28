@@ -17,10 +17,9 @@
         </tr>
         <tr th:each="user : ${adminRightsModel}">
             <td width="100">
-                <span th:text="${user.name}"></span>
-                <span th:attr="id='username_' + ${user.name}" style="display: none; color: red">
-                    This user has incorrect settings
-                </span>
+                <span th:text="${user.name}" ></span>
+                <span style="display: none; color: red" th:attr="id=${user.name}+'_someText'">More than one role</span>
+
             </td>
 
             <td th:each="role: ${user.roleDtos}" align="center">

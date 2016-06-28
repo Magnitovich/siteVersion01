@@ -51,9 +51,5 @@ function deleteSelectedElements() {
         success: function(msg){  //msg - показывает ответ с сервера
             window.location.href = window.location.href;
         }
-    });
-
-
-
-
+    })
 }

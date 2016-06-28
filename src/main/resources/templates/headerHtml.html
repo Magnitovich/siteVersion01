@@ -45,8 +45,7 @@
                                           method="post" id="signupSubmitFrm">
 
                                         <input type="text" name="NickName" id="NickName" class="form-control duplication"
-                                               pattern="[A-Za-z0-9._]{3,}"
-                                               required=""
+                                               pattern="[A-Za-z0-9._]{3,}" required=""
                                                th:placeholder="#{.key.NickName}" autofocus=""/>
 
                                         <span id="nickError" style="display: none; color: snow"> problem NickName </span>
@@ -102,33 +101,48 @@
         </div>
     </div>
     <script>
-        $.validator.addMethod( "pattern", function( value, element, param ) {
-            if ( this.optional( element ) ) {
-                return true;
-            }
-            if ( typeof param === "string" ) {
-                param = new RegExp( "^(?:" + param + ")$" );
-            }
-            return param.test( value );
-        }, "Invalid format." );
+        // для того что бы взять паттерн с html
+            $.validator.addMethod( "pattern", function( value, element, param ) {
+//DOM находим строки под названием pattern
+                if ( this.optional( element ) ) {
+                    return true;
+                }
+                // проверяем является ли значение pattern атрибуты строкой, строка объявляется кавычками
+                if ( typeof param === "string" ) {
+                    //в param находится наш стринг pattern,  new RegExp разбивает param посимвольно и хранит у себя
+                    param = new RegExp( "^(?:" + param + ")$" );
+                }
+                //берем данные с UI и проверяем с помощью new RegExp на паттерн
+                //test как equals в java
+                return param.test( value );
+            }, "Invalid format." );
 
-        $.validator.addMethod( "name_duplication", function( value, element, param ) {
+//        "name_duplication" просто название, которое мы используем для обращения к ф-ции
+//         value - значение в UI
+        $.validator.addMethod( "name_duplication", function( value ) {
+
             var url = '/name_duplication?name=' + value;
             var isSuccess = false;
 
-            $.ajax({ url: url,
-                data: {},
+            $.ajax({
+                url: url,
+
                 async: false,
                 success:
                         function(msg) {
+//                            isSuccess = msg === "0" означает что в БД нет такого имени
+//                            ? означает if(msg === "0") {return true} else{returne false}
                             isSuccess = msg === "0" ? true : false
                         }
             });
             return isSuccess;
         });
+        //duplication это CSS класс, этого класса нет это как маркер.
 
         jQuery.validator.classRuleSettings.duplication = {
+        //при     true означает, что все успешно
             name_duplication: true
+
         };
 
 

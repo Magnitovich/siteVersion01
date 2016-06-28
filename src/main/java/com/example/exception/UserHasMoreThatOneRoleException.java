@@ -7,13 +7,13 @@ import java.util.Set;
 
 @ResponseStatus(value= HttpStatus.EXPECTATION_FAILED, reason="User should not have more that one role")
 public class UserHasMoreThatOneRoleException extends RuntimeException {
-    private final Set<String> invalidUserNames;
+    private Set<String> faildUserRights;
 
-    public UserHasMoreThatOneRoleException(Set<String> invalidUserNames) {
-        this.invalidUserNames = invalidUserNames;
+    public UserHasMoreThatOneRoleException(Set<String> faildUserRights) {
+        this.faildUserRights = faildUserRights;
     }
 
-    public Set<String> getInvalidUserNames() {
-        return invalidUserNames;
+    public Set<String> getFaildUserRights() {
+        return faildUserRights;
     }
 }

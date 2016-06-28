@@ -32,10 +32,10 @@ public class AddNewWhiskyController {
     @Autowired
     private ExceptionAddWhiskyService exceptionAddWhiskyService;
 
-    @Value("${img.path}")
+    @Value("${img.whisky.path}")
     private String imagePath;
 
-    @Value("${img.relative.path}")
+    @Value("${img.whisky.relative.path}")
     private String relativeImagePath;
 
 
@@ -78,7 +78,7 @@ public class AddNewWhiskyController {
 
             try {
 
-//                getOriginalFilename благодаря этой строке загрузится название файло которое было на UI
+//                getOriginalFilename благодаря этой строке загрузится название файлa, которое было на UI
 //                getFileObject() это находится в whiskyDTO
 
                 File convFile = new File(imagePath + whiskyDTO.getFileObject().getOriginalFilename());

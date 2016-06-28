@@ -1,9 +1,13 @@
 package com.example.model;
 
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.math.BigDecimal;
 
 public class CarsDTO {
+
+    private MultipartFile objectPhotoCar;
 
     private String photo;
 
@@ -16,6 +20,14 @@ public class CarsDTO {
     private BigDecimal price;
 
     private String idForEditAdd;
+
+    public MultipartFile getObjectPhotoCar() {
+        return objectPhotoCar;
+    }
+
+    public void setObjectPhotoCar(MultipartFile objectPhotoCar) {
+        this.objectPhotoCar = objectPhotoCar;
+    }
 
     public String getPhoto() {
         return photo;
