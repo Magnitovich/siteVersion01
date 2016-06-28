@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8"/>
-    <link href="css/back.css" rel="stylesheet"/>
-    <script src="js/jquery-1.12.3.min.js" ></script>
-    <script src="js/adminParams.js"></script>
-
-
+<head th:replace="headerHtml :: header-libs">
 </head>
 <body class="centered">
+    <script src="js/adminParams.js"></script>
 
 <table border="1">
     <form method="post">
@@ -21,7 +16,11 @@
             <td>User</td>
         </tr>
         <tr th:each="user : ${adminRightsModel}">
-            <td width="100" th:text="${user.name}">
+            <td width="100">
+                <span th:text="${user.name}"></span>
+                <span th:attr="id='username_' + ${user.name}" style="display: none; color: red">
+                    This user has incorrect settings
+                </span>
             </td>
 
             <td th:each="role: ${user.roleDtos}" align="center">

@@ -1,16 +1,6 @@
 function adminRights() {
 
-//var checkboxChecked = $('input:checked') //определение активированных checkbox
-//if(checkboxChecked.length>1)
-//{alert("You selected more one car for the edit!")
-//
-//} else if (checkboxChecked.length==0) {
-//    alert("Nothing selected")
-//
-//} else {
-//    window.location.href="okYouDoIt?id="+checkboxChecked[0].id;
-//}
-
+    $('span[id^="username_"]').hide();
 
     var selectedCheckBoxForUpdate = [];
     var i = 0;
@@ -39,9 +29,12 @@ function adminRights() {
             //#errors это означ что мы обращаемся к нашему getElementById("errors")
             $("#errors").text("ERRORRRRRRR!!!!");
             $("#errors").show();
-            //errorMessage.alert("AAAAAAAAAAAAAAAAAAAQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")
-            alert(xhr.status);
-            alert(thrownError);
+            if (xhr.responseJSON.status === 417) {
+                var userNameArray = xhr.responseJSON.message.split(",");
+                userNameArray.forEach(function(userName) {
+                    $("#username_" + userName).show();
+                });
+            }
         }
     });
 }

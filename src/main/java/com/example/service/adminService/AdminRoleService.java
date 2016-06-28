@@ -15,9 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -114,16 +112,22 @@ public class AdminRoleService {
     }
 
     private void checkRoleLengthForEachUserIsLessThan2(List<UserAdminRightsDTO> user) {
+        Set<String> invalidUserNames = new HashSet<>();
+
         for (UserAdminRightsDTO dto:user) {
             if(dto.getRole().size()>1) {
-                throw new UserHasMoreThatOneRoleException();
+                invalidUserNames.add(dto.getName());
             }
+        }
 
+        if (invalidUserNames.size() > 0) {
+            throw new UserHasMoreThatOneRoleException(invalidUserNames);
         }
     }
 
     private void saveDataFromUserDto(List<UserAdminRightsDTO> users) {
-//        misstake();
+        Set<String> invalidUserNames = new HashSet<>();
+
         for (UsersModel userEntity: userRepositiry.findAll()) {
             UserAdminRightsDTO roleDTO = getUserFromList(users, userEntity.getName());
 
@@ -137,7 +141,7 @@ public class AdminRoleService {
                             continue;
                         } else {
                             //Ошибка
-                            misstake();
+                            misstake(roleDTO.getName(), invalidUserNames);
                         }
 
                     } else {
@@ -148,13 +152,17 @@ public class AdminRoleService {
                             continue;
                         } else {
                             //Ошибка, т.к. озн, что поставленно нe одна птичка
-                            misstake();
+                            misstake(roleDTO.getName(), invalidUserNames);
                         }
                     }
                 }
             } else {
                 saveInDB(userEntity.getName(), "");
             }
+        }
+
+        if (invalidUserNames.size() != 0) {
+            throw new UserHasMoreThatOneRoleException(invalidUserNames);
         }
     }
 
@@ -172,8 +180,9 @@ public class AdminRoleService {
         userRepositiry.save(readUserFromDB);
     }
 
-    public void misstake() {
-        throw new UserHasMoreThatOneRoleException();
+    public void misstake(String name, Set<String> invalidUserNames) {
+        invalidUserNames.add(name);
+
     }
 
 
