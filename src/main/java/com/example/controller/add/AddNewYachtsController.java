@@ -41,12 +41,10 @@ public class AddNewYachtsController {
     private String relativeObjectsPath;
 
 
-
-
     @RequestMapping(value = "/addInfoAboutNewYachts", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView seePageAddYachts(@RequestParam(required = false)String id) {
+    public ModelAndView seePageAddYachts(@RequestParam(required = false) String id) {
 
-        if (id !=null && id.length()!=0) {
+        if (id != null && id.length() != 0) {
             YachtDTO yachtDTO = yachtService.viewSelecterYachtModel(id);
             yachtDTO.setIdForEdit(id);
             System.out.println(id);
@@ -56,34 +54,21 @@ public class AddNewYachtsController {
             return modelAndView;
 
         } else {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("add/addYachts");
-        return modelAndView;}
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("add/addYachts");
+            return modelAndView;
+        }
     }
 
     @RequestMapping(value = "/addSuccessfulYacht", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView addInfoCars(@ModelAttribute("comparePhotoNameWithDB") YachtDTO yachtDTO,
-                                    BindingResult result) throws IOException {
+                                    BindingResult result,
+                                    @RequestParam(required = false) String id) throws IOException {
 
-        System.out.println(yachtDTO.getName()+ "//PHOTO:= " + yachtDTO.getObjectPhotoYacht().getOriginalFilename());
+        String nameFile = null;
+        FileOutputStream fileOutputStream = null;
 
-        if (yachtDTO.getIdForEdit()!=null && yachtDTO.getIdForEdit().length() !=0) {
-
-            yachtService.editYacht(yachtDTO);
-            List<YachtDTO> yachtDTOs = yachtService.vewAllYachts();
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.addObject("viewSelectedYacht", yachtDTOs);
-            modelAndView.setViewName("yacht");
-            return modelAndView;
-
-        }
-
-        else {
-
-            FileOutputStream fileOutputStream = null;
-
-        try {
-
+        if (!yachtDTO.getObjectPhotoYacht().isEmpty()) {
             File convertFileObjectYachts = new File(realObjectsPath +
                     yachtDTO.getObjectPhotoYacht().getOriginalFilename());
 
@@ -94,29 +79,45 @@ public class AddNewYachtsController {
             fileOutputStream = new FileOutputStream(convertFileObjectYachts);
             fileOutputStream.write(yachtDTO.getObjectPhotoYacht().getBytes());
 
-            String nameFile = relativeObjectsPath + yachtDTO.getObjectPhotoYacht().getOriginalFilename();
+            nameFile = relativeObjectsPath + yachtDTO.getObjectPhotoYacht().getOriginalFilename();
 
-                        exceptionAddYachtService.compareEnterInfoAndInDB(nameFile, yachtDTO.getName(),
-                                    yachtDTO.getDescriptions(), yachtDTO.getNumber(), yachtDTO.getPrice());
+        }
 
-            List<YachtDTO> list = yachtService.vewAllYachts();
-
+        if (yachtDTO.getIdForEdit() != null && yachtDTO.getIdForEdit().length() != 0) {
+            yachtDTO.setPhoto(nameFile);
+            yachtService.editYacht(yachtDTO);
+            List<YachtDTO> yachtDTOs = yachtService.vewAllYachts();
             ModelAndView modelAndView = new ModelAndView();
-            modelAndView.addObject("viewSelectedYacht", list);
+            modelAndView.addObject("viewSelectedYacht", yachtDTOs);
             modelAndView.setViewName("yacht");
             return modelAndView;
-        } catch (RuntimeException r) {
 
-            result.rejectValue("name", "error.name", "Error: Name or Photo exist");
+        } else {
+            System.out.println(yachtDTO.getName() + "//PHOTO:= " + yachtDTO.getObjectPhotoYacht().getOriginalFilename());
+
+            try {
+
+                exceptionAddYachtService.compareEnterInfoAndInDB(nameFile, yachtDTO.getName(),
+                        yachtDTO.getDescriptions(), yachtDTO.getNumber(), yachtDTO.getPrice());
+
+                List<YachtDTO> list = yachtService.vewAllYachts();
+
+                ModelAndView modelAndView = new ModelAndView();
+                modelAndView.addObject("viewSelectedYacht", list);
+                modelAndView.setViewName("yacht");
+                return modelAndView;
+            } catch (RuntimeException r) {
+
+                result.rejectValue("name", "error.name", "Error: Name or Photo exist");
 //            return seePageAddYachts(yachtDTO.getName());
-            return viewExeption();
-        }
-        //если я получу ошибку между открытием и закрытием потока, то поток без finally не закроется
-        finally {
-            if(fileOutputStream != null) {
-                fileOutputStream.close();
+                return viewExeption();
             }
-        }
+            //если я получу ошибку между открытием и закрытием потока, то поток без finally не закроется
+            finally {
+                if (fileOutputStream != null) {
+                    fileOutputStream.close();
+                }
+            }
         }
     }
 

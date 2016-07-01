@@ -26,14 +26,7 @@ public class YachtsBuyController {
         ModelAndView modelAndView = openSelectedYachtForSale(name);
         return modelAndView;
     }
-    @RequestMapping(value = "buyImgYachts", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView viewYachtImgForSale(@RequestParam("hiddenYachtImg")String id) {
-        System.out.println(id+ "\\\\\\\\//////////");
 
-        ModelAndView modelAndView = openSelectedYachtForSale(id);
-        return modelAndView;
-
-    }
     @ModelAttribute("baySuccessfulYachts")
     public YachtsModel createModel() {
         return new YachtsModel();

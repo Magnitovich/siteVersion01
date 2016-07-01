@@ -55,7 +55,7 @@ public class AdminController {
 
     @ExceptionHandler
     void handleUserHasMoreThatOneRoleException(UserHasMoreThatOneRoleException e, HttpServletResponse response) throws IOException {
-        Set<String> invalidUserNames = e.getInvalidUserNames();
+        Set<String> invalidUserNames = e.getFaildUserRights();
         response.sendError(HttpStatus.EXPECTATION_FAILED.value(), StringUtils.collectionToCommaDelimitedString(invalidUserNames));
     }
 }

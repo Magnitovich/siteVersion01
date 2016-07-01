@@ -10,16 +10,21 @@
 
 <table border="1" align="center"><p/>
     <form action="addSuccessfulNewYachts"  th:object = "${comparePhotoNameWithDB}" method="post" enctype="multipart/form-data">
-
+        <input class="buttons" type="hidden"
+               th:field="*{idForEdit}"/>
     <p/>
     <p/><br/>
+    <tr th:if="${param.id}">
+        <td>Current photo</td>
+        <td>
+            <img th:attr="src=*{photo}" style="max-width: 400px; max-height: 280px;"/>
+        </td>
+
+    </tr>
     <tr>
-        <td>Path to photo </td>
+        <td>Path to new photo</td>
         <td><input class="buttons" type="file" style="width: 255px" th:field="*{objectPhotoYacht}" name="objectPhotoYacht"
                    id="objectPhotoYacht" />
-        <input class="buttons" type="text" style="width: 255px" th:field="*{photo}" name="photoYacht"
-               id="photoYacht"/>
-
         </td>
     </tr>
     <tr>

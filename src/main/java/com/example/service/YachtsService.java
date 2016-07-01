@@ -7,6 +7,7 @@ import com.example.model.YachtsModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -79,7 +80,9 @@ public class YachtsService {
     public void editYacht(YachtDTO yachtDTO) {
         System.out.println(yachtDTO.getPhoto()+" -Photo, Name - "+ yachtDTO.getName());
         YachtsModel model = yachtRepository.findFirstByName(yachtDTO.getName());
-        model.setPhoto(yachtDTO.getPhoto());
+        if (!StringUtils.isEmpty(yachtDTO.getPhoto())) {
+            model.setPhoto(yachtDTO.getPhoto());
+        }
         model.setName(yachtDTO.getName());
         model.setDescriptions(yachtDTO.getDescriptions());
         model.setNumber(yachtDTO.getNumber());
@@ -87,6 +90,7 @@ public class YachtsService {
 
         yachtRepository.save(model);
     }
+
     public YachtDTO viewSelecterYachtModel(String name) {
         YachtsModel byName = yachtRepository.findFirstByName(name);
         YachtDTO yachtDTO = convertModelToDTO(byName);
