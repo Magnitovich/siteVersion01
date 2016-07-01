@@ -16,7 +16,7 @@ public class CarDescrModel {
     private BigDecimal price;
     @Id
     @Column(name = "ID")
-    @TableGenerator(name = "car_description")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "carDescrModel")
     private CarsModel carsModel;

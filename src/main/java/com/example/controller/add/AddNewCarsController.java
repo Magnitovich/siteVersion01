@@ -103,6 +103,7 @@ public class AddNewCarsController {
                     return modelAndView;
 
                 } catch (RuntimeException r) {
+                    System.out.println(r);
                     bindingResult.rejectValue("name", "error.name", "Errore: Photo or name exist in DB");
                     return viewException();
                 } finally {

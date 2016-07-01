@@ -14,14 +14,14 @@
                th:field="*{idForEdit}"/>
     <p/>
     <p/><br/>
-    <tr th:if="${param.id}">
+
+    <tr><tr th:if="${param.id}">
         <td>Current photo</td>
         <td>
             <img th:attr="src=*{photo}" style="max-width: 400px; max-height: 280px;"/>
         </td>
 
     </tr>
-    <tr>
         <td>Path to new photo</td>
         <td><input class="buttons" type="file" style="width: 255px" th:field="*{objectPhotoYacht}" name="objectPhotoYacht"
                    id="objectPhotoYacht" />

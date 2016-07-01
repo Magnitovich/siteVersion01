@@ -1,6 +1,7 @@
 package com.example.service;
 
 
+import com.example.dao.CarsDescrRepository;
 import com.example.dao.CarsRepository;
 
 import com.example.model.CarDescrModel;
@@ -19,6 +20,9 @@ public class CarsService {
 
     @Autowired
     private CarsRepository carsRepository;
+
+    @Autowired
+    private CarsDescrRepository carsDescrRepository;
 
     private CarsDTO conversModelToDTO(CarsModel carsMode) {
 
@@ -58,6 +62,7 @@ public class CarsService {
         carDescrModel.setPrice(price);
         carsModel.setCarDescrModel(carDescrModel);
 
+        carsDescrRepository.save(carDescrModel);
         carsRepository.save(carsModel);
     }
 
@@ -88,8 +93,8 @@ public class CarsService {
         model.getCarDescrModel().setQuantity(carsDTO.getQuantity());
         model.getCarDescrModel().setPrice(carsDTO.getPrice());
 
+        carsDescrRepository.save(model.getCarDescrModel());
         carsRepository.save(model);
-
     }
 
     @Transactional
