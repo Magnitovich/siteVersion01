@@ -62,21 +62,23 @@ public class AddNewCarsController {
     public ModelAndView addInfoCars(@ModelAttribute("comparePhotoNameCarWithDB")CarsDTO carsDTO,
                                     BindingResult bindingResult ) throws IOException {
 
+        System.out.println(carsDTO.getName()+ "  PHOTO:=" + carsDTO.getObjectPhotoCar().getOriginalFilename());
+
         String nameFile = null;
         FileOutputStream fileOutputStream = null;
 
-        File convertFileCar = new File(realObjectsPath + carsDTO.getObjectPhotoCar().getOriginalFilename());
+        if(!carsDTO.getObjectPhotoCar().isEmpty()) {
+            File convertFileCar = new File(realObjectsPath + carsDTO.getObjectPhotoCar().getOriginalFilename());
 
-        if (!convertFileCar.exists()) {
-            convertFileCar.createNewFile();
+            if (!convertFileCar.exists()) {
+                convertFileCar.createNewFile();
+            }
+            fileOutputStream = new FileOutputStream(convertFileCar);
+            fileOutputStream.write(carsDTO.getObjectPhotoCar().getBytes());
+
+            nameFile = relativeObjectsPath + carsDTO.getObjectPhotoCar().getOriginalFilename();
+
         }
-        fileOutputStream = new FileOutputStream(convertFileCar);
-        fileOutputStream.write(carsDTO.getObjectPhotoCar().getBytes());
-
-        nameFile = relativeObjectsPath + carsDTO.getObjectPhotoCar().getOriginalFilename();
-
-        System.out.println(carsDTO.getName()+ "  PHOTO:=" + carsDTO.getObjectPhotoCar().getOriginalFilename());
-
             if (carsDTO.getIdForEditAdd() != null ) {
 
                     carsService.editCar(carsDTO);

@@ -86,7 +86,8 @@ public class CarsService {
     public void editCar(CarsDTO carsDTO) {
 
         CarsModel model = carsRepository.findOne(carsDTO.getIdCar());
-    if (model.getPhoto() != null) {
+
+        if (carsDTO.getPhoto() != null) {
 
         model.setPhoto(carsDTO.getPhoto());
     }
