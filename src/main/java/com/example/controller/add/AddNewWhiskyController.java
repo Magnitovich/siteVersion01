@@ -93,8 +93,8 @@ public class AddNewWhiskyController {
 
             try {
 
-                exceptionAddWhiskyService.compareInfoInDBWithInfoUI(nameFile, whiskyDTO.getNameWhisky(), whiskyDTO.getDescribeWhisky(),
-                        whiskyDTO.getQuantityWhisky(), whiskyDTO.getPrice());
+                exceptionAddWhiskyService.compareInfoInDBWithInfoUI(nameFile, whiskyDTO.getNameWhisky(),
+                        whiskyDTO.getDescribeWhisky(), whiskyDTO.getQuantityWhisky(), whiskyDTO.getPrice());
 
                 List<WhiskyDTO> all = whiskyService.seeAllWhisky();
 
