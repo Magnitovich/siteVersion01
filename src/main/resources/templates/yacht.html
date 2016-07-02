@@ -52,14 +52,14 @@
         </tr>
     <tr th:each="viewSelectedYacht : ${viewSelectedYacht}">
         <td align="center">
-            <input type="checkbox" name="selectYachtForChange" th:attr="id=${viewSelectedYacht.name}"/>
+            <input type="checkbox" name="selectYachtForChange" th:attr="id=${viewSelectedYacht.idYacht}"/>
         </td>
         <td>
         <!--<a href="buyYachts?selectionYacht=${viewSelectedYacht.name}">-->
             <!--<a href="" onclick="buyYachtFromImg()">-->
             <form action="buyYachts"  method="post" >
             <!--<input type="hidden" id="hiddenYachtImg" name="hiddenYachtImg" th:value="${viewSelectedYacht.name}" />-->
-          <button id="hiddenYachtImg" name="hiddenYachtName" th:value="${viewSelectedYacht.name}">
+          <button id="hiddenYachtImg" name="hiddenYachtName" th:value="${viewSelectedYacht.idYacht}">
               <img th:attr="src=${viewSelectedYacht.photo}"  width="400" height="280"/>
           </button>
         <!--</a>-->
@@ -78,8 +78,8 @@
         <td th:text="${viewSelectedYacht.price}">Name</td>
         <form action="buyYachts" th:object = "${baySuccessfulYachts}" method="post" >
         <td align="Center" width="80">
-            <input type="hidden" id="hiddenYachtName" name="hiddenYachtName" th:value="${viewSelectedYacht.name}" />
-            <input class="buttons" type="submit" th:attr="id=${viewSelectedYacht.name}" style="width: 60px" value="buy"/>
+            <input type="hidden" id="hiddenYachtName" name="hiddenYachtName" th:value="${viewSelectedYacht.idYacht}" />
+            <input class="buttons" type="submit" th:attr="id=${viewSelectedYacht.idYacht}" style="width: 60px" value="buy"/>
 
         </td>
         </form>

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface YachtRepository extends CrudRepository<YachtsModel, String>{
+public interface YachtRepository extends CrudRepository<YachtsModel, Long>{
 
     @Query(value = "select ys from YachtsModel ys where name=?")
     List<YachtsModel> findByNameYacht(String name);

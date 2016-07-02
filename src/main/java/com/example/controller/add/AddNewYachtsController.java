@@ -42,9 +42,9 @@ public class AddNewYachtsController {
 
 
     @RequestMapping(value = "/addInfoAboutNewYachts", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView seePageAddYachts(@RequestParam(required = false) String id) {
+    public ModelAndView seePageAddYachts(@RequestParam(required = false) Long id) {
 
-        if (id != null && id.length() != 0) {
+        if (id != null ) {
             YachtDTO yachtDTO = yachtService.viewSelecterYachtModel(id);
             yachtDTO.setIdForEdit(id);
             System.out.println(id);
@@ -83,7 +83,7 @@ public class AddNewYachtsController {
 
         }
 
-        if (yachtDTO.getIdForEdit() != null && yachtDTO.getIdForEdit().length() != 0) {
+        if (yachtDTO.getIdForEdit() != null ) {
             yachtDTO.setPhoto(nameFile);
             yachtService.editYacht(yachtDTO);
             List<YachtDTO> yachtDTOs = yachtService.vewAllYachts();

@@ -1,9 +1,6 @@
 package com.example.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -13,6 +10,9 @@ public class YachtsModel {
     private String photo;
 
     @Id
+    @Column(name = "IDYACHT")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long idYacht;
     @Column
     private String name;
     @Column
@@ -22,6 +22,14 @@ public class YachtsModel {
     private Integer number;
     @Column
     private BigDecimal price;
+
+    public Long getIdYacht() {
+        return idYacht;
+    }
+
+    public void setIdYacht(Long idYacht) {
+        this.idYacht = idYacht;
+    }
 
     @Override
     public String toString() {

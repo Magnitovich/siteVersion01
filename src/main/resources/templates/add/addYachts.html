@@ -23,7 +23,9 @@
 
     </tr>
         <td>Path to new photo</td>
-        <td><input class="buttons" type="file" style="width: 255px" th:field="*{objectPhotoYacht}" name="objectPhotoYacht"
+        <td>
+            <input type="hidden" th:field="*{idYacht}" />
+            <input class="buttons" type="file" style="width: 255px" th:field="*{objectPhotoYacht}" name="objectPhotoYacht"
                    id="objectPhotoYacht" />
         </td>
     </tr>

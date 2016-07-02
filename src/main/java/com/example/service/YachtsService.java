@@ -37,9 +37,9 @@ public class YachtsService {
     }
 
 
-    public void deleteYachts(List<String> nameYachts) {
+    public void deleteYachts(List<Long> nameYachts) {
 
-        for (String yacht:nameYachts) {
+        for (Long yacht:nameYachts) {
             yachtRepository.delete(yacht);
         }
     }
@@ -68,6 +68,7 @@ public class YachtsService {
     public void addNewYacht(final String photo, final String name, final String describe,
                             final Integer quantity, final BigDecimal price) {
         YachtsModel yachtsModel = new YachtsModel();
+
         yachtsModel.setPhoto(photo);
         yachtsModel.setName(name);
         yachtsModel.setDescriptions(describe);
@@ -78,8 +79,11 @@ public class YachtsService {
 
     @Transactional
     public void editYacht(YachtDTO yachtDTO) {
+
         System.out.println(yachtDTO.getPhoto()+" -Photo, Name - "+ yachtDTO.getName());
-        YachtsModel model = yachtRepository.findFirstByName(yachtDTO.getName());
+
+        YachtsModel model = yachtRepository.findOne(yachtDTO.getIdYacht());
+
         if (!StringUtils.isEmpty(yachtDTO.getPhoto())) {
             model.setPhoto(yachtDTO.getPhoto());
         }
@@ -91,8 +95,8 @@ public class YachtsService {
         yachtRepository.save(model);
     }
 
-    public YachtDTO viewSelecterYachtModel(String name) {
-        YachtsModel byName = yachtRepository.findFirstByName(name);
+    public YachtDTO viewSelecterYachtModel(Long idSelectedYachts) {
+        YachtsModel byName = yachtRepository.findOne(idSelectedYachts);
         YachtDTO yachtDTO = convertModelToDTO(byName);
         return yachtDTO;
 
@@ -100,7 +104,7 @@ public class YachtsService {
 
     private YachtDTO convertModelToDTO(YachtsModel model) {
         YachtDTO yachtDTO = new YachtDTO();
-
+        yachtDTO.setIdYacht(model.getIdYacht());
         yachtDTO.setPhoto(model.getPhoto());
         yachtDTO.setName(model.getName());
         yachtDTO.setDescriptions(model.getDescriptions());

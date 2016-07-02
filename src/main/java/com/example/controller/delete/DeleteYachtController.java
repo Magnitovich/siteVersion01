@@ -21,7 +21,7 @@ public class DeleteYachtController {
     private YachtsService yachtsService;
 
     @RequestMapping(value = "/deleteYacht/DELETE", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView deleteSelectedYacht(@RequestBody List<String> list, Model model) {
+    public ModelAndView deleteSelectedYacht(@RequestBody List<Long> list, Model model) {
 
         yachtsService.deleteYachts(list);
         System.out.println(list);

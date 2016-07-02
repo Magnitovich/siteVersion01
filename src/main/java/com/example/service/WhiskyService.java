@@ -89,13 +89,9 @@ public class WhiskyService {
 
         WhiskeyModel whiskeyModels = repository.findOne(whiskyDTO.getId());
 
-
         if(whiskyDTO.getPhoto() != null) {
-
             whiskeyModels.setPhoto(whiskyDTO.getPhoto());
-
         }
-
         whiskeyModels.setNameWhisky(whiskyDTO.getNameWhisky());
         whiskeyModels.setDescribeWhisky(whiskyDTO.getDescribeWhisky());
         whiskeyModels.setQuantityWhisky(whiskyDTO.getQuantityWhisky());

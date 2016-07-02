@@ -1,6 +1,7 @@
 package com.example.model;
 
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.condition.ParamsRequestCondition;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -23,7 +24,17 @@ public class YachtDTO {
     private String descriptions;
     private Integer number;
     private BigDecimal price;
-    private String idForEdit;
+    private Long idForEdit;
+
+    private Long idYacht;
+
+    public Long getIdYacht() {
+        return idYacht;
+    }
+
+    public void setIdYacht(Long idYacht) {
+        this.idYacht = idYacht;
+    }
 
     public String getPhoto() {
         return photo;
@@ -65,11 +76,11 @@ public class YachtDTO {
         this.price = price;
     }
 
-    public String getIdForEdit() {
+    public Long getIdForEdit() {
         return idForEdit;
     }
 
-    public void setIdForEdit(String idForEdit) {
+    public void setIdForEdit(Long idForEdit) {
         this.idForEdit = idForEdit;
     }
 }
