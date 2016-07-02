@@ -11,12 +11,20 @@
 
         <p/>
         <p/><br/>
+        <tr th:if="${param.id}">
+        <td>Current photo</td>
+        <td>
+            <img th:attr="src=*{photo}" style="max-width: 400px; max-height: 280px;"/>
+        </td>
+</tr>
         <tr >
             <td>Path to photo </td>
             <td><input class="buttons" type="file" th:field="*{objectPhotoCar}"  style="width: 205px"
                        name="objectPhotoCar" id="objectPhotoCar"/>
-            <input class="buttons" type="text" style="width: 120px" name="photoCars" id="photoCras"
-                       th:field="*{photo}" value="cars/"/> </td>
+            <!--<input class="buttons" type="text" style="width: 120px" name="photoCars" id="photoCras"-->
+                       <!--th:field="*{photo}" value="cars/"/> -->
+                <input type="hidden" th:field="*{idCar}" />
+            </td>
         </tr>
         <tr>
             <td>Name Cars </td>

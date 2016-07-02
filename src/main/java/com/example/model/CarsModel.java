@@ -14,6 +14,9 @@ public class CarsModel {
     @Column(name = "PHOTO")
     private String photo;
     @Id
+    @Column(name = "IDCAR")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long idCar;
     @Column(name = "NAME_CAR")
     private String name;
 
@@ -23,6 +26,14 @@ public class CarsModel {
 
     public CarDescrModel getCarDescrModel() {
         return carDescrModel;
+    }
+
+    public Long getIdCar() {
+        return idCar;
+    }
+
+    public void setIdCar(Long idCar) {
+        this.idCar = idCar;
     }
 
     public void setCarDescrModel(CarDescrModel carDescrModel) {

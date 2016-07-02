@@ -27,7 +27,7 @@ public class CarsService {
     private CarsDTO conversModelToDTO(CarsModel carsMode) {
 
         CarsDTO carsDTO = new CarsDTO();
-
+        carsDTO.setIdCar(carsMode.getIdCar());
         carsDTO.setPhoto(carsMode.getPhoto());
         carsDTO.setName(carsMode.getName());
         carsDTO.setDescriptions(carsMode.getCarDescrModel().getDescription());
@@ -44,9 +44,9 @@ public class CarsService {
         return carsDTOs;
     }
 
-    public CarsDTO viewSelectedModelCars(String name) {
+    public CarsDTO viewSelectedModelCars(Long name) {
 
-        CarsModel selectedCars = carsRepository.findFirstByName(name);
+        CarsModel selectedCars = carsRepository.findOne(name);
         CarsDTO carsDTOs = conversModelToDTO(selectedCars);
         return carsDTOs;
     }
@@ -85,9 +85,11 @@ public class CarsService {
     @Transactional
     public void editCar(CarsDTO carsDTO) {
 
-        CarsModel model = carsRepository.findFirstByName(carsDTO.getName());
+        CarsModel model = carsRepository.findOne(carsDTO.getIdCar());
+    if (model.getPhoto() != null) {
 
         model.setPhoto(carsDTO.getPhoto());
+    }
         model.setName(carsDTO.getName());
         model.getCarDescrModel().setDescription(carsDTO.getDescriptions());
         model.getCarDescrModel().setQuantity(carsDTO.getQuantity());
@@ -118,9 +120,9 @@ public class CarsService {
         }
     }
 
-    public void deleteCars(List<String> nameDeletedCar) {
+    public void deleteCars(List<Long> nameDeletedCar) {
 
-        for (String selectedCarForDelete:nameDeletedCar) {
+        for (Long selectedCarForDelete:nameDeletedCar) {
 
             carsRepository.delete(selectedCarForDelete);
 

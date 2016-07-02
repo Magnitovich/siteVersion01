@@ -39,9 +39,9 @@ public class AddNewCarsController {
 
 
     @RequestMapping(value = "/addInfoAboutNewCar", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView seePageAdd(@RequestParam(required = false)String id) {
+    public ModelAndView seePageAdd(@RequestParam(required = false)Long id) {
 
-        if (id !=null && id.length()!=0) {
+        if (id !=null ) {
             CarsDTO carsModel = carsService.viewSelectedModelCars(id);
             carsModel.setIdForEditAdd(id);
             System.out.println(id);
@@ -62,9 +62,22 @@ public class AddNewCarsController {
     public ModelAndView addInfoCars(@ModelAttribute("comparePhotoNameCarWithDB")CarsDTO carsDTO,
                                     BindingResult bindingResult ) throws IOException {
 
+        String nameFile = null;
+        FileOutputStream fileOutputStream = null;
+
+        File convertFileCar = new File(realObjectsPath + carsDTO.getObjectPhotoCar().getOriginalFilename());
+
+        if (!convertFileCar.exists()) {
+            convertFileCar.createNewFile();
+        }
+        fileOutputStream = new FileOutputStream(convertFileCar);
+        fileOutputStream.write(carsDTO.getObjectPhotoCar().getBytes());
+
+        nameFile = relativeObjectsPath + carsDTO.getObjectPhotoCar().getOriginalFilename();
+
         System.out.println(carsDTO.getName()+ "  PHOTO:=" + carsDTO.getObjectPhotoCar().getOriginalFilename());
 
-            if (carsDTO.getIdForEditAdd() != null && carsDTO.getIdForEditAdd().length() !=0) {
+            if (carsDTO.getIdForEditAdd() != null ) {
 
                     carsService.editCar(carsDTO);
 
@@ -77,19 +90,10 @@ public class AddNewCarsController {
 
             } else {
 
-                FileOutputStream fileOutputStream = null;
+
 
                 try {
 
-                    File convertFileCar = new File(realObjectsPath + carsDTO.getObjectPhotoCar().getOriginalFilename());
-
-                    if (!convertFileCar.exists()) {
-                        convertFileCar.createNewFile();
-                    }
-                    fileOutputStream = new FileOutputStream(convertFileCar);
-                    fileOutputStream.write(carsDTO.getObjectPhotoCar().getBytes());
-
-                    String nameFile = relativeObjectsPath + carsDTO.getObjectPhotoCar().getOriginalFilename();
 
                     exceptionAddCar.compareInfoInDBWithInfoUI(nameFile, carsDTO.getName(), carsDTO.getDescriptions(),
                             carsDTO.getQuantity(), carsDTO.getPrice());

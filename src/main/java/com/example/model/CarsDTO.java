@@ -19,7 +19,17 @@ public class CarsDTO {
 
     private BigDecimal price;
 
-    private String idForEditAdd;
+    private Long idForEditAdd;
+
+    private Long idCar;
+
+    public Long getIdCar() {
+        return idCar;
+    }
+
+    public void setIdCar(Long idCar) {
+        this.idCar = idCar;
+    }
 
     public MultipartFile getObjectPhotoCar() {
         return objectPhotoCar;
@@ -69,11 +79,11 @@ public class CarsDTO {
         this.price = price;
     }
 
-    public String getIdForEditAdd() {
+    public Long getIdForEditAdd() {
         return idForEditAdd;
     }
 
-    public void setIdForEditAdd(String idForEditAdd) {
+    public void setIdForEditAdd(Long idForEditAdd) {
         this.idForEditAdd = idForEditAdd;
     }
 }

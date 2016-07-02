@@ -44,7 +44,7 @@
     <tr th:each="cars : ${namesCars}">
 
         <td align="center">
-            <input type="checkbox" th:attr="id=${cars.name}" /></td>
+            <input type="checkbox" th:attr="id=${cars.idCar}" /></td>
         <td>
         <img th:attr="src=${cars.photo}" width="400" height="280"/>
     </td>
@@ -63,7 +63,7 @@
          <form action="bayCars"  method="post" >
         <td align="center" width="80">
 
-            <input type="hidden" id="nameCarsHidden" name="nameCarsHidden" th:value="${cars.name}" />
+            <input type="hidden" id="nameCarsHidden" name="nameCarsHidden" th:value="${cars.idCar}" />
                 <input type="submit" class="buttons" name="useCar"  style="width: 60px" value="buy"/>
             <!--<input type="hidden" id="qCars" name="qCars" th:value="${Cars.quantity}" />-->
         </td>

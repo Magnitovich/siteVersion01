@@ -22,7 +22,7 @@ public class DeleteCarsController {
     private CarsService carsService;
 
     @RequestMapping(value = "/deleteCars/DELETE", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView viewDeleteCarResult(@RequestBody List<String> namesCars, Model model,
+    public ModelAndView viewDeleteCarResult(@RequestBody List<Long> namesCars, Model model,
                                             HttpServletRequest req) {
         System.out.println(namesCars);
 

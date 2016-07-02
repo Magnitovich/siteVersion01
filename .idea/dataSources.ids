@@ -112,42 +112,45 @@
         <data-type>varchar(45)</data-type>
       </column>
       <column id="37" parent="7" name="NAME_CAR">
-        <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
       <column id="38" parent="7" name="CAR_DESCRIPTION_ID">
         <data-type>int(11)</data-type>
       </column>
-      <key id="39" parent="7" name="PRIMARY">
-        <columns>NAME_CAR</columns>
+      <column id="39" parent="7" name="IDCAR">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <key id="40" parent="7" name="PRIMARY">
+        <columns>IDCAR</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="40" parent="7" name="FK_CAR_ID">
+      <foreign-key id="41" parent="7" name="FK_CAR_ID">
         <columns>CAR_DESCRIPTION_ID</columns>
         <ref-key>car_description.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="41" parent="8" name="USER_ID">
+      <column id="42" parent="8" name="USER_ID">
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="42" parent="8" name="ROLE_UID">
+      <column id="43" parent="8" name="ROLE_UID">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <key id="43" parent="8" name="PRIMARY">
+      <key id="44" parent="8" name="PRIMARY">
         <columns>USER_ID
 ROLE_UID</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="44" parent="8" name="fk_role_user">
+      <foreign-key id="45" parent="8" name="fk_role_user">
         <columns>ROLE_UID</columns>
         <ref-key>user_role.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="45" parent="8" name="fk_user_role">
+      <foreign-key id="46" parent="8" name="fk_user_role">
         <columns>USER_ID</columns>
         <ref-key>users.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
