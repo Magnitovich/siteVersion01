@@ -14,6 +14,15 @@
 
     <p/>
     <p/><br/>
+
+        <tr th:if="${param.id}">
+        <td>Current photo</td>
+        <td>
+            <input type="hidden" th:field="*{id}" />
+            <img th:attr="src=*{photo}" style="max-width: 400px; max-height: 280px;"/>
+        </td>
+
+    </tr>
     <tr>
         <td>Path to photo </td>
         <!--type="file" благодаря этому type мы получаем кнопку которая откр проводник-->

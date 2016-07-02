@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface WhiskyRepository extends CrudRepository<WhiskeyModel, String> {
+public interface WhiskyRepository extends CrudRepository<WhiskeyModel, Long> {
 
 //    @Query(value = "select wm from WhiskeyModel ws where name_Whisky=?")
     public List<WhiskeyModel> findByNameWhisky(String name);

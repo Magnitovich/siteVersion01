@@ -9,20 +9,29 @@ import java.math.BigDecimal;
 
 public class WhiskyDTO {
 
-    private String idForEdit;
+    private Long idForEdit;
 
     private MultipartFile fileObject;
+    private Long id;
     private String photo;
     private String nameWhisky;
     private String describeWhisky;
     private Integer quantityWhisky;
     private BigDecimal price;
 
-    public String getIdForEdit() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getIdForEdit() {
         return idForEdit;
     }
 
-    public void setIdForEdit(String idForEdit) {
+    public void setIdForEdit(Long idForEdit) {
         this.idForEdit = idForEdit;
     }
 

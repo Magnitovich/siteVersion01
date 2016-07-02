@@ -17,10 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.tags.form.LabelTag;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -40,10 +37,10 @@ public class AddNewWhiskyController {
 
 
     @RequestMapping(value = "addNewWhisky", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView viewPageAddWhisky(@RequestParam(required = false)String id) {
+    public ModelAndView viewPageAddWhisky(@RequestParam(required = false)Long id) {
 
         System.out.println(id);
-        if(id !=null && id.length() !=0) {
+        if(id !=null ) {
             WhiskyDTO model = whiskyService.viewByNameWhisky(id);
             model.setIdForEdit(id);
             System.out.println(model);
@@ -61,8 +58,29 @@ public class AddNewWhiskyController {
     @RequestMapping(value = "addSuccessfulNewWhisky", method = {RequestMethod.POST})
     public ModelAndView viewAddWhisky(@ModelAttribute("understandEditOrAdd")WhiskyDTO whiskyDTO,
                                       BindingResult bindingResult ) throws IOException {
-        if (whiskyDTO.getIdForEdit() != null && whiskyDTO.getIdForEdit().length() != 0) {
 
+        String nameFile = null;
+        FileOutputStream fos = null;
+
+        //                getOriginalFilename благодаря этой строке загрузится название файлa, которое было на UI
+//                getFileObject() это находится в whiskyDTO
+        if(!whiskyDTO.getFileObject().isEmpty()) {
+            File convFile = new File(imagePath + whiskyDTO.getFileObject().getOriginalFilename());
+            if (!convFile.exists()) {
+                convFile.createNewFile();
+            }
+            //                fos- запись
+            fos = new FileOutputStream(convFile);
+            fos.write(whiskyDTO.getFileObject().getBytes());
+
+            //nameFile получаем путь к файлу в БД
+            nameFile = relativeImagePath + whiskyDTO.getFileObject().getOriginalFilename();
+
+        }
+
+
+        if (whiskyDTO.getIdForEdit() != null ) {
+            whiskyDTO.setPhoto(nameFile);
             whiskyService.editWhisky(whiskyDTO);
             List<WhiskyDTO> all = whiskyService.seeAllWhisky();
 
@@ -71,26 +89,9 @@ public class AddNewWhiskyController {
             modelAndView.setViewName("whisky");
             return modelAndView;
 
-
         } else {
 
-            FileOutputStream fos = null;
-
             try {
-
-//                getOriginalFilename благодаря этой строке загрузится название файлa, которое было на UI
-//                getFileObject() это находится в whiskyDTO
-
-                File convFile = new File(imagePath + whiskyDTO.getFileObject().getOriginalFilename());
-                if (!convFile.exists()) {
-                    convFile.createNewFile();
-                }
-//                fos- запись
-                 fos = new FileOutputStream(convFile);
-                fos.write(whiskyDTO.getFileObject().getBytes());
-
-                //nameFile получаем путь к файлу в БД
-                String nameFile = relativeImagePath + whiskyDTO.getFileObject().getOriginalFilename();
 
                 exceptionAddWhiskyService.compareInfoInDBWithInfoUI(nameFile, whiskyDTO.getNameWhisky(), whiskyDTO.getDescribeWhisky(),
                         whiskyDTO.getQuantityWhisky(), whiskyDTO.getPrice());

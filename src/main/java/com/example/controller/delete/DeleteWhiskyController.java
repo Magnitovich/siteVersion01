@@ -22,7 +22,7 @@ public class DeleteWhiskyController {
     private WhiskyService whiskyService;
 
     @RequestMapping(value = "/deleteWhisky", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView viewDelete(@RequestBody List<String> namesWhisky, Model model,
+    public ModelAndView viewDelete(@RequestBody List<Long> namesWhisky, Model model,
                                    HttpServletRequest req) {
 
         whiskyService.delete(namesWhisky);

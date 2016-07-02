@@ -19,7 +19,7 @@ public class WhiskyService {
 
     public WhiskyDTO convertModelToDTO(WhiskeyModel model) {
         WhiskyDTO whiskyDTO = new WhiskyDTO();
-
+        whiskyDTO.setId(model.getId());
         whiskyDTO.setPhoto(model.getPhoto());
         whiskyDTO.setNameWhisky(model.getNameWhisky());
         whiskyDTO.setDescribeWhisky(model.getDescribeWhisky());
@@ -79,17 +79,23 @@ public class WhiskyService {
         repository.save(whiskeyModel);
     }
 
-    public WhiskyDTO viewByNameWhisky(String name) {
-        WhiskeyModel whiskeyModels = repository.findFirstByNameWhisky(name);
+    public WhiskyDTO viewByNameWhisky(Long idWhyski) {
+        WhiskeyModel whiskeyModels = repository.findOne(idWhyski);
         WhiskyDTO whiskyDTOs = convertModelToDTO(whiskeyModels);
         return whiskyDTOs;
     }
     @Transactional
     public void editWhisky(WhiskyDTO whiskyDTO) {
 
-        WhiskeyModel whiskeyModels = repository.findFirstByNameWhisky(whiskyDTO.getNameWhisky());
+        WhiskeyModel whiskeyModels = repository.findOne(whiskyDTO.getId());
 
-        whiskeyModels.setPhoto(whiskyDTO.getPhoto());
+
+        if(whiskyDTO.getPhoto() != null) {
+
+            whiskeyModels.setPhoto(whiskyDTO.getPhoto());
+
+        }
+
         whiskeyModels.setNameWhisky(whiskyDTO.getNameWhisky());
         whiskeyModels.setDescribeWhisky(whiskyDTO.getDescribeWhisky());
         whiskeyModels.setQuantityWhisky(whiskyDTO.getQuantityWhisky());
@@ -99,9 +105,9 @@ public class WhiskyService {
 
     }
 
-    public void delete(List<String> nameWhisky) {
+    public void delete(List<Long> nameWhisky) {
 
-        for(String name:nameWhisky){
+        for(Long name:nameWhisky){
 
             repository.delete(name);
         }

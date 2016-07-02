@@ -12,6 +12,11 @@ public class WhiskeyModel {
     @Column
     private String photo;
     @Id
+    // @GeneratedValue(strategy=GenerationType.IDENTITY) эта строка указывает хибернейту,
+//    что ID будет генерится
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
     @Column(name = "NAME")
     private String nameWhisky;
     @Column(name = "DESCRIPTION")
@@ -30,6 +35,14 @@ public class WhiskeyModel {
                 ", quantityWhisky=" + quantityWhisky +
                 ", price=" + price +
                 '}';
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getPhoto() {
