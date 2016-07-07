@@ -65,7 +65,9 @@ public class AddNewWhiskyController {
         //                getOriginalFilename благодаря этой строке загрузится название файлa, которое было на UI
 //                getFileObject() это находится в whiskyDTO
         if(!whiskyDTO.getFileObject().isEmpty()) {
+
             File convFile = new File(imagePath + whiskyDTO.getFileObject().getOriginalFilename());
+
             if (!convFile.exists()) {
                 convFile.createNewFile();
             }
