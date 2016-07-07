@@ -50,6 +50,13 @@ public class YachtsService {
         return yachtDTOs;
     }
 
+    public String convertIdToName(Long id) {
+
+        YachtsModel model = yachtRepository.findOne(id);
+        YachtDTO yachtDTO = convertModelToDTO(model);
+        return yachtDTO.getName();
+    }
+
     @Transactional
     public void buyAndUpdate(String name, Integer quantityUI) {
 

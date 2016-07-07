@@ -80,7 +80,6 @@ public class AddNewWhiskyController {
 
         }
 
-
         if (whiskyDTO.getIdForEdit() != null ) {
             whiskyDTO.setPhoto(nameFile);
             whiskyService.editWhisky(whiskyDTO);
