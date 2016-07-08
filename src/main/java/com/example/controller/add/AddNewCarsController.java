@@ -68,6 +68,7 @@ public class AddNewCarsController {
         FileOutputStream fileOutputStream = null;
 
         if(!carsDTO.getObjectPhotoCar().isEmpty()) {
+
             File convertFileCar = new File(realObjectsPath + carsDTO.getObjectPhotoCar().getOriginalFilename());
 
             if (!convertFileCar.exists()) {

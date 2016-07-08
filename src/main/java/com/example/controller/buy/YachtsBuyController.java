@@ -21,9 +21,16 @@ public class YachtsBuyController {
     private YachtsService yachtsService;
 
     @RequestMapping(value = "buyYachts", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView viewYachtForSale(@RequestParam("hiddenYachtName")String name
+    public ModelAndView viewYachtForSale(@RequestParam("hiddenYachtName")Long nameId
                                          ) {
-        ModelAndView modelAndView = openSelectedYachtForSale(name);
+
+        System.out.println(nameId);
+        System.out.println();
+
+        String s = yachtsService.convertIdToName(nameId);
+        System.out.println(s);
+
+        ModelAndView modelAndView = openSelectedYachtForSale(s);
         return modelAndView;
     }
 
