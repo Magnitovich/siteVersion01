@@ -84,13 +84,10 @@ public class CarsService {
     }
     @Transactional
     public void editCar(CarsDTO carsDTO) {
-
         CarsModel model = carsRepository.findOne(carsDTO.getIdCar());
-
         if (carsDTO.getPhoto() != null) {
-
-        model.setPhoto(carsDTO.getPhoto());
-    }
+            model.setPhoto(carsDTO.getPhoto());
+        }
         model.setName(carsDTO.getName());
         model.getCarDescrModel().setDescription(carsDTO.getDescriptions());
         model.getCarDescrModel().setQuantity(carsDTO.getQuantity());
