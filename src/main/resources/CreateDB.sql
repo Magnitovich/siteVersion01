@@ -68,6 +68,14 @@ CREATE TABLE `car_description` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+CREATE TABLE `persistent_logins` (
+  `username` VARCHAR(64) NOT NULL,
+  `series` VARCHAR(64) NOT NULL,
+  `token` VARCHAR(64) NOT NULL,
+  `last_used` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`series`)
+) ENGINE=InnoDB;
+
 INSERT INTO USERS (name, password) VALUE ('test', 'test');
 INSERT INTO USERS (name, password) VALUE ('test2', 'test2');
 INSERT INTO USERS (name, password) VALUE ('test3', 'test3');

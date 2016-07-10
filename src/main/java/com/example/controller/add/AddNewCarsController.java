@@ -78,13 +78,10 @@ public class AddNewCarsController {
             fileOutputStream.write(carsDTO.getObjectPhotoCar().getBytes());
 
             nameFile = relativeObjectsPath + carsDTO.getObjectPhotoCar().getOriginalFilename();
-
         }
             if (carsDTO.getIdForEditAdd() != null ) {
-
                 carsDTO.setPhoto(nameFile);
-
-                    carsService.editCar(carsDTO);
+                carsService.editCar(carsDTO);
 
                 List<CarsDTO> list = carsService.viewAllModelCars();
                 ModelAndView modelAndView = new ModelAndView();
