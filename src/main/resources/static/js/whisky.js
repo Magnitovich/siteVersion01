@@ -40,6 +40,16 @@ function editInfoWhisky() {
 
 }
 
+function imageClick() {
+
+    var imageId = $("#photoId");
+    var hiddenId = $("#idNameWhisky");
+    alert(hiddenId.getPropertyValue);
+
+    window.location.href = "buySelectedWhisky?id=" + hiddenId[0].id;
+
+}
+
 function addNewWhisky() {
 
     window.location.href="addNewWhisky";

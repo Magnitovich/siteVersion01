@@ -7,6 +7,8 @@
     <link href="css/back.css" rel="stylesheet"/>
     <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
     <script src="js/yacht.js"></script>
+
+    <script src="js/search.js"></script>
 </head>
 <body>
 
@@ -16,8 +18,13 @@
 <center>
     <h2>Form for Buy yachts</h2><p/>
 <table border="1">
-    <tr><td colspan="4" align="Right" ><input class="buttons" type="search" value="Search"/></td>
-    <td colspan="3" align="center">
+    <tr><td colspan="4" align="Right" >
+
+        <input class="buttons" type="search" value="Search" id="searchBarId" autocomplete="off"
+        onmousedown="" onblur=""/></td>
+
+
+        <td colspan="3" align="center">
 
         <div align="right" sec:authorize="hasAuthority('admin')">
             Hello  <span th:text="${#authentication.name}"/>
@@ -40,6 +47,15 @@
                    onclick="deleteSelectedElements()"
                    type="submit" value="Delete" style="width: 70px"/>
     </td></tr>
+
+
+    <tr>
+
+        <div id="searchResult"></div>
+
+    </tr>
+
+
         <tr>
             <td width="30" align="center">
                 <input type="checkbox" name="selectAllCheckbox" id="selectAllCheckbox"/> </td>

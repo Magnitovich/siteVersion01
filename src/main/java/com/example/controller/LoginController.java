@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.config.UserDetailsImpl;
 import com.example.dao.UserRepository;
 import com.example.model.UsersModel;
+import com.example.service.SendingMail;
 import com.example.service.adminService.AdminRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -21,6 +23,8 @@ public class LoginController {
     private AdminRoleService adminRoleService;
     @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
+    private SendingMail sendingMail;
 
     @RequestMapping(value = "/login", method = {RequestMethod.GET})
     public ModelAndView viewMainPage() {
@@ -35,10 +39,13 @@ public class LoginController {
     public ModelAndView registrationPage(
                                          @RequestParam(value = "NickName") String name,
                                          @RequestParam(value = "signUpPassword") String password,
-                                         @RequestParam(value = "Email") String email) {
+                                         @RequestParam(value = "Email") String email) throws MessagingException {
+
         System.out.println("Nick= "+name+" pass= "+password+" email= "+email);
 
         adminRoleService.addNewUser(name, password, email);
+
+        sendingMail.sendingMessage(email);
 
         System.out.println(name + " pass:= " + password+ " email: "+email);
         ModelAndView modelAndView = new ModelAndView();

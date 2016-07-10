@@ -49,7 +49,17 @@
         <td align="center">
             <input type="hidden" th:value="${viewAvailableWhisky.id}" id="imageClick" name="imageClick"/>
 
-            <img th:attr="src=${viewAvailableWhisky.photo}" width="150" height="250"/>
+
+
+
+            <a th:href="@{~/buySelectedWhisky(nameBuyWhiskey=${viewAvailableWhisky.id})}"  >
+
+                <input type="hidden"  th:value="${viewAvailableWhisky.id}"/>
+
+            <img  th:attr="src=${viewAvailableWhisky.photo}" id="photoId" width="150" height="250"/>
+                <!--onclick="imageClick()"-->
+            </a>
+
             </td>
         <td align="center" th:text="${viewAvailableWhisky.nameWhisky}">Name</td>
         <td align="center" th:text="${viewAvailableWhisky.describeWhisky}">Describe</td>
@@ -61,7 +71,7 @@
             <!--<form action="buySelectedWhisky" method="post">-->
 
             <input type="hidden" name="nameBuyWhiskey" id="nameBuyWhiskey"
-                       th:value="${viewAvailableWhisky.nameWhisky}"/>
+                       th:value="${viewAvailableWhisky.id}"/>
                 <input type="submit" class="buttons" name="buttonBuyWhiskey" style="width: 60px" value="Buy"/>
             <!--</form>-->
         </td>

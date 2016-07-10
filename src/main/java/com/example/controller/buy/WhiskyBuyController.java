@@ -6,10 +6,7 @@ import com.example.model.WhiskyDTO;
 import com.example.service.WhiskyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -21,10 +18,15 @@ public class WhiskyBuyController {
     private WhiskyService whiskyService;
 
     @RequestMapping(value = "buySelectedWhisky", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView viewSelectedWhisky(@RequestParam("nameBuyWhiskey")String nameWhisky) {
+    public ModelAndView viewSelectedWhisky(@RequestParam(value = "nameBuyWhiskey", required = false)Long nameId
+                                           ) {
 
-        System.out.println(nameWhisky);
-        List<WhiskyDTO> list = whiskyService.viewSelectedWhisky(nameWhisky);
+//        System.out.println("@RequestParam(required = false)Long id - " + id);
+
+        System.out.println(nameId);
+        String s = whiskyService.convertIdToName(nameId);
+
+        List<WhiskyDTO> list = whiskyService.viewSelectedWhisky(s);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("buySelectedWhisky", list);
         modelAndView.setViewName("buy/buyWhisky");

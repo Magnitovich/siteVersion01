@@ -37,6 +37,14 @@ public class WhiskyService {
         return whisky;
     }
 
+    public String convertIdToName(Long id) {
+
+        WhiskeyModel model = repository.findOne(id);
+        WhiskyDTO dto = convertModelToDTO(model);
+        return dto.getNameWhisky();
+
+    }
+
     public List<WhiskyDTO> viewSelectedWhisky(String name) {
         List<WhiskeyModel> byNameWhisky = repository.findByNameWhisky(name);
         List<WhiskyDTO> whiskyDTOs = convertListModelToListDTO(byNameWhisky);
