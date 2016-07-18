@@ -20,9 +20,6 @@ public class WhiskyBuyController {
     @RequestMapping(value = "buySelectedWhisky", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewSelectedWhisky(@RequestParam(value = "nameBuyWhiskey", required = false)Long nameId
                                            ) {
-
-//        System.out.println("@RequestParam(required = false)Long id - " + id);
-
         System.out.println(nameId);
         String s = whiskyService.convertIdToName(nameId);
 
@@ -33,6 +30,9 @@ public class WhiskyBuyController {
         return modelAndView;
 
     }
+
+    }
+
 //    @RequestMapping(value = "buySelectedWhisky", method = {RequestMethod.GET, RequestMethod.POST})
 //    public ModelAndView viewSelectedWhisky(@RequestParam String nameWhisky) {
 //
@@ -43,5 +43,3 @@ public class WhiskyBuyController {
 ////        modelAndView.setViewName("buy/buyWhisky");
 //            return modelAndView;
 //        }
-    }
-

@@ -47,9 +47,7 @@
     <tr th:each="viewAvailableWhisky : ${viewAvailableWhisky}">
         <td align="center"><input type="checkbox" th:attr="id=${viewAvailableWhisky.id}"/> </td>
         <td align="center">
-            <input type="hidden" th:value="${viewAvailableWhisky.id}" id="imageClick" name="imageClick"/>
-
-
+            <!--<input type="hidden" th:value="${viewAvailableWhisky.id}" id="imageClick" name="imageClick"/>-->
 
 
             <a th:href="@{~/buySelectedWhisky(nameBuyWhiskey=${viewAvailableWhisky.id})}"  >

@@ -46,7 +46,15 @@
         <td align="center">
             <input type="checkbox" th:attr="id=${cars.idCar}" /></td>
         <td>
-        <img th:attr="src=${cars.photo}" width="400" height="280"/>
+
+            <a th:href="@{~/bayCars(nameCarsHidden=${cars.idCar})}"  >
+
+                <input type="hidden"  th:value="${cars.idCar}"/>
+
+                <img th:attr="src=${cars.photo}" width="400" height="280"/>
+                <!--onclick="imageClick()"-->
+            </a>
+
     </td>
         <td width="100" th:text="${cars.name}">Name</td>
         <td width="100" th:text="${cars.descriptions}">Describe</td>

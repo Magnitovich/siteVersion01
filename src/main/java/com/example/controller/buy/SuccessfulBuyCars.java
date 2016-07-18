@@ -1,6 +1,7 @@
 package com.example.controller.buy;
 
 import com.example.dao.CarsRepository;
+import com.example.model.CarsDTO;
 import com.example.model.CarsModel;
 
 import com.example.service.CarsService;
@@ -24,11 +25,13 @@ public class SuccessfulBuyCars {
     @RequestMapping(value = "buySuccessful", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView viewBuyCars(@RequestParam("quantityCars")Integer quantityBuyCar,
                                     @RequestParam("nameCars")String nameBuyCar) {
+
         System.out.println("Имя авто: "+nameBuyCar+" Кол-во авто: "+quantityBuyCar);
 
          buyCarService.changeQuantityCarsInDB(nameBuyCar, quantityBuyCar);
 
-        List<CarsModel> list = carsRepository.findAllCars();
+        List<CarsDTO> list = buyCarService.viewAllModelCars();
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("namesCars", list);
         modelAndView.setViewName("cars");

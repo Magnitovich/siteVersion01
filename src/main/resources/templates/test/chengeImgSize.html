@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <script type="text/javascript">
+
+        /* This script and many more are available free online at
+         The JavaScript Source!! http://www.javascriptsource.com
+         Created by: Cat Arriola | http://astrodiva.journalspace.com/ */
+
+        function fixImgs(whichId, maxW) {
+            var pix=document.getElementById(whichId).getElementsByTagName('img');
+            for (i=0; i<pix.length; i++) {
+                w=pix[i].width;
+                h=pix[i].height;
+                if (w > maxW) {
+                    f=1-((w - maxW) / w);
+                    pix[i].width=w * f;
+                    pix[i].height=h * f;
+                }
+            }
+        }
+
+        // Multiple onload function created by: Simon Willison
+        // http://simonwillison.net/2004/May/26/addLoadEvent/
+        function addLoadEvent(func) {
+            var oldonload = window.onload;
+            if (typeof window.onload != 'function') {
+                window.onload = func;
+            } else {
+                window.onload = function() {
+                    if (oldonload) {
+                        oldonload();
+                    }
+                    func();
+                }
+            }
+        }
+
+        addLoadEvent(function() {
+            fixImgs('photos', 108);  // ('element ID', maximum width)
+        });
+
+
+    </script>
+</head>
+<body>
+
+<table id="photos" cellspacing="2">
+    <tr>
+        <td class="simple"><img src="cars/alfaSml.jpg" alt="photo 1"></td>
+        <td class="simple"><img src="yachts/yacht01sm.jpg" alt="photo 2"></td>
+        <td class="simple"><img src="whisky/glenDevSml.jpg" alt="photo 3"></td>
+    </tr>
+    <tr>
+        <td class="simple" colspan="3"><b>Live demo:</b> <input type="button"
+            value="Make width 80 pixels" onclick="fixImgs('photos', 80)"></td></tr>
+</table>
+
+
+</body>
+</html>

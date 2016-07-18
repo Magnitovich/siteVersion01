@@ -82,6 +82,11 @@ public class CarsService {
         List<CarsDTO> carsDTOs = convertListModelToLIstDTO(byNameCars);
         return carsDTOs;
     }
+    public String convertLongToString(Long id) {
+        CarsModel one = carsRepository.findOne(id);
+        CarsDTO carsDTO = conversModelToDTO(one);
+        return carsDTO.getName();
+    }
     @Transactional
     public void editCar(CarsDTO carsDTO) {
         CarsModel model = carsRepository.findOne(carsDTO.getIdCar());
@@ -114,6 +119,7 @@ public class CarsService {
             result = quantityCarsInDB - quantityFromUI;
 
             model.getCarDescrModel().setQuantity(result);
+//            carsDescrRepository.save(model.getCarDescrModel());
             carsRepository.save(model);
         }
     }

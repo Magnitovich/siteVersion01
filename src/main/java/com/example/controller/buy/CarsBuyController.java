@@ -21,10 +21,11 @@ public class CarsBuyController {
     private CarsService buyCarService;
 
     @RequestMapping(value = "/bayCars", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView viewCarForBuy(@RequestParam("nameCarsHidden")String name_Cars) {
-        System.out.println(name_Cars);
+    public ModelAndView viewCarForBuy(@RequestParam("nameCarsHidden")Long idCars) {
+        System.out.println(idCars);
 //        List<CarsModel> list = carsService.findByNameCars(name_Cars);
-        List<CarsDTO> list = buyCarService.viewSelectedCarForBuy(name_Cars);
+        String s = buyCarService.convertLongToString(idCars);
+        List<CarsDTO> list = buyCarService.viewSelectedCarForBuy(s);
         System.out.println(list);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("baySelectedCars", list);
