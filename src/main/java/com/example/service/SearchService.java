@@ -54,7 +54,7 @@ public class SearchService {
             List<WhiskyDTO> searchWhisky = new ArrayList<>();
             searchWhisky.addAll(whiskyDTOs);
             for (WhiskyDTO w : searchWhisky) {
-                if (w.getNameWhisky().contains(search)) {
+                if (w.getNameWhisky().toLowerCase().contains(search) ||w.getNameWhisky().toUpperCase().contains(search)) {
                     answer.add(w);
                 }
             }
@@ -67,7 +67,7 @@ public class SearchService {
         List<YachtDTO> searchYachts = new ArrayList<>();
         searchYachts.addAll(yDTO);
         for (YachtDTO y:searchYachts) {
-            if(y.getName().contains(searchYacht)) {
+            if(y.getName().toLowerCase().contains(searchYacht) ||y.getName().toUpperCase().contains(searchYacht)) {
                 answerYacht.add(y);
             }
         }

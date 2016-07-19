@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<h1 align="center">Wolrld of WHISKEY</h1>
+<h1 align="center">Searching</h1>
 <p/>
 <p/>
 <table align="center" border="1">
@@ -57,20 +57,18 @@
         <td align="center" th:text="${answerSearch.quantityWhisky}">Quantity</td>
         <td align="center" th:text="${answerSearch.price}">Price</td>
 
-        <!--<form action="buySelectedWhisky" method="post">-->
-        <td align="center">
+        <form action="buySelectedWhisky" method="post">
+            <td align="center">
 
-            <input type="hidden" name="nameBuyWhiskey" id="nameBuyWhiskey"
+                <input type="hidden" name="nameBuyWhiskey" id="nameBuyWhiskey"
                        th:value="${answerSearch.id}"/>
                 <input type="submit" class="buttons" name="buttonBuyWhiskey" style="width: 60px" value="Buy"/>
-        </td>
-        <!--</form>-->
+            </td>
+        </form>
 
     </tr>
     <tr th:each="viewSelectedYacht : ${viewSelectedYacht}">
-        <td align="center">
-            <input type="checkbox" name="selectYachtForChange" th:attr="id=${viewSelectedYacht.idYacht}"/>
-        </td>
+
         <td>
             <!--<a href="buyYachts?selectionYacht=${viewSelectedYacht.name}">-->
             <!--<a href="" onclick="buyYachtFromImg()">-->
