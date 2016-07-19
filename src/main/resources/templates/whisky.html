@@ -16,7 +16,9 @@
     <tr>
 
         <td colspan="4" align="right">
-            <input type="search" name="searchWhisky" id="searchWhisky" placeholder="Search" class="buttons"/>
+            <form action="searchOnTheSite" method="post">
+            <input type="search" name="searchRequest" id="searchRequest" placeholder="Search" class="buttons"/>
+            </form>
         </td>
         <td colspan="3" align="center">
             <div align="right" sec:authorize="hasAuthority('admin')">

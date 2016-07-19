@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link href="css/back.css" rel="stylesheet"/>
+    <script src="js/jquery-1.12.3.min.js" ></script>
+    <script src="js/whisky.js"></script>
+</head>
+<body>
+
+<h1 align="center">Wolrld of WHISKEY</h1>
+<p/>
+<p/>
+<table align="center" border="1">
+
+    <tr>
+
+        <td colspan="4" align="right">
+            <form action="searchOnTheSite" method="post">
+            <input type="search" name="searchRequest" id="searchRequest" placeholder="Search" class="buttons"/>
+            </form>
+        </td>
+        <td colspan="3" align="center">
+            <div align="right" sec:authorize="hasAuthority('admin')">
+                I am an admin
+            </div>
+            <div align="right" sec:authorize="hasAuthority('user')">
+                I am a user
+            </div>
+
+        </td>
+    </tr>
+    <tr>
+        <td align="center" width="100">Photo</td>
+        <td align="center" width="100">Name</td>
+        <td align="center" width="100">Describe</td>
+        <td align="center" width="100">Available</td>
+        <td align="center" width="100">Price</td>
+        <td align="center" width="100">Buy</td>
+    </tr>
+    <tr th:each="answerSearch : ${answerSearch}">
+        <td align="center">
+            <!--<input type="hidden" th:value="${viewAvailableWhisky.id}" id="imageClick" name="imageClick"/>-->
+
+
+            <!--<a th:href="@{~/buySelectedWhisky(nameBuyWhiskey=${viewAvailableWhisky.id})}"  >-->
+
+                <!--<input type="hidden"  th:value="${answerSearch.id}"/>-->
+
+            <img  th:attr="src=${answerSearch.photo}" id="photoId" width="150" height="250"/>
+                <!--onclick="imageClick()"-->
+            <!--</a>-->
+
+            </td>
+        <td align="center" th:text="${answerSearch.nameWhisky}">Name</td>
+        <td align="center" th:text="${answerSearch.describeWhisky}">Describe</td>
+        <td align="center" th:text="${answerSearch.quantityWhisky}">Quantity</td>
+        <td align="center" th:text="${answerSearch.price}">Price</td>
+
+        <!--<form action="buySelectedWhisky" method="post">-->
+        <td align="center">
+
+            <input type="hidden" name="nameBuyWhiskey" id="nameBuyWhiskey"
+                       th:value="${answerSearch.id}"/>
+                <input type="submit" class="buttons" name="buttonBuyWhiskey" style="width: 60px" value="Buy"/>
+        </td>
+        <!--</form>-->
+
+    </tr>
+    <tr th:each="viewSelectedYacht : ${viewSelectedYacht}">
+        <td align="center">
+            <input type="checkbox" name="selectYachtForChange" th:attr="id=${viewSelectedYacht.idYacht}"/>
+        </td>
+        <td>
+            <!--<a href="buyYachts?selectionYacht=${viewSelectedYacht.name}">-->
+            <!--<a href="" onclick="buyYachtFromImg()">-->
+            <form action="buyYachts"  method="post" >
+                <!--<input type="hidden" id="hiddenYachtImg" name="hiddenYachtImg" th:value="${viewSelectedYacht.name}" />-->
+                <button id="hiddenYachtImg" name="hiddenYachtName" th:value="${viewSelectedYacht.idYacht}">
+                    <img th:attr="src=${viewSelectedYacht.photo}"  width="400" height="280"/>
+                </button>
+                <!--</a>-->
+            </form>
+        </td>
+        <td width="100" th:text="${viewSelectedYacht.name}">Name</td>
+        <td width="100" th:text="${viewSelectedYacht.descriptions}">Name</td>
+
+        <td align="center" width="100" th:text="${viewSelectedYacht.number}">
+
+            <!--&lt;!&ndash;озн, что *{moduleAtributeQuantity} присоединяется к  baySuccessfulCars&ndash;&gt;-->
+            <!--<input type="number" id="quantityYachts" nameYachts="quantityYachts" class="buttons" min="1"-->
+            <!--th:attr="max=${viewSelectedYacht.quantity}"-->
+            <!--style="text-align: center"  width="100" />-->
+        </td>
+        <td th:text="${viewSelectedYacht.price}">Name</td>
+        <form action="buyYachts" th:object = "${baySuccessfulYachts}" method="post" >
+            <td align="Center" width="80">
+                <input type="hidden" id="hiddenYachtName" name="hiddenYachtName" th:value="${viewSelectedYacht.idYacht}" />
+                <input class="buttons" type="submit" th:attr="id=${viewSelectedYacht.idYacht}" style="width: 60px" value="buy"/>
+
+            </td>
+        </form>
+    </tr>
+</table>
+
+</body>
+</html>

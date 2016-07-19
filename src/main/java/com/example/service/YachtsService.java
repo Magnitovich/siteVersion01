@@ -26,7 +26,7 @@ public class YachtsService {
         return yachtDTOs;
     }
 
-    private List<YachtDTO> convertListModelToListDTO(List<YachtsModel> yachtsModels) {
+    public List<YachtDTO> convertListModelToListDTO(List<YachtsModel> yachtsModels) {
 
         List<YachtDTO> yachtDTOs = new ArrayList<>();
         for (YachtsModel add:yachtsModels) {
