@@ -17,7 +17,7 @@
 
         <td colspan="4" align="right">
             <form action="searchOnTheSite" method="post">
-            <input type="search" name="searchRequest" id="searchRequest" placeholder="Search" class="buttons"/>
+            <input type="search" name="searchRequest"  autocomplete="off" id="searchRequest" placeholder="Search" class="buttons"/>
             </form>
         </td>
         <td colspan="3" align="center">
@@ -82,6 +82,33 @@
                 <input type="hidden" id="hiddenYachtName" name="hiddenYachtName" th:value="${viewSelectedYacht.idYacht}" />
                 <input class="buttons" type="submit" th:attr="id=${viewSelectedYacht.idYacht}" style="width: 60px" value="buy"/>
 
+            </td>
+        </form>
+    </tr>
+
+    <tr th:each="cars : ${namesCars}">
+
+        <td>
+            <a th:href="@{~/bayCars(nameCarsHidden=${cars.idCar})}"  >
+
+                <input type="hidden"  th:value="${cars.idCar}"/>
+
+                <img th:attr="src=${cars.photo}" width="400" height="280"/>
+            </a>
+
+        </td>
+        <td width="100" th:text="${cars.name}">Name</td>
+        <td width="100" th:text="${cars.descriptions}">Describe</td>
+
+        <td align="center"  width="100" th:text="${cars.quantity}">Quantity</td>
+
+        <td align="center" width="100" th:text="${cars.price}">Price</td>
+
+        <form action="bayCars"  method="post" >
+            <td align="center" width="80">
+
+                <input type="hidden" id="nameCarsHidden" name="nameCarsHidden" th:value="${cars.idCar}" />
+                <input type="submit" class="buttons" name="useCar"  style="width: 60px" value="buy"/>
             </td>
         </form>
     </tr>

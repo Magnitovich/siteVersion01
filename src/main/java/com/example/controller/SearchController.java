@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.model.CarsDTO;
 import com.example.model.WhiskyDTO;
 import com.example.model.YachtDTO;
 import com.example.service.SearchService;
@@ -24,11 +25,13 @@ public class SearchController {
         System.out.println("We searching: " + findSearchRequest);
 
 //        Iterable<WhiskyDTO> list = whiskyService.seeAllWhisky();
-        List<WhiskyDTO> listWhisky = searchService.serchInWhisky(findSearchRequest);
+        List<WhiskyDTO> listWhisky = searchService.searchInWhisky(findSearchRequest);
         List<YachtDTO> yachtDTOList = searchService.searchInYachts(findSearchRequest);
+        List<CarsDTO> carDTOList = searchService.searchInCar(findSearchRequest);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("answerSearch", listWhisky);
         modelAndView.addObject("viewSelectedYacht", yachtDTOList);
+        modelAndView.addObject("namesCars", carDTOList);
         modelAndView.setViewName("answerOnSearch");
         return modelAndView;
     }

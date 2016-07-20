@@ -1,11 +1,9 @@
 package com.example.service;
 
+import com.example.dao.CarsRepository;
 import com.example.dao.WhiskyRepository;
 import com.example.dao.YachtRepository;
-import com.example.model.WhiskeyModel;
-import com.example.model.WhiskyDTO;
-import com.example.model.YachtDTO;
-import com.example.model.YachtsModel;
+import com.example.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +23,15 @@ public class SearchService {
     @Autowired
     YachtsService yachtService;
 
+    @Autowired
+    CarsRepository carsRepository;
+    @Autowired
+    CarsService carsService;
+
     List<WhiskyDTO> answer = new ArrayList<>();
     List<YachtDTO> answerYacht = new ArrayList<>();
+    List<CarsDTO> answerCar = new ArrayList<>();
+
 
 //    public List<WhiskyDTO> serchInWhisky(String search) {
 //
@@ -46,7 +51,7 @@ public class SearchService {
 //        }
 //        return answer;
 
-        public List<WhiskyDTO> serchInWhisky(String search) {
+        public List<WhiskyDTO> searchInWhisky(String search) {
 
             answer.clear();
             List<WhiskeyModel> allWhisky = whiskyRepository.findAllWhisky();
@@ -73,5 +78,19 @@ public class SearchService {
         }
 
         return answerYacht;
+    }
+    public List<CarsDTO> searchInCar(String search) {
+
+        answerCar.clear();
+        List<CarsModel> allCar = carsRepository.findAllCars();
+        List<CarsDTO> carsDTOs = carsService.convertListModelToLIstDTO(allCar);
+        List<CarsDTO> searchCar = new ArrayList<>();
+        searchCar.addAll(carsDTOs);
+        for (CarsDTO w : searchCar) {
+            if (w.getName().toLowerCase().contains(search) ||w.getName().toUpperCase().contains(search)) {
+                answerCar.add(w);
+            }
+        }
+        return answerCar;
     }
 }
