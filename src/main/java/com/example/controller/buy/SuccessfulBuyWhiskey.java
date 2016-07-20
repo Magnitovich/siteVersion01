@@ -24,9 +24,11 @@ public class SuccessfulBuyWhiskey {
     private WhiskyService whiskyService;
 
     @RequestMapping(value = "buySuccessfulWhisky", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView view(@RequestParam("nameWhiskey")String name,
-                             @RequestParam("numberOrderWhisky")Integer quantityOrder) {
+    public ModelAndView view(@RequestParam("nameSelectedWhisky")String name,
+                             @RequestParam("quantitySelectedWhisky")Integer quantityOrder) {
 
+        System.out.println("Name: = "+name);
+        System.out.println("Quantity: = "+quantityOrder);
         whiskyService.changeInfoInDB(name, quantityOrder);
 
         List<WhiskyDTO> all = whiskyService.seeAllWhisky();

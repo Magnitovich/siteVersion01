@@ -22,10 +22,10 @@
         </td>
         <td colspan="3" align="center">
             <div align="right" sec:authorize="hasAuthority('admin')">
-                I am an admin
+               Answer for   <span th:text="${#authentication.name}"/> WOW you Admin
             </div>
             <div align="right" sec:authorize="hasAuthority('user')">
-                I am a user
+                Answer for   <span th:text="${#authentication.name}"/>
             </div>
 
         </td>
@@ -40,16 +40,9 @@
     </tr>
     <tr th:each="answerSearch : ${answerSearch}">
         <td align="center">
-            <!--<input type="hidden" th:value="${viewAvailableWhisky.id}" id="imageClick" name="imageClick"/>-->
 
-
-            <!--<a th:href="@{~/buySelectedWhisky(nameBuyWhiskey=${viewAvailableWhisky.id})}"  >-->
-
-                <!--<input type="hidden"  th:value="${answerSearch.id}"/>-->
 
             <img  th:attr="src=${answerSearch.photo}" id="photoId" width="150" height="250"/>
-                <!--onclick="imageClick()"-->
-            <!--</a>-->
 
             </td>
         <td align="center" th:text="${answerSearch.nameWhisky}">Name</td>
@@ -70,14 +63,11 @@
     <tr th:each="viewSelectedYacht : ${viewSelectedYacht}">
 
         <td>
-            <!--<a href="buyYachts?selectionYacht=${viewSelectedYacht.name}">-->
-            <!--<a href="" onclick="buyYachtFromImg()">-->
+
             <form action="buyYachts"  method="post" >
-                <!--<input type="hidden" id="hiddenYachtImg" name="hiddenYachtImg" th:value="${viewSelectedYacht.name}" />-->
                 <button id="hiddenYachtImg" name="hiddenYachtName" th:value="${viewSelectedYacht.idYacht}">
                     <img th:attr="src=${viewSelectedYacht.photo}"  width="400" height="280"/>
                 </button>
-                <!--</a>-->
             </form>
         </td>
         <td width="100" th:text="${viewSelectedYacht.name}">Name</td>
@@ -85,10 +75,6 @@
 
         <td align="center" width="100" th:text="${viewSelectedYacht.number}">
 
-            <!--&lt;!&ndash;озн, что *{moduleAtributeQuantity} присоединяется к  baySuccessfulCars&ndash;&gt;-->
-            <!--<input type="number" id="quantityYachts" nameYachts="quantityYachts" class="buttons" min="1"-->
-            <!--th:attr="max=${viewSelectedYacht.quantity}"-->
-            <!--style="text-align: center"  width="100" />-->
         </td>
         <td th:text="${viewSelectedYacht.price}">Name</td>
         <form action="buyYachts" th:object = "${baySuccessfulYachts}" method="post" >

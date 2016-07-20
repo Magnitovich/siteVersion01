@@ -61,9 +61,9 @@ function showLogin() {
 
 function submitSignupShowError() {
 
-    var nickName = $("#NickName");
-    var password = $("#signUpPassword");
-    var email =document.getElementById("Email");
+    //var nickName = $("#NickName");
+    //var password = $("#signUpPassword");
+    //var email =document.getElementById("Email");
 
     $("#emailError").hide();
     $("#nickError").hide();

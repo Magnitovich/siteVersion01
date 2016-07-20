@@ -22,10 +22,10 @@
         </td>
         <td colspan="3" align="center">
             <div align="right" sec:authorize="hasAuthority('admin')">
-                I am an admin
+                Hello <span th:text="${#authentication.name}"/> you are admin
             </div>
             <div align="right" sec:authorize="hasAuthority('user')">
-                I am a user
+                Hello <span th:text="${#authentication.name}"/> you are user
             </div>
             <!--<form>-->
             <input type="submit" style="width: 60px" name="addWhisky" id="addWhisky"

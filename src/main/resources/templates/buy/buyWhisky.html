@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8"/>
     <link href="css/back.css" rel="stylesheet"/>
+    <script src="js/whisky.js"></script>
+    <script src="js/jquery-1.12.3.min.js" ></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <link href="js/jquery-ui.min.css" rel="stylesheet"/>
 </head>
 <body>
 <h1 align="center">You selected this WHISKEY</h1>
@@ -16,25 +20,31 @@
         <td align="center" width="100">Available</td>
         <td align="center" width="100">Price</td>
         <td align="center" width="100">Buy</td>
-    </tr><form action="buySuccessfulWhisky" method="post">
+    </tr>
+    <!--<form action="buySuccessfulWhisky" method="post">-->
+    <form id="buySelectedWhiskyThroughJavaScript" method="post">
+
     <tr th:each="buySelectedWhisky : ${buySelectedWhisky}">
         <td align="center">
-            <img th:attr="src=${buySelectedWhisky.photo}" width="150" height="250"/>
-            Photo</td>
+            <img th:attr="src=${buySelectedWhisky.photo}" width="150" height="250"/>Photo</td>
+
         <td align="center" th:text="${buySelectedWhisky.nameWhisky}">Name</td>
+
         <td align="center" th:text="${buySelectedWhisky.describeWhisky}">Describe</td>
+
         <td align="center" width="100">
             <input type="number" style="width: 100px" min="1" th:attr="max=${buySelectedWhisky.quantityWhisky}"
-       placeholder="Enter quantity" name="numberOrderWhisky" /></td>
-        <!--<td align="center" th:text="${viewAvailableWhisky.quantityWhisky}">Quantity</td>-->
+       placeholder="Enter quantity" name="numberOrderWhisky" id="numberOrderWhisky"/>
+        </td>
+
         <td align="center" th:text="${buySelectedWhisky.price}">Price</td>
 
-
         <td align="center">
-                <input type="hidden" name="nameWhiskey" th:value="${buySelectedWhisky.nameWhisky}"/>
-                <input type="hidden" name="quantityWhiskeyInDB" th:value="${buySelectedWhisky.quantityWhisky}"/>
-                <input type="submit" class="buttons" name="buttonBuyWhiskey" style="width: 60px" value="Buy"/> </td>
-    </tr>            </form>
+                <input type="hidden" name="nameWhiskey" id="nameWhiskey" th:value="${buySelectedWhisky.nameWhisky}"/>
+                <!--<input type="hidden" name="quantityWhiskeyInDB" id="quantityWhiskeyInDB" th:value="${buySelectedWhisky.quantityWhisky}"/>-->
+                <input type="button" class="buttons" onclick="buyFromJS()" name="buttonBuyWhiskey" style="width: 60px" value="Buy"/> </td>
+    </tr>
+    </form>
 
 </table>
 

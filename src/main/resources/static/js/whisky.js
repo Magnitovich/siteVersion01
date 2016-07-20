@@ -39,6 +39,35 @@ function editInfoWhisky() {
       window.location.href = "addNewWhisky?id=" + listCheckdWhisky[0].id;        }
 
 }
+function buyFromJS() {
+
+    $.getJSON("buySuccessfulWhisky",
+        {
+            nameSelectedWhisky:$('#nameWhiskey').val(),
+            quantitySelectedWhisky:$('#numberOrderWhisky').val()
+        }
+
+   );
+    window.location.href = "warehouseWhisky";
+
+   }
+
+    //$.ajax({   //тип запроса
+    //    headers: {
+    //        "Accept": "application/json",
+    //        "Content-Type": "application/json"
+    //    },
+    //    type: "POST", //это типа method
+    //
+    //    url: '/buySuccessfulWhisky?' + $("#buySelectedWhiskyThroughJavaScript").serialize(),
+    //    success: function (msg) {  //msg - показывает ответ с сервера
+    //        window.location.href = "buySuccessfulWhisky";
+    //    }
+    //})
+//}
+
+
+
 
 function imageClick() {
 
