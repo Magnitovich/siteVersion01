@@ -74,8 +74,7 @@ function editInfoWhisky() {
 //}
 function buyFromJS() {
 
-    //$("#buySelectedWhiskyThroughJavaScript").leanModal();
-    //$("#buySelectedWhiskyThroughJavaScript").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
+
 sendBuyWhiskyInJava();
 }
 
