@@ -39,38 +39,65 @@ function editInfoWhisky() {
       window.location.href = "addNewWhisky?id=" + listCheckdWhisky[0].id;        }
 
 }
+//function buyFromJS() {
+    //
+    // $.getJSON("buySuccessfulWhisky",
+    //     {
+    //         nameSelectedWhisky:$('#nameWhiskey').val(),
+    //         quantitySelectedWhisky:$('#numberOrderWhisky').val()
+    //     },
+    //     function() {
+    //         window.location.href = "warehouseWhisky";
+    //         //window.location.href=$('#warehouseWhisky');
+    //     }   );
+    //}
+
+    //var nameSelectedWhisky = $('#nameWhiskey').val();
+    //var quantitySelectedWhisky = $('#numberOrderWhisky').val();
+    //$.ajax({   //тип запроса
+    //    headers: {
+    //        "Accept": "application/json",
+    //        "Content-Type": "application/json"
+    //    },
+    //    type: "POST", //это типа method
+    //    data: JSON.stringify(nameSelectedWhisky.id, quantitySelectedWhisky.id),
+    //
+    //    url: '/buySuccessfulWhisky',
+    //    success: function (msg) {  //msg - показывает ответ с сервера
+    //        window.location.href = "warehouseWhisky";
+    //    },
+    //    error:function(){
+    //        alert("ERROR");
+    //    }
+    //})
+//}
+//}
 function buyFromJS() {
-   //
-   // $.getJSON("buySuccessfulWhisky",
-   //     {
-   //         nameSelectedWhisky:$('#nameWhiskey').val(),
-   //         quantitySelectedWhisky:$('#numberOrderWhisky').val()
-   //     },
-   //     function() {
-   //         window.location.href = "warehouseWhisky";
-   //         //window.location.href=$('#warehouseWhisky');
-   //     }   );
-   //}
 
-    var nameSelectedWhisky = $('#nameWhiskey').val();
-    var quantitySelectedWhisky = $('#numberOrderWhisky').val();
-    $.ajax({   //тип запроса
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        },
-        type: "POST", //это типа method
-        data: JSON.stringify(nameSelectedWhisky.id, quantitySelectedWhisky.id),
+    //$("#buySelectedWhiskyThroughJavaScript").leanModal();
+    //$("#buySelectedWhiskyThroughJavaScript").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
+sendBuyWhiskyInJava();
+}
 
-        url: '/buySuccessfulWhisky',
-        success: function (msg) {  //msg - показывает ответ с сервера
-            window.location.href = "warehouseWhisky";
+  function sendBuyWhiskyInJava(){
+        $('#buySelectedWhiskyThroughJavaScript').submit(function(e){
+            e.preventDefault();
+
+            $.ajax({   //тип запроса
+                type: "POST", //это типа method
+                url: '/buySuccessfulWhisky',
+                data: {
+                    nameSelectedWhisky: $("#nameWhiskey").val(),
+                quantitySelectedWhisky: $("#numberOrderWhisky").val()
         },
-        error:function(){
-            alert("ERROR");
-        }
+                success: function(data) {  //msg - показывает ответ с сервера
+                    window.location.href = "warehouseWhisky";
+                    console.log(data)
+                }
+        })
     })
 }
+
 
 
 

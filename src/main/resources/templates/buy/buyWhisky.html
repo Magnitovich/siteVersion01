@@ -7,6 +7,7 @@
     <script src="js/jquery-1.12.3.min.js" ></script>
     <script src="js/jquery-ui.min.js"></script>
     <link href="js/jquery-ui.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="js/jquery.leanModal.min.js"></script>
 </head>
 <body>
 <h1 align="center">You selected this WHISKEY</h1>
@@ -42,7 +43,7 @@
         <td align="center">
                 <input type="hidden" name="nameWhiskey" id="nameWhiskey" th:value="${buySelectedWhisky.nameWhisky}"/>
                 <!--<input type="hidden" name="quantityWhiskeyInDB" id="quantityWhiskeyInDB" th:value="${buySelectedWhisky.quantityWhisky}"/>-->
-                <input type="button" class="buttons" onclick="buyFromJS()" name="buttonBuyWhiskey" style="width: 60px" value="Buy"/> </td>
+                <input type="submit" class="buttons" onclick="buyFromJS()" name="buttonBuyWhiskey" style="width: 60px" value="Buy"/> </td>
     </tr>
     </form>
 
