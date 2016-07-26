@@ -21,7 +21,11 @@
     background: #000;
     display: none;
 }
-
+.verticalLine {
+    border-left: 2px solid #ccc; /* Параметры линии */
+    margin-left: 20px; /* Отступ слева */
+    padding-left: 10px; /* Расстояние от линии до текста */
+}
 
 .backRegistration
 {

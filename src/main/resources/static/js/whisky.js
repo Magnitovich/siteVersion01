@@ -72,8 +72,31 @@ function editInfoWhisky() {
     //})
 //}
 //}
-function buyFromJS() {
+function modalityWindowNew(){
 
+    dialog = $('#go').dialog({
+        autoOpen: false,
+        //height: 'auto',
+        //width: 'auto',
+        modal: true,
+        dialogClass: 'no-close success-dialog',
+        //target: $('#go'),
+        //toggle: $('modal')
+    });
+    //openModality.open();
+    $('#buttonBuyWhiskey').button().on( "click", function() {
+        dialog.dialog("open");
+    });
+    sendBuyWhiskyInJava();
+}
+
+
+function buyFromJS() {
+    //var newWin = $('#go').open();
+    //newWin.document.open();
+    //newWin.document.writeln('Динамический контент.');
+    //newWin.document.write('<div>Как-то так.</div>');
+    //newWin.document.close();
 
 sendBuyWhiskyInJava();
 }
