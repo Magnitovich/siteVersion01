@@ -51,26 +51,6 @@ function editInfoWhisky() {
     //         //window.location.href=$('#warehouseWhisky');
     //     }   );
     //}
-
-    //var nameSelectedWhisky = $('#nameWhiskey').val();
-    //var quantitySelectedWhisky = $('#numberOrderWhisky').val();
-    //$.ajax({   //тип запроса
-    //    headers: {
-    //        "Accept": "application/json",
-    //        "Content-Type": "application/json"
-    //    },
-    //    type: "POST", //это типа method
-    //    data: JSON.stringify(nameSelectedWhisky.id, quantitySelectedWhisky.id),
-    //
-    //    url: '/buySuccessfulWhisky',
-    //    success: function (msg) {  //msg - показывает ответ с сервера
-    //        window.location.href = "warehouseWhisky";
-    //    },
-    //    error:function(){
-    //        alert("ERROR");
-    //    }
-    //})
-//}
 //}
 function modalityWindowNew(){
 
@@ -89,37 +69,84 @@ function modalityWindowNew(){
     });
     sendBuyWhiskyInJava();
 }
-
-
-function buyFromJS() {
-    //var newWin = $('#go').open();
-    //newWin.document.open();
-    //newWin.document.writeln('Динамический контент.');
-    //newWin.document.write('<div>Как-то так.</div>');
-    //newWin.document.close();
-
-sendBuyWhiskyInJava();
-}
-
-  function sendBuyWhiskyInJava(){
-        $('#buySelectedWhiskyThroughJavaScript').submit(function(e){
-            e.preventDefault();
-
-            $.ajax({   //тип запроса
-                type: "POST", //это типа method
-                url: '/buySuccessfulWhisky',
-                data: {
-                    nameSelectedWhisky: $("#nameWhiskey").val(),
-                quantitySelectedWhisky: $("#numberOrderWhisky").val()
-        },
-                success: function(data) {  //msg - показывает ответ с сервера
-                    window.location.href = "warehouseWhisky";
-                    console.log(data)
-                }
-        })
-    })
-}
-
+//var cartWhisky = [];
+//var itemCart = function(photo, name, describe, quantity, price){
+//    this.photo=photo;
+//    this.name=name;
+//    this.describe=describe;
+//    this.quantity=quantity;
+//    this.price=price;
+//};
+//
+//function buyFromJS() {
+//    //var newWin = $('#go').open();
+//    //newWin.document.open();
+//    //newWin.document.writeln('Динамический контент.');
+//    //newWin.document.write('<div>Как-то так.</div>');
+//    //newWin.document.close();
+//
+//
+//    var photo = $("#photoId").val();
+//    var name = $("#nameWhiskey").val();
+//    var describe = $("#describeID").val();
+//    var quantity= Number($("#numberOrderWhisky").val());
+//    var quantityInDB= Number($("#quantityWhiskeyInDB").val());
+//    var price = $("#priceID").val();
+// //console.log("price: "+price);
+// //console.log("quantity: "+quantity);
+// //console.log("quantityDB: "+quantityInDB);
+//
+//    if (quantity<=quantityInDB) {
+//        loadCart();
+//        console.log(cartWhisky)
+//    var item = new itemCart(photo, name, describe, quantity, price);
+//    cartWhisky.push(item);
+//    saveCart();
+//    sendBuyWhiskyInJava();
+//    }
+//    else if (quantity>quantityInDB && quantity<0) {
+//    clearCart()
+//    }
+//}
+////clear
+//function clearCart() {
+//    cartWhisky = [];
+//    saveCart();
+//}
+////SaveCart()
+//function saveCart(){
+//    //JSON.parse – читает объекты из строки в формате JSON.
+//    //JSON.stringify – превращает объекты в строку в формате JSON, используется, когда нужно из JavaScript передать данные по сети.
+//
+//    localStorage.setItem("shoppingCart", JSON.stringify(cartWhisky));
+//}
+//
+////loadCart()
+//function loadCart(){
+//    cartWhisky = JSON.parse(localStorage.getItem("shoppingCart"));
+//}
+//
+//
+//
+//  function sendBuyWhiskyInJava(){
+//        $('#buySelectedWhiskyThroughJavaScript').submit(function(e){
+//            e.preventDefault();
+//
+//            $.ajax({   //тип запроса
+//                type: "POST", //это типа method
+//                url: '/buySuccessfulWhisky',
+//                data: {
+//                    nameSelectedWhisky: $("#nameWhiskey").val(),
+//                quantitySelectedWhisky: $("#numberOrderWhisky").val()
+//        },
+//                success: function(data) {  //msg - показывает ответ с сервера
+//                    window.location.href = "warehouseWhisky";
+//                    console.log(data)
+//                }
+//        })
+//    })
+//}
+//
 
 
 

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <script src="js/whisky.js"></script>
+    <script src="js/shoppingCart.js"></script>
     <script src="js/jquery-1.12.3.min.js" ></script>
     <script src="js/jquery-ui.min.js"></script>
     <link href="js/jquery-ui.min.css" rel="stylesheet"/>
@@ -25,8 +26,9 @@
 </head>
 <body>
 <h1 align="center">You selected this WHISKEY</h1>
-<p/>
-<p/>
+<p align="center">
+<button class="button" id="whiskyCart" onclick="cartOpen()" value="Cart">Cart</button>
+</p>
 <table align="center" border="1">
     <tr>
         <td align="center" width="100">Photo</td>
@@ -37,28 +39,34 @@
         <td align="center" width="100">Buy</td>
     </tr>
     <!--<form action="buySuccessfulWhisky" method="post">-->
-    <form id="buySelectedWhiskyThroughJavaScript" method="post">
+    <!--<form id="buySelectedWhiskyThroughJavaScript" method="post">-->
 
     <tr th:each="buySelectedWhisky : ${buySelectedWhisky}">
         <td align="center">
-            <img th:attr="src=${buySelectedWhisky.photo}" width="150" height="250"/>Photo</td>
+            <img th:attr="src=${buySelectedWhisky.photo}" id="photoImg" width="150" height="250"/>Photo</td>
 
         <td align="center" th:text="${buySelectedWhisky.nameWhisky}">Name</td>
 
         <td align="center" th:text="${buySelectedWhisky.describeWhisky}">Describe</td>
+        <input type="hidden" name="quantityWhiskeyInDB" id="describeID" th:value="${buySelectedWhisky.describeWhisky}"/>
 
-        <td align="center" width="100">
-            <input type="number" style="width: 100px" min="1" th:attr="max=${buySelectedWhisky.quantityWhisky}"
-       placeholder="Enter quantity" name="numberOrderWhisky" />
+        <td align="center" th:text="${buySelectedWhisky.quantityWhisky}">
+            <!--<input type="number" style="width: 100px" min="1" th:attr="max=${buySelectedWhisky.quantityWhisky}"-->
+       <!--placeholder="Enter quantity" name="numberOrderWhisky"  />-->
+
         </td>
 
-        <td align="center" th:text="${buySelectedWhisky.price}">Price</td>
+        <td align="center" th:text="${buySelectedWhisky.price}">
+
+            Price</td>
 
         <td align="center">
 
                 <input type="hidden" name="nameWhiskey" id="nameWhiskey" th:value="${buySelectedWhisky.nameWhisky}"/>
-                <!--<input type="hidden" name="quantityWhiskeyInDB" id="quantityWhiskeyInDB" th:value="${buySelectedWhisky.quantityWhisky}"/>-->
-                <input type="button" class="buttons"  data-toggle="modal" data-target="#go" style="width: 60px" value="Buy"/>
+                <input type="hidden" name="quantityWhiskeyInDB" id="quantityWhiskeyInDB" th:value="${buySelectedWhisky.quantityWhisky}"/>
+                <input type="hidden" name="photoId" id="photoId" th:value="${buySelectedWhisky.photo}"/>
+            <input type="hidden" name="priceID" id="priceID" th:value="${buySelectedWhisky.price}"/>
+            <input type="button" class="buttons"  data-toggle="modal" data-target="#go" style="width: 60px" value="Buy"/>
 
 
             <div class="modal fade" tabindex="-1" role="dialog" id="go">
@@ -116,7 +124,7 @@
 
         </td>
     </tr>
-    </form>
+    <!--</form>-->
 
 </table>
 
