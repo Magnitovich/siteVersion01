@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link href="css/back.css" rel="stylesheet"/>
+    <script src="js/jquery-1.12.3.min.js" ></script>
+    <script src="js/whisky.js"></script>
+    <script src="js/oldWorkVariant/shoppingCartThreeTables.js"></script>
+
+</head>
+<body>
+
+<h1 align="center">Shopping cart</h1>
+<p>
+<h2 align="center">You order:</h2>
+
+</p>
+<table align="center" id="tblWhisky">
+    <thead>
+    <tr>
+
+        <td colspan="3" align="right">
+            <div align="right" sec:authorize="hasAuthority('admin')">
+                Answer for   <span th:text="${#authentication.name}"/> WOW you Admin
+            </div>
+            <div align="right" sec:authorize="hasAuthority('user')">
+                Answer for   <span th:text="${#authentication.name}"/>
+            </div>
+
+        </td>
+    </tr>
+    <tr>
+        <td align="center" width="50">Photo</td>
+        <td align="center" width="100">Name</td>
+        <td align="center" width="100">Describe</td>
+        <td align="center" width="50">Available</td>
+        <td align="center" width="50">Price</td>
+        <td align="center" width="50">Total</td>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<table align="center" border="1">
+
+
+    <tr>
+        <td align="center" width="100">Photo</td>
+        <td align="center" width="100">Name</td>
+        <td align="center" width="100">Describe</td>
+        <td align="center" width="100">Available</td>
+        <td align="center" width="100">Price</td>
+        <td align="center" width="100">Buy</td>
+    </tr>
+    <tr>
+        <td><div id="photoWhisky"></div></td>
+        <td><div id="nameWhisky"></div></td>
+        <td><div id="describeWhisky"></div></td>
+        <td><div id="quantityWhisky"></div></td>
+        <td><div id="priceWhisky"></div></td>
+
+
+    </tr>
+
+
+</table>
+<div>
+    <ul id="showCart">
+
+        <!---->
+    </ul>
+    <div>Total in cart: $ <span  id="totalCart"/></div>
+</div>
+</body>
+</html>

@@ -6,6 +6,7 @@
     <script src="js/jquery-1.12.3.min.js" ></script>
     <script src="js/whisky.js"></script>
     <script src="js/shoppingCart.js"></script>
+
 </head>
 <body>
 
@@ -14,18 +15,13 @@
 <h2 align="center">You order:</h2>
 
 </p>
-<table align="center" border="1">
-
+<table align="center" id="tblWhisky">
+    <thead>
     <tr>
 
-        <td colspan="4" align="right">
-            <form action="searchOnTheSite" method="post">
-            <input type="search" name="searchRequest"  autocomplete="off" id="searchRequest" placeholder="Search" class="buttons"/>
-            </form>
-        </td>
-        <td colspan="3" align="center">
+        <td colspan="3" align="right">
             <div align="right" sec:authorize="hasAuthority('admin')">
-               Answer for   <span th:text="${#authentication.name}"/> WOW you Admin
+                Answer for   <span th:text="${#authentication.name}"/> WOW you Admin
             </div>
             <div align="right" sec:authorize="hasAuthority('user')">
                 Answer for   <span th:text="${#authentication.name}"/>
@@ -34,104 +30,45 @@
         </td>
     </tr>
     <tr>
-        <td align="center" width="100">Photo</td>
+        <td align="center" width="50">Photo</td>
         <td align="center" width="100">Name</td>
         <td align="center" width="100">Describe</td>
-        <td align="center" width="100">Available</td>
-        <td align="center" width="100">Price</td>
-        <td align="center" width="100">Buy</td>
+        <td align="center" width="70">Available</td>
+        <td align="left" width="70">Price</td>
+        <td align="left" width="70">Total</td>
     </tr>
-    <tr>
-        <td><div id="photoWhisky"></div></td>
-        <td><div id="nameWhisky"></div></td>
-        <td><div id="describeWhisky"></div></td>
-        <td><div id="quantityWhisky"></div></td>
-        <td><div id="priceWhisky"></div></td>
-
-
-    </tr>
-    <!--<tr th:each="answerSearch : ${answerSearch}">-->
-        <!--<td align="center">-->
-
-
-            <!--<img  th:attr="src=${answerSearch.photo}" id="photoId" width="150" height="250"/>-->
-
-            <!--</td>-->
-        <!--<td align="center" th:text="${answerSearch.nameWhisky}">Name</td>-->
-        <!--<td align="center" th:text="${answerSearch.describeWhisky}">Describe</td>-->
-        <!--<td align="center" th:text="${answerSearch.quantityWhisky}">Quantity</td>-->
-        <!--<td align="center" th:text="${answerSearch.price}">Price</td>-->
-
-        <!--<form action="buySelectedWhisky" method="post">-->
-            <!--<td align="center">-->
-
-                <!--<input type="hidden" name="nameBuyWhiskey" id="nameBuyWhiskey"-->
-                       <!--th:value="${answerSearch.id}"/>-->
-                <!--<input type="submit" class="buttons" name="buttonBuyWhiskey" style="width: 60px" value="Buy"/>-->
-            <!--</td>-->
-        <!--</form>-->
-
-    <!--</tr>-->
-    <!--<tr th:each="viewSelectedYacht : ${viewSelectedYacht}">-->
-
-        <!--<td>-->
-
-            <!--<form action="buyYachts"  method="post" >-->
-                <!--<button id="hiddenYachtImg" name="hiddenYachtName" th:value="${viewSelectedYacht.idYacht}">-->
-                    <!--&lt;!&ndash;<img th:attr="src=${viewSelectedYacht.photo}"  width="400" height="280"/>&ndash;&gt;-->
-                <!--</button>-->
-            <!--</form>-->
-        <!--</td>-->
-        <!--<td width="100" th:text="${viewSelectedYacht.name}">Name</td>-->
-        <!--<td width="100" th:text="${viewSelectedYacht.descriptions}">Name</td>-->
-
-        <!--<td align="center" width="100" th:text="${viewSelectedYacht.number}">-->
-
-        <!--</td>-->
-        <!--<td th:text="${viewSelectedYacht.price}">Name</td>-->
-        <!--<form action="buyYachts" th:object = "${baySuccessfulYachts}" method="post" >-->
-            <!--<td align="Center" width="80">-->
-                <!--<input type="hidden" id="hiddenYachtName" name="hiddenYachtName" th:value="${viewSelectedYacht.idYacht}" />-->
-                <!--<input class="buttons" type="submit" th:attr="id=${viewSelectedYacht.idYacht}" style="width: 60px" value="buy"/>-->
-
-            <!--</td>-->
-        <!--</form>-->
-    <!--</tr>-->
-
-    <!--<tr th:each="cars : ${namesCars}">-->
-
-        <!--<td>-->
-            <!--<a th:href="@{~/bayCars(nameCarsHidden=${cars.idCar})}"  >-->
-
-                <!--<input type="hidden"  th:value="${cars.idCar}"/>-->
-
-                <!--<img th:attr="src=${cars.photo}" width="400" height="280"/>-->
-            <!--</a>-->
-
-        <!--</td>-->
-        <!--<td width="100" th:text="${cars.name}">Name</td>-->
-        <!--<td width="100" th:text="${cars.descriptions}">Describe</td>-->
-
-        <!--<td align="center"  width="100" th:text="${cars.quantity}">Quantity</td>-->
-
-        <!--<td align="center" width="100" th:text="${cars.price}">Price</td>-->
-
-        <!--<form action="bayCars"  method="post" >-->
-            <!--<td align="center" width="80">-->
-
-                <!--<input type="hidden" id="nameCarsHidden" name="nameCarsHidden" th:value="${cars.idCar}" />-->
-                <!--<input type="submit" class="buttons" name="useCar"  style="width: 60px" value="buy"/>-->
-            <!--</td>-->
-        <!--</form>-->
-    <!--</tr>-->
-
+    </thead>
+    <tbody></tbody>
 </table>
-<div>
-    <ul id="showCart">
+<!--<table align="center" border="1">-->
 
-        <!---->
-    </ul>
-    <div>Total in cart: $ <span  id="totalCart"/></div>
-</div>
+
+    <!--<tr>-->
+        <!--<td align="center" width="100">Photo</td>-->
+        <!--<td align="center" width="100">Name</td>-->
+        <!--<td align="center" width="100">Describe</td>-->
+        <!--<td align="center" width="100">Available</td>-->
+        <!--<td align="center" width="100">Price</td>-->
+        <!--<td align="center" width="100">Buy</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+        <!--<td><div id="photoWhisky"></div></td>-->
+        <!--<td><div id="nameWhisky"></div></td>-->
+        <!--<td><div id="describeWhisky"></div></td>-->
+        <!--<td><div id="quantityWhisky"></div></td>-->
+        <!--<td><div id="priceWhisky"></div></td>-->
+
+
+    <!--</tr>-->
+
+
+<!--</table>-->
+<!--<div>-->
+    <!--<ul id="showCart">-->
+
+        <!--&lt;!&ndash;&ndash;&gt;-->
+    <!--</ul>-->
+    <!--<div>Total in cart: $ <span  id="totalCart"/></div>-->
+<!--</div>-->
 </body>
 </html>

@@ -60,9 +60,9 @@ $(document).ready(function() {
         $("#tblWhisky tbody").append('<tr><td><img src="'+cartArrayDIV[i].photo+'" width=35 height=80></td>\
             <td>'+cartArrayDIV[i].name+'</td>\
             <td>'+cartArrayDIV[i].describe+'</td>\
-            <td>'+cartArrayDIV[i].quantity+'<button class="minus" id="minusID" data-name="'+cartArrayDIV[i].name+'">-</button>'+
-            '<button class="minus" id="minusID" data-name="'+cartArrayDIV[i].name+'">+</button>  </td>\
-            <td>'+cartArrayDIV[i].price+'</td></tr>');
+            <td>'+cartArrayDIV[i].quantity+'</td>\
+            <td>'+cartArrayDIV[i].price+'</td>\
+            <td>'+cartArrayDIV[i].total+'</td></tr>');
     }
     //var table ='';
     //var rows = cartArray.length;
