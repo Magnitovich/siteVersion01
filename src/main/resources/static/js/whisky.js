@@ -1,4 +1,8 @@
 
+function cartOpen() {
+    window.location.href = "allCart";
+}
+
 function deleteSelectedElements() {
     var nameWhisky = []; //новый пустой массив
     var i = 0;
