@@ -4,8 +4,10 @@
     <meta charset="UTF-8"/>
     <link href="css/back.css" rel="stylesheet"/>
     <script src="js/jquery-1.12.3.min.js" ></script>
+    <!--<script src="js/jquery-ui.min.js" ></script>-->
     <script src="js/whisky.js"></script>
     <script src="js/shoppingCart.js"></script>
+    <script src="js/jquery.validate.js"></script>
 
 </head>
 <body>
@@ -15,31 +17,49 @@
 <h2 align="center">You order:</h2>
 
 </p>
-<table align="center" id="tblWhisky">
-    <thead>
-    <tr>
+<!--<table align="center" id="tblWhisky">-->
+    <!--<thead>-->
+    <!--<tr>-->
 
-        <td colspan="3" align="right">
-            <div align="right" sec:authorize="hasAuthority('admin')">
-                Answer for   <span th:text="${#authentication.name}"/> WOW you Admin
-            </div>
-            <div align="right" sec:authorize="hasAuthority('user')">
-                Answer for   <span th:text="${#authentication.name}"/>
-            </div>
+        <!--<td colspan="6" align="right">-->
+            <!--<div align="right" sec:authorize="hasAuthority('admin')">-->
+                <!--Answer for   <span th:text="${#authentication.name}"/> WOW you Admin-->
+            <!--</div>-->
+            <!--<div align="right" sec:authorize="hasAuthority('user')">-->
+                <!--Answer for   <span th:text="${#authentication.name}"/>-->
+            <!--</div>-->
 
-        </td>
-    </tr>
+        <!--</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+        <!--<td align="center" width="50">Photo</td>-->
+        <!--<td align="center" width="100">Name</td>-->
+        <!--<td align="center" width="100">Describe</td>-->
+        <!--<td align="center" width="100">Available</td>-->
+        <!--<td align="left" width="100">Price</td>-->
+        <!--<td align="left" width="100">Total</td>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody ></tbody>-->
+<table align="center" border="1">
     <tr>
-        <td align="center" width="50">Photo</td>
+        <td align="center" >Photo</td>
         <td align="center" width="100">Name</td>
         <td align="center" width="100">Describe</td>
-        <td align="center" width="70">Available</td>
-        <td align="left" width="70">Price</td>
-        <td align="left" width="70">Total</td>
+        <td align="center" width="100">Available</td>
+        <td align="center">Price</td>
+        <td align="center" >Amount</td>
+        <td align="center" >Delete</td>
     </tr>
-    </thead>
-    <tbody></tbody>
+    <tbody id="trash"></tbody>
+    <tfoot><tr><td colspan="5">
+        <!--<input type="button" value="loadCart" id="btnLoad"/>-->
+        Total in carts:
+    </td>
+    <td colspan="2"><span id="totalCart"></span> </td>
+    </tr></tfoot>
 </table>
+<!--</table>-->
 <!--<table align="center" border="1">-->
 
 

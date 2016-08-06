@@ -60,11 +60,71 @@ $(document).ready(function() {
         $("#tblWhisky tbody").append('<tr><td><img src="'+cartArrayDIV[i].photo+'" width=35 height=80></td>\
             <td>'+cartArrayDIV[i].name+'</td>\
             <td>'+cartArrayDIV[i].describe+'</td>\
-            <td>'+cartArrayDIV[i].quantity+'</td>\
-            <td>'+cartArrayDIV[i].price+'</td>\
-            <td>'+cartArrayDIV[i].total+'</td></tr>');
+            <td>'+cartArrayDIV[i].quantity+'<button class="minus" id="minusID" data-name="'+cartArrayDIV[i].name+'">-</button>'+
+            '<button class="minus" id="minusID" data-name="'+cartArrayDIV[i].name+'">+</button>  </td>\
+            <td>'+cartArrayDIV[i].price+'</td></tr>');
     }
-     function sendBuyWhiskyInJava() {
+    //var table ='';
+    //var rows = cartArray.length;
+    //for(var r in cartArray){
+    //    table +='<tr>';
+    //        table +="<td>"+"<img src='"+cartArray[r].photo+"' width='35' height='80'>"+"</td>";
+    //        table +="<td width='100'>"+cartArray[r].name+"</td>";
+    //        table +='<td width="150">'+cartArray[r].describe+'</td>';
+    //        table +='<td align="center" width="100">'
+    //            +"<button class='minus' id='minusID' data-name='"+cartArray[r].name+"'>-</button>"
+    //            +" "+cartArray[r].quantity
+    //            +" "+"<button class='plus' data-name='"+cartArray[r].name+"' >+</button>"+'</td>';
+    //        table +='<td width="80" align="center">'+cartArray[r].price+'</td>';
+    //        table +='<td width="20">' +"<button class='deleteItem' data-name='"+cartArray[r].name+"'>X</button>"+'</td>';
+    //    table +='</tr>';
+    //}
+    //document.write('<table align="center">'+table+'</table>');
+    ////function tryNew(){
+    //$(".minus").click(function(event){
+    ////$('#minusID').on("click", ".minus", function (e){
+    //    var name = $(this).attr("data-name");
+    //    console.log(name);
+    //    removeOneItemsFromCart(name);
+    //    see();
+    //});
+    //function see(){ loadCart();
+    //    var cartArray = listCart();
+    //    var table ='';
+    //    var rows = cartArray.length;
+    //    for(var r in cartArray){
+    //        table +='<tr>';
+    //        table +="<td>"+"<img src='"+cartArray[r].photo+"' width='35' height='80'>"+"</td>";
+    //        table +="<td width='100'>"+cartArray[r].name+"</td>";
+    //        table +='<td width="150">'+cartArray[r].describe+'</td>';
+    //        table +='<td align="center" width="100">'
+    //            +"<button class='minus' id='minusID' data-name='"+cartArray[r].name+"'>-</button>"
+    //            +" "+cartArray[r].quantity
+    //            +" "+"<button class='plus' data-name='"+cartArray[r].name+"' >+</button>"+'</td>';
+    //        table +='<td width="80" align="center">'+cartArray[r].price+'</td>';
+    //        table +='<td width="20">' +"<button class='deleteItem' data-name='"+cartArray[r].name+"'>X</button>"+'</td>';
+    //        table +='</tr>';
+    //    }
+    //document.write('<table align="center">'+table+'</table>');
+    //}
+
+        //$.ajax({   //тип запроса
+        //    headers: {
+        //        "Accept": "application/json",
+        //        "Content-Type": "application/json"
+        //    },
+        //    type: "POST", //это типа method
+        //    data: JSON.stringify(orderOnCartWhisky), //грубо говоря это Серриализация
+        //    url: '/allCart',
+        //    success: function (msg) {  //msg - показывает ответ с сервера
+        //        window.location.href = window.location.href;
+        //    }
+        //});
+        //window.location.href = "cartStart";
+
+
+
+    function sendBuyWhiskyInJava() {
         $('#buySelectedWhiskyThroughJavaScript').submit(function (e) {
             e.preventDefault();
 
@@ -92,7 +152,7 @@ function listCart(){
         for (var p in item) {
             itemCopy[p] = item[p];
         }
-        itemCopy.total = (item.price * item.quantity).toFixed(2);
+        //itemCopy.total = (item.price * item.count).toFixed(2);
         cartCopy.push(itemCopy);
     }
     return cartCopy;
@@ -134,7 +194,7 @@ function clearCart() {
 function countCart(){
     var totalCount = 0;
     for(var i in cartWhisky) {
-        totalCount += cartWhisky[i].quantity;
+        totalCount += cartWhisky[i].count;
     }
     return totalCount;
 }
@@ -144,7 +204,7 @@ function totalPriceInCart() {
 
     var totalPrice = 0;
     for(var i in cartWhisky) {
-        totalPrice = cartWhisky[i].price * cartWhisky[i].quantity + totalPrice;
+        totalPrice = cartWhisky[i].price * cartWhisky[i].count + totalPrice;
     }
     //toFixed() - кол-во знаков после запятой
     return totalPrice.toFixed(2);
@@ -164,65 +224,3 @@ function loadCart() {
 }
 
 });
-
-
-//var table ='';
-//var rows = cartArray.length;
-//for(var r in cartArray){
-//    table +='<tr>';
-//        table +="<td>"+"<img src='"+cartArray[r].photo+"' width='35' height='80'>"+"</td>";
-//        table +="<td width='100'>"+cartArray[r].name+"</td>";
-//        table +='<td width="150">'+cartArray[r].describe+'</td>';
-//        table +='<td align="center" width="100">'
-//            +"<button class='minus' id='minusID' data-name='"+cartArray[r].name+"'>-</button>"
-//            +" "+cartArray[r].quantity
-//            +" "+"<button class='plus' data-name='"+cartArray[r].name+"' >+</button>"+'</td>';
-//        table +='<td width="80" align="center">'+cartArray[r].price+'</td>';
-//        table +='<td width="20">' +"<button class='deleteItem' data-name='"+cartArray[r].name+"'>X</button>"+'</td>';
-//    table +='</tr>';
-//}
-//document.write('<table align="center">'+table+'</table>');
-////function tryNew(){
-//$(".minus").click(function(event){
-////$('#minusID').on("click", ".minus", function (e){
-//    var name = $(this).attr("data-name");
-//    console.log(name);
-//    removeOneItemsFromCart(name);
-//    see();
-//});
-//function see(){ loadCart();
-//    var cartArray = listCart();
-//    var table ='';
-//    var rows = cartArray.length;
-//    for(var r in cartArray){
-//        table +='<tr>';
-//        table +="<td>"+"<img src='"+cartArray[r].photo+"' width='35' height='80'>"+"</td>";
-//        table +="<td width='100'>"+cartArray[r].name+"</td>";
-//        table +='<td width="150">'+cartArray[r].describe+'</td>';
-//        table +='<td align="center" width="100">'
-//            +"<button class='minus' id='minusID' data-name='"+cartArray[r].name+"'>-</button>"
-//            +" "+cartArray[r].quantity
-//            +" "+"<button class='plus' data-name='"+cartArray[r].name+"' >+</button>"+'</td>';
-//        table +='<td width="80" align="center">'+cartArray[r].price+'</td>';
-//        table +='<td width="20">' +"<button class='deleteItem' data-name='"+cartArray[r].name+"'>X</button>"+'</td>';
-//        table +='</tr>';
-//    }
-//document.write('<table align="center">'+table+'</table>');
-//}
-
-//$.ajax({   //тип запроса
-//    headers: {
-//        "Accept": "application/json",
-//        "Content-Type": "application/json"
-//    },
-//    type: "POST", //это типа method
-//    data: JSON.stringify(orderOnCartWhisky), //грубо говоря это Серриализация
-//    url: '/allCart',
-//    success: function (msg) {  //msg - показывает ответ с сервера
-//        window.location.href = window.location.href;
-//    }
-//});
-//window.location.href = "cartStart";
-
-
-

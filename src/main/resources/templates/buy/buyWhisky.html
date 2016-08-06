@@ -14,15 +14,6 @@
     <script type="text/javascript" src="js/jquery.leanModal.min.js"></script>
     <link href="css/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet"/>
     <script src="css/bootstrap-3.3.6-dist/js/bootstrap.min.js"/>
-
-    <!--<style type="text/css">-->
-        <!--.line {-->
-            <!--border-left: 2px solid #ccc; /* Параметры линии */-->
-            <!--margin-left: 20px; /* Отступ слева */-->
-            <!--padding-left: 10px; /* Расстояние от линии до текста */-->
-        <!--}-->
-    <!--</style>-->
-
 </head>
 <body>
 <h1 align="center">You selected this WHISKEY</h1>
@@ -95,9 +86,9 @@
                  </td>
                 <!--<div style="border-width: 0 0 0 1px;/*толщина*/ border-style: solid; padding-left: 10px;/*отступ слева*/">-->
                    <td class="verticalLine">
-                <input  type="number" style="width: 100px" min="1"
+                <input  type="number" style="width: 100px" min="1" autofocus=""
                        th:attr="max=${buySelectedWhisky.quantityWhisky}" placeholder="Enter quantity"
-                       name="numberOrderWhisky" id="numberOrderWhisky"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                       name="numberOrderWhisky" id="numberOrderWhisky" required="" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                    </td>
                    <td class="verticalLine" th:text="${buySelectedWhisky.price}">Price
 

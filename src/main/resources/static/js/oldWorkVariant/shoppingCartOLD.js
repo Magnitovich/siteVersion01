@@ -33,24 +33,6 @@
         }
     }
 
-//clear
-    function clearCart() {
-        cartWhisky = [];
-        saveCart();
-    }
-
-//SaveCart()
-    function saveCart() {
-        //JSON.parse – читает объекты из строки в формате JSON.
-        //JSON.stringify – превращает объекты в строку в формате JSON, используется, когда нужно из JavaScript передать данные по сети.
-
-        localStorage.setItem("shoppingCart", JSON.stringify(cartWhisky));
-    }
-
-//loadCart()
-    function loadCart() {
-        cartWhisky = JSON.parse(localStorage.getItem("shoppingCart"));
-    }
 
     function comeBack() {
         window.location.href = "warehouseWhisky";
@@ -159,4 +141,23 @@ function listCart(){
     }
     return cartCopy;
 }
+//clear
+function clearCart() {
+    cartWhisky = [];
+    saveCart();
+}
+
+//SaveCart()
+function saveCart() {
+    //JSON.parse – читает объекты из строки в формате JSON.
+    //JSON.stringify – превращает объекты в строку в формате JSON, используется, когда нужно из JavaScript передать данные по сети.
+
+    localStorage.setItem("shoppingCart", JSON.stringify(cartWhisky));
+}
+
+//loadCart()
+function loadCart() {
+    cartWhisky = JSON.parse(localStorage.getItem("shoppingCart"));
+}
+
 //});
