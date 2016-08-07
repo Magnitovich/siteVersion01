@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8"/>
     <script src="js/whisky.js"></script>
-    <script src="js/shoppingCart.js"></script>
     <script src="js/jquery-1.12.3.min.js" ></script>
     <script src="js/jquery-ui.min.js"></script>
     <link href="js/jquery-ui.min.css" rel="stylesheet"/>
@@ -14,6 +13,8 @@
     <script type="text/javascript" src="js/jquery.leanModal.min.js"></script>
     <link href="css/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet"/>
     <script src="css/bootstrap-3.3.6-dist/js/bootstrap.min.js"/>
+    <script async='async' src="js/shoppingCart.js"></script>
+
 </head>
 <body>
 <h1 align="center">You selected this WHISKEY</h1>
@@ -91,7 +92,7 @@
                        name="numberOrderWhisky" id="numberOrderWhisky" required="" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                    </td>
                    <td class="verticalLine" th:text="${buySelectedWhisky.price}">Price
-
+                            <span id="changePrice"></span>
                    </td>
 
                </tr>
@@ -107,7 +108,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-primary"  onclick="buyFromJS()" value="Buy"/>
+                            <input type="submit" class="btn btn-primary"  id="buyFromJS"  value="Buy"/>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
