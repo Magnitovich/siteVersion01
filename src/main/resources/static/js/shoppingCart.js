@@ -227,47 +227,53 @@ function cartOpen() {
 
 });
 function sendToJavaBuy() {
+        cartWhisky = JSON.parse(localStorage.getItem("shoppingCart"));
+        var newArray = [];
+        var i = 0;
+        for(i in cartWhisky){
+            newArray[i] = cartWhisky[i].name +"_"+ cartWhisky[i].quantity;
+            i++;
+            console.log("newArray[i]"+newArray);
 
-    cartWhisky = JSON.parse(localStorage.getItem("shoppingCart"));
+        }
+            $.ajax({
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                type: "POST",
+                data :
+                    //JSON.stringify({"dataArray":newArray}),
+                    JSON.stringify(newArray),
+                url: '/buySuccessfulWhisky',
 
-    for (var i in cartWhisky) {
-        console.log("cartWhisky[i]" + cartWhisky[i]);
+                success: function (msg) {
+                    window.location.href = "buySuccessfulWhisky";
+                    //console.log(data)
+                }
+            });
 
-        $.ajax({   //тип запроса
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            type: "POST",
-            data: JSON.stringify(cartWhisky[i]),
-            url: '/buySuccessfulWhisky',
-            success: function (data) {
-                window.location.href = "index";
-                console.log(data)
-            }
-
-        });
-    }
 }
 
-function sendBuyWhiskyInJava() {
-    $('#buySelectedWhiskyThroughJavaScript').submit(function (e) {
-        e.preventDefault();
 
-        $.ajax({   //тип запроса
-            type: "POST", //это типа method
-            url: '/buySuccessfulWhisky',
-            data: {
-                nameSelectedWhisky: $("#nameWhiskey").val(),
-                quantitySelectedWhisky: $("#numberOrderWhisky").val()
-            },
-            success: function (data) {  //msg - показывает ответ с сервера
-                window.location.href = "warehouseWhisky";
-                console.log(data)
-            }
-        })
-    })
-}
+//function sendBuyWhiskyInJava() {
+//    $('#buySelectedWhiskyThroughJavaScript').submit(function (e) {
+//        e.preventDefault();
+//
+//        $.ajax({   //тип запроса
+//            type: "POST", //это типа method
+//            url: '/buySuccessfulWhisky',
+//            data: {
+//                nameSelectedWhisky: $("#nameWhiskey").val(),
+//                quantitySelectedWhisky: $("#numberOrderWhisky").val()
+//            },
+//            success: function (data) {  //msg - показывает ответ с сервера
+//                window.location.href = "warehouseWhisky";
+//                console.log(data)
+//            }
+//        })
+//    })
+//}
 
 //
 //    for (var i in cartArrayDIV) {

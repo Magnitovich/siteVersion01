@@ -5,18 +5,16 @@ import com.example.model.WhiskeyModel;
 import com.example.model.WhiskyDTO;
 import com.example.service.WhiskyService;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.Lifecycle;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,28 +31,27 @@ public class SuccessfulBuyWhiskey {
     @Autowired
     private WhiskyService whiskyService;
 
+    @JsonProperty(value = "dataArray")
 
-    @RequestMapping(value = "buySuccessfulWhisky", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView view(@RequestBody ArrayList< WhiskyDTO> namesWhisky, Model model)
-//            @RequestParam("nameSelectedWhisky")String name,
-//                             @RequestParam("quantitySelectedWhisky")Integer quantityOrder)
-    {
-        System.out.println(namesWhisky);
-//        for(WhiskyDTO i:namesWhisky) {
-//            System.out.println("Name: = " + i.getNameWhisky());
-//        System.out.println("Quantity: = "+i.getQuantityWhisky());
-//            System.out.println("Price"+ i.getPrice());
+    @RequestMapping(value = "/buySuccessfulWhisky", method = {RequestMethod.GET, RequestMethod.POST})
+//    @ResponseStatus(value = HttpStatus.OK)
+    public ModelAndView view(@RequestBody List<String> newArray, Model model) {
+        System.out.println(newArray);
+        System.out.println();
+//        for (String properties : newArray) {
+//            String[] split = properties.split("_");
+//            String name = split[0];
+//            Integer quantity = Integer.valueOf(split[1]);
+//            System.out.println("name:= " + name);
+//            System.out.println("quantity:= " + quantity);
+//
+////        whiskyService.changeInfoInDB(name, quantity);
 //        }
-//        System.out.println("Name: = "+name);
-//        System.out.println("Quantity: = "+quantityOrder);
-//        whiskyService.changeInfoInDB(name, quantityOrder);
-//
-//        List<WhiskyDTO> all = whiskyService.seeAllWhisky();
-//
+        List<WhiskyDTO> whiskyDTOs = whiskyService.seeAllWhisky();
         ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("viewAvailableWhisky", all);
-//        modelAndView.setViewName("whisky");
+        modelAndView.addObject("viewAvailableWhisky", whiskyDTOs);
+        modelAndView.setViewName("whisky");
         return modelAndView;
-
     }
+
 }

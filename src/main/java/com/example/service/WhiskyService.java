@@ -56,7 +56,8 @@ public class WhiskyService {
 
         List<WhiskeyModel> list = repository.findByNameWhisky(name);
         WhiskeyModel model = list.get(0);
-
+        System.out.println("********************************");
+        System.out.println("name+Q"+name+" "+quantityFromUI);
         int quantityInDB = model.getQuantityWhisky();
         if(quantityInDB==0) {
             System.out.println("In DB ZERO");
